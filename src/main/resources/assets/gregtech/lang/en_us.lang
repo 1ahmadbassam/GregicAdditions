@@ -495,14 +495,10 @@ gtadditions.machine.rock_breaker.luv.name=Advanced Rock Breaker V
 gtadditions.machine.rock_breaker.zpm.name=Advanced Rock Breaker VI
 gtadditions.machine.rock_breaker.uv.name=Advanced Rock Breaker VII
 
-gtadditions.machine.fisher_lv.name=Basic Fisher
-gtadditions.machine.fisher_mv.name=Advanced Fisher
-gtadditions.machine.fisher_hv.name=Advanced Fisher II
-gtadditions.machine.fisher_ev.name=Advanced Fisher III
-gtadditions.machine.fisher_iv.name=Advanced Fisher IV
-gtadditions.machine.fisher_luv.name=Advanced Fisher V
-gtadditions.machine.fisher_zpm.name=Advanced Fisher VI
-gtadditions.machine.fisher_uv.name=Advanced Fisher VII
+gtadditions.machine.fisher.iv.name=Advanced Fisher IV
+gtadditions.machine.fisher.luv.name=Advanced Fisher V
+gtadditions.machine.fisher.zpm.name=Advanced Fisher VI
+gtadditions.machine.fisher.uv.name=Advanced Fisher VII
 
 gregtech.machine.rock_breaker.tooltip=Put Water and Lava adjacent
 tile.ga_multiblock_casing.coke_oven_bricks.name=Coke Oven Bricks

@@ -10,6 +10,7 @@ import gregtech.api.metatileentity.MetaTileEntityHolder;
 import gregtech.api.metatileentity.TieredMetaTileEntity;
 import gregtech.api.render.OrientedOverlayRenderer;
 import gregtech.api.render.Textures;
+import gregtech.api.util.GTUtility;
 import net.minecraft.block.BlockStaticLiquid;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
@@ -45,8 +46,8 @@ public class TileEntityRockBreaker extends TieredMetaTileEntity {
             ItemStack output;
             int largestSignal = 0;
             for (EnumFacing face : EnumFacing.VALUES)
-                if (getWorld().getRedstonePower(getPos(), face) > largestSignal)
-                    largestSignal = getWorld().getRedstonePower(getPos(), face);
+                if (GTUtility.getRedstonePower(getWorld(), getPos(), face) > largestSignal)
+                    largestSignal = GTUtility.getRedstonePower(getWorld(), getPos(), face);
             switch (largestSignal) {
                 case 4:
                 case 5:

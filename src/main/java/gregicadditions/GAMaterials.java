@@ -11,7 +11,7 @@ import gregtech.api.unification.ore.OrePrefix;
 import gregtech.api.unification.stack.MaterialStack;
 
 @IMaterialHandler.RegisterMaterialHandler
-public class GAMaterials {
+public class GAMaterials implements IMaterialHandler {
     public static FluidMaterial FishOil;
     public static FluidMaterial RawGrowthMedium;
     public static FluidMaterial SterilizedGrowthMedium;
@@ -49,7 +49,8 @@ public class GAMaterials {
     public static DustMaterial CupricOxide;
     public static DustMaterial Ferrosilite;
 
-    static {
+    @Override
+    public void onMaterialsInit() {
         long STD_METAL = DustMaterial.MatFlags.GENERATE_PLATE;
         long EXT_METAL = STD_METAL | gregtech.api.unification.material.type.SolidMaterial.MatFlags.GENERATE_ROD |
                 gregtech.api.unification.material.type.IngotMaterial.MatFlags.GENERATE_BOLT_SCREW;
