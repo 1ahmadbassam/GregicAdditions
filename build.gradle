@@ -46,12 +46,12 @@ repositories {
         url = "https://maven.blamejared.com/"
     }
     maven {
-        name = "Forestry Maven"
-        url = "http://maven.ic2.player.to"
-    }
-    maven {
         name = "CurseForge"
         url = "https://minecraft.curseforge.com/api/maven/"
+    }
+    maven {
+        name = "CurseMaven"
+        url = "https://cursemaven.com"
     }
 }
 
@@ -61,7 +61,7 @@ dependencies {
     deobfCompile "codechicken:ForgeMultipart:${minecraft_version}-${multipart_version}:deobf"
     deobfCompile "CraftTweaker2:CraftTweaker2-MC${stripped_version}-Main:${crafttweaker_version}"
     deobfCompile "mezz.jei:jei_${minecraft_version}:${jei_version}"
-    deobfCompile "net.sengir.forestry:forestry_${minecraft_version}:${forestry_version}"
+    deobfCompile "curse.maven:forestry-59751:2918418"
     deobfCompile "slimeknights.mantle:Mantle:${short_version}-${mantle_version}"
     deobfCompile "slimeknights:TConstruct:${minecraft_version}-${tconstruct_version}"
     deobfCompile "gregtechce:gregtech:${minecraft_version}:${gt_version}"
