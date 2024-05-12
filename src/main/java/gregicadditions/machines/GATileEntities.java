@@ -11,8 +11,11 @@ import gregtech.api.recipes.RecipeMaps;
 import gregtech.api.render.Textures;
 import gregtech.api.unification.material.Materials;
 import gregtech.common.metatileentities.electric.MetaTileEntityAirCollector;
+import gregtech.common.metatileentities.electric.MetaTileEntityBlockBreaker;
 import gregtech.common.metatileentities.electric.MetaTileEntityFisher;
 import gregtech.common.metatileentities.electric.MetaTileEntityPump;
+import gregtech.common.metatileentities.storage.MetaTileEntityQuantumChest;
+import gregtech.common.metatileentities.storage.MetaTileEntityQuantumTank;
 import net.minecraft.util.ResourceLocation;
 
 public class GATileEntities {
@@ -61,6 +64,7 @@ public class GATileEntities {
     public static SimpleMachineMetaTileEntity[] MASS_FAB = new SimpleMachineMetaTileEntity[8];
     public static TileEntityFusionReactor[] FUSION_REACTOR = new TileEntityFusionReactor[3];
 
+
     public static TileEntityAssemblyLine ASSEMBLY_LINE;
 
     public static TileEntitySteamMixer STEAM_MIXER;
@@ -81,6 +85,9 @@ public class GATileEntities {
     public static MetaTileEntityPump[] PUMP = new MetaTileEntityPump[8];
     public static MetaTileEntityAirCollector[] AIR_COLLECTOR = new MetaTileEntityAirCollector[8];
     public static MetaTileEntityFisher[] FISHER = new MetaTileEntityFisher[8];
+    public static MetaTileEntityBlockBreaker[] BLOCK_BREAKER = new MetaTileEntityBlockBreaker[8];
+    public static MetaTileEntityQuantumChest[] QUANTUM_CHEST = new MetaTileEntityQuantumChest[8];
+    public static MetaTileEntityQuantumTank[] QUANTUM_TANK = new MetaTileEntityQuantumTank[8];
 
     public static void init() {
         CIRCUITASSEMBLER[0] = GregTechAPI.registerMetaTileEntity(2000, new SimpleMachineMetaTileEntity(location("circuit_assembler.lv"), GARecipeMaps.CIRCUIT_ASSEMBLER_RECIPES, Textures.ASSEMBLER_OVERLAY, 1));
@@ -445,6 +452,25 @@ public class GATileEntities {
             FISHER[1] = GregTechAPI.registerMetaTileEntity(2227, new MetaTileEntityFisher(location("fisher.luv"), 6));
             FISHER[2] = GregTechAPI.registerMetaTileEntity(2228, new MetaTileEntityFisher(location("fisher.zpm"), 7));
             FISHER[3] = GregTechAPI.registerMetaTileEntity(2229, new MetaTileEntityFisher(location("fisher.uv"), 8));
+        }
+
+        if (GAConfig.GT5U.highTierBlockBreakers) {
+            BLOCK_BREAKER[0] = GregTechAPI.registerMetaTileEntity(2230, new MetaTileEntityBlockBreaker(location("block_breaker.iv"), 5));
+            BLOCK_BREAKER[1] = GregTechAPI.registerMetaTileEntity(2231, new MetaTileEntityBlockBreaker(location("block_breaker.luv"), 6));
+            BLOCK_BREAKER[2] = GregTechAPI.registerMetaTileEntity(2232, new MetaTileEntityBlockBreaker(location("block_breaker.zpm"), 7));
+            BLOCK_BREAKER[3] = GregTechAPI.registerMetaTileEntity(2233, new MetaTileEntityBlockBreaker(location("block_breaker.uv"), 8));
+        }
+
+        if (GAConfig.GT5U.highTierQuantumChests) {
+            QUANTUM_CHEST[0] = GregTechAPI.registerMetaTileEntity(2234, new MetaTileEntityQuantumChest(location("quantum_chest.luv"), 6, 24576000));
+            QUANTUM_CHEST[1] = GregTechAPI.registerMetaTileEntity(2235, new MetaTileEntityQuantumChest(location("quantum_chest.zpm"), 7, 28672000));
+            QUANTUM_CHEST[2] = GregTechAPI.registerMetaTileEntity(2236, new MetaTileEntityQuantumChest(location("quantum_chest.uv"), 8, 32768000));
+        }
+
+        if (GAConfig.GT5U.highTierQuantumTanks) {
+            QUANTUM_TANK[0] = GregTechAPI.registerMetaTileEntity(2237, new MetaTileEntityQuantumTank(location("quantum_tank.luv"), 6, 384000000));
+            QUANTUM_TANK[1] = GregTechAPI.registerMetaTileEntity(2238, new MetaTileEntityQuantumTank(location("quantum_tank.zpm"), 7, 448000000));
+            QUANTUM_TANK[2] = GregTechAPI.registerMetaTileEntity(2239, new MetaTileEntityQuantumTank(location("quantum_tank.uv"), 8, 512000000));
         }
     }
 

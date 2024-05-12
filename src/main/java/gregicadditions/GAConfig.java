@@ -157,6 +157,13 @@ public class GAConfig {
         public boolean highTierUnpackers = true;
         @Config.Name("Should higher tier Wiremills be registered?")
         public boolean highTierWiremills = true;
+        @Config.Name("Should higher tier Block Breakers be registered?")
+        public boolean highTierBlockBreakers = true;
+        @Config.Name("Should higher tier Quantum Chests be registered?")
+        public boolean highTierQuantumChests = true;
+        @Config.Name("Should higher tier Quantum Tanks be registered?")
+        public boolean highTierQuantumTanks = true;
+
 
         @Config.Comment("Set these to true to enable certain Batteries.")
         @Config.Name("Batteries - Enable an extra ZPM and UV Battery (this also makes the Ultimate Battery harder to make)")

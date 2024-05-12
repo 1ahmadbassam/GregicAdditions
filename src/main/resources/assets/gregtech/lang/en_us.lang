@@ -473,9 +473,24 @@ gtadditions.machine.pump.luv.name=Advanced Pump V
 gtadditions.machine.pump.zpm.name=Advanced Pump VI
 gtadditions.machine.pump.uv.name=Advanced Pump VII
 
+gtadditions.machine.block_breaker.iv.name=Advanced Block Breaker IV
+gtadditions.machine.block_breaker.luv.name=Advanced Block Breaker V
+gtadditions.machine.block_breaker.zpm.name=Advanced Block Breaker VI
+gtadditions.machine.block_breaker.uv.name=Advanced Block Breaker VII
+
 gregtech.machine.air_collector.ev.name=Advanced Air Collector III
 gtadditions.machine.air_collector.iv.name=Atmosphere Collector
 gtadditions.machine.air_collector.luv.name=Atmosphere Collector
+
+gtadditions.machine.quantum_chest.iv.name=Black Hole-Quantum Chest IV
+gtadditions.machine.quantum_chest.luv.name=Black Hole-Quantum Chest V
+gtadditions.machine.quantum_chest.zpm.name=Black Hole-Quantum Chest VI
+gtadditions.machine.quantum_chest.uv.name=Black Hole-Quantum Chest VII
+
+gtadditions.machine.quantum_tank.iv.name=Black Hole-Quantum Tank IV
+gtadditions.machine.quantum_tank.luv.name=Black Hole-Quantum Tank V
+gtadditions.machine.quantum_tank.zpm.name=Black Hole-Quantum Tank VI
+gtadditions.machine.quantum_tank.uv.name=Black Hole-Quantum Tank VII
 
 gtadditions.machine.replicator.tooltip=Producing The Purest Of Elements
 

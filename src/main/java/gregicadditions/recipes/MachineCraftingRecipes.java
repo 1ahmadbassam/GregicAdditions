@@ -15,7 +15,10 @@ import gregtech.api.unification.material.MarkerMaterials.Tier;
 import gregtech.api.unification.material.Materials;
 import gregtech.api.unification.ore.OrePrefix;
 import gregtech.api.unification.stack.UnificationEntry;
-import gregtech.common.blocks.*;
+import gregtech.common.blocks.BlockMachineCasing;
+import gregtech.common.blocks.BlockMetalCasing;
+import gregtech.common.blocks.BlockMultiblockCasing;
+import gregtech.common.blocks.MetaBlocks;
 import gregtech.common.items.MetaItems;
 import gregtech.common.metatileentities.MetaTileEntities;
 import net.minecraft.init.Blocks;
@@ -179,7 +182,14 @@ public class MachineCraftingRecipes {
         if (GAConfig.Misc.highTierCollector)
             registerMachineRecipe(GATileEntities.AIR_COLLECTOR, "WFW", "PHP", "WCW", 'W', Blocks.IRON_BARS, 'F', MetaItems.ITEM_FILTER, 'P', PUMP, 'H', HULL, 'C', CIRCUIT);
         registerMachineRecipe(GATileEntities.ROCK_BREAKER, "QPQ", "CMC", "GGG", 'M', HULL, 'Q', CABLE, 'C', CIRCUIT, 'P', PISTON, 'G', GLASS);
-        registerMachineRecipe(GATileEntities.FISHER, "CRC", "PMP", "RQR", 'M', HULL, 'C', CIRCUIT, 'R', MOTOR, 'P', PISTON, 'Q', PUMP);
+        if (GAConfig.GT5U.highTierFishers)
+            registerMachineRecipe(GATileEntities.FISHER, "CRC", "PMP", "RQR", 'M', HULL, 'C', CIRCUIT, 'R', MOTOR, 'P', PISTON, 'Q', PUMP);
+        if (GAConfig.GT5U.highTierBlockBreakers)
+            registerMachineRecipe(GATileEntities.BLOCK_BREAKER, "RDR", "CMC", "QKQ", 'M', HULL, 'C', CIRCUIT, 'R', MOTOR, 'Q', CABLE, 'D', OreDictNames.craftingGrinder, 'K', OreDictNames.chestWood);
+        if (GAConfig.GT5U.highTierQuantumChests)
+            registerMachineRecipe(GATileEntities.QUANTUM_CHEST, "CPC", "PMP", "CFC", 'C', CIRCUIT, 'M', HULL, 'P', PLATE, 'F', FIELD_GENERATOR);
+        if (GAConfig.GT5U.highTierQuantumTanks)
+            registerMachineRecipe(GATileEntities.QUANTUM_TANK, "CFC", "PMP", "CPC", 'C', CIRCUIT, 'M', HULL, 'P', PLATE, 'F', FIELD_GENERATOR);
     }
 
     public static <T extends MetaTileEntity & ITieredMetaTileEntity> void registerMachineRecipe(T[] metaTileEntities, Object... recipe) {
