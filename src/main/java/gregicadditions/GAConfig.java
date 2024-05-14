@@ -159,6 +159,8 @@ public class GAConfig {
         public boolean highTierWiremills = true;
         @Config.Name("Should higher tier Block Breakers be registered?")
         public boolean highTierBlockBreakers = true;
+        @Config.Name("Should higher tier Item Collectors be registered?")
+        public boolean highTierItemCollectors = true;
         @Config.Name("Should higher tier Quantum Chests be registered?")
         public boolean highTierQuantumChests = true;
         @Config.Name("Should higher tier Quantum Tanks be registered?")

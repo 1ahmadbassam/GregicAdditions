@@ -478,6 +478,11 @@ gtadditions.machine.block_breaker.luv.name=Advanced Block Breaker V
 gtadditions.machine.block_breaker.zpm.name=Advanced Block Breaker VI
 gtadditions.machine.block_breaker.uv.name=Advanced Block Breaker VII
 
+gtadditions.machine.item_collector.iv.name=Advanced Item Collector IV
+gtadditions.machine.item_collector.luv.name=Advanced Item Collector V
+gtadditions.machine.item_collector.zpm.name=Advanced Item Collector VI
+gtadditions.machine.item_collector.uv.name=Item Sucker 9000!
+
 gregtech.machine.air_collector.ev.name=Advanced Air Collector III
 gtadditions.machine.air_collector.iv.name=Atmosphere Collector
 gtadditions.machine.air_collector.luv.name=Atmosphere Collector

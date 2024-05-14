@@ -10,10 +10,7 @@ import gregtech.api.metatileentity.SimpleMachineMetaTileEntity;
 import gregtech.api.recipes.RecipeMaps;
 import gregtech.api.render.Textures;
 import gregtech.api.unification.material.Materials;
-import gregtech.common.metatileentities.electric.MetaTileEntityAirCollector;
-import gregtech.common.metatileentities.electric.MetaTileEntityBlockBreaker;
-import gregtech.common.metatileentities.electric.MetaTileEntityFisher;
-import gregtech.common.metatileentities.electric.MetaTileEntityPump;
+import gregtech.common.metatileentities.electric.*;
 import gregtech.common.metatileentities.storage.MetaTileEntityQuantumChest;
 import gregtech.common.metatileentities.storage.MetaTileEntityQuantumTank;
 import net.minecraft.util.ResourceLocation;
@@ -88,6 +85,7 @@ public class GATileEntities {
     public static MetaTileEntityBlockBreaker[] BLOCK_BREAKER = new MetaTileEntityBlockBreaker[8];
     public static MetaTileEntityQuantumChest[] QUANTUM_CHEST = new MetaTileEntityQuantumChest[8];
     public static MetaTileEntityQuantumTank[] QUANTUM_TANK = new MetaTileEntityQuantumTank[8];
+    public static MetaTileEntityItemCollector[] ITEM_COLLECTOR = new MetaTileEntityItemCollector[8];
 
     public static void init() {
         CIRCUITASSEMBLER[0] = GregTechAPI.registerMetaTileEntity(2000, new SimpleMachineMetaTileEntity(location("circuit_assembler.lv"), GARecipeMaps.CIRCUIT_ASSEMBLER_RECIPES, Textures.ASSEMBLER_OVERLAY, 1));
@@ -471,6 +469,13 @@ public class GATileEntities {
             QUANTUM_TANK[0] = GregTechAPI.registerMetaTileEntity(2237, new MetaTileEntityQuantumTank(location("quantum_tank.luv"), 6, 384000000));
             QUANTUM_TANK[1] = GregTechAPI.registerMetaTileEntity(2238, new MetaTileEntityQuantumTank(location("quantum_tank.zpm"), 7, 448000000));
             QUANTUM_TANK[2] = GregTechAPI.registerMetaTileEntity(2239, new MetaTileEntityQuantumTank(location("quantum_tank.uv"), 8, 512000000));
+        }
+
+        if (GAConfig.GT5U.highTierItemCollectors) {
+            ITEM_COLLECTOR[0] = GregTechAPI.registerMetaTileEntity(2240, new MetaTileEntityItemCollector(location("item_collector.iv"), 5, 96));
+            ITEM_COLLECTOR[1] = GregTechAPI.registerMetaTileEntity(2241, new MetaTileEntityItemCollector(location("item_collector.luv"), 6, 128));
+            ITEM_COLLECTOR[2] = GregTechAPI.registerMetaTileEntity(2242, new MetaTileEntityItemCollector(location("item_collector.zpm"), 7, 192));
+            ITEM_COLLECTOR[3] = GregTechAPI.registerMetaTileEntity(2243, new MetaTileEntityItemCollector(location("item_collector.uv"), 8, 256));
         }
     }
 

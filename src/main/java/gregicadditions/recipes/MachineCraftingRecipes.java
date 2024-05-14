@@ -190,6 +190,8 @@ public class MachineCraftingRecipes {
             registerMachineRecipe(GATileEntities.QUANTUM_CHEST, "CPC", "PMP", "CFC", 'C', CIRCUIT, 'M', HULL, 'P', PLATE, 'F', FIELD_GENERATOR);
         if (GAConfig.GT5U.highTierQuantumTanks)
             registerMachineRecipe(GATileEntities.QUANTUM_TANK, "CFC", "PMP", "CPC", 'C', CIRCUIT, 'M', HULL, 'P', PLATE, 'F', FIELD_GENERATOR);
+        if (GAConfig.GT5U.highTierItemCollectors)
+            registerMachineRecipe(GATileEntities.ITEM_COLLECTOR, "MRM", "RHR", "CQC", 'M', MOTOR, 'R', ROTOR, 'H', HULL, 'C', CIRCUIT, 'Q', WIRE);
     }
 
     public static <T extends MetaTileEntity & ITieredMetaTileEntity> void registerMachineRecipe(T[] metaTileEntities, Object... recipe) {
