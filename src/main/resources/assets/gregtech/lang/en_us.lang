@@ -241,15 +241,15 @@ gtadditions.machine.cluster_mill.luv.name=Advanced Cluster Mill V
 gtadditions.machine.cluster_mill.zpm.name=Advanced Cluster Mill VI
 gtadditions.machine.cluster_mill.uv.name=Advanced Cluster Mill VII
 
-gtadditions.machine.electric_furnace.iv.name=Advanced Electric Furnace  IV
-gtadditions.machine.electric_furnace.luv.name=Advanced Electric Furnace  V
-gtadditions.machine.electric_furnace.zpm.name=Advanced Electric Furnace  VI
-gtadditions.machine.electric_furnace.uv.name=Advanced Electric Furnace  VII
+gtadditions.machine.electric_furnace.iv.name=Electron Excitement Processor
+gtadditions.machine.electric_furnace.luv.name=Electron Excitement Processor II
+gtadditions.machine.electric_furnace.zpm.name=Electron Excitement Processor III
+gtadditions.machine.electric_furnace.uv.name=Electron Excitement Processor IV
 
-gtadditions.machine.macerator.iv.name=Universal Macerator II
-gtadditions.machine.macerator.luv.name=Universal Macerator III
-gtadditions.machine.macerator.zpm.name=Universal Macerator IV
-gtadditions.machine.macerator.uv.name=Universal Macerator V
+gtadditions.machine.macerator.iv.name=Blend-O-Matic 9001
+gtadditions.machine.macerator.luv.name=Blend-O-Matic 9002
+gtadditions.machine.macerator.zpm.name=Blend-O-Matic 9003
+gtadditions.machine.macerator.uv.name=Blend-O-Matic 9004
 
 gtadditions.machine.alloy_smelter.iv.name=Advanced Alloy Smelter IV
 gtadditions.machine.alloy_smelter.luv.name=Advanced Alloy Smelter V
@@ -292,10 +292,10 @@ gtadditions.machine.canner.zpm.name=Advanced Canning Machine VI
 gtadditions.machine.canner.uv.name=Advanced Canning Machine VII
 
 gregtech.machine.centrifuge.ev.name=Molecular Separator
-gtadditions.machine.centrifuge.iv.name=Turbo Centrifuge III
-gtadditions.machine.centrifuge.luv.name=Turbo Centrifuge IV
-gtadditions.machine.centrifuge.zpm.name=Turbo Centrifuge V
-gtadditions.machine.centrifuge.uv.name=Turbo Centrifuge VI
+gtadditions.machine.centrifuge.iv.name=Molecular Cyclone
+gtadditions.machine.centrifuge.luv.name=Molecular Cyclone II
+gtadditions.machine.centrifuge.zpm.name=Molecular Cyclone III
+gtadditions.machine.centrifuge.uv.name=Molecular Cyclone IV
 
 gtadditions.machine.chemical_bath.iv.name=Advanced Chemical Bath IV
 gtadditions.machine.chemical_bath.luv.name=Advanced Chemical Bath V
@@ -324,10 +324,10 @@ gtadditions.machine.distillery.zpm.name=Advanced Distillery VI
 gtadditions.machine.distillery.uv.name=Advanced Distillery VII
 
 gregtech.machine.electrolyzer.ev.name=Advanced Electrolyzer III
-gtadditions.machine.electrolyzer.iv.name=Advanced Electrolyzer IV
-gtadditions.machine.electrolyzer.luv.name=Advanced Electrolyzer V
-gtadditions.machine.electrolyzer.zpm.name=Advanced Electrolyzer VI
-gtadditions.machine.electrolyzer.uv.name=MAdvanced Electrolyzer VII
+gtadditions.machine.electrolyzer.iv.name=Molecular Disintegrator E-4905
+gtadditions.machine.electrolyzer.luv.name=Molecular Disintegrator E-4906
+gtadditions.machine.electrolyzer.zpm.name=Molecular Disintegrator E-4907
+gtadditions.machine.electrolyzer.uv.name=Molecular Disintegrator E-4908
 
 gtadditions.machine.electromagnetic_separator.iv.name=Advanced Electromagnetic Separator IV
 gtadditions.machine.electromagnetic_separator.luv.name=Advanced Electromagnetic Separator V
@@ -335,10 +335,10 @@ gtadditions.machine.electromagnetic_separator.zpm.name=Advanced Electromagnetic 
 gtadditions.machine.electromagnetic_separator.uv.name=Advanced Electromagnetic Separator VII
 
 gregtech.machine.extractor.ev.name=Advanced Extractor III
-gtadditions.machine.extractor.iv.name=Vacuum Extractor IV
-gtadditions.machine.extractor.luv.name=Vacuum Extractor V
-gtadditions.machine.extractor.zpm.name=Vacuum Extractor VI
-gtadditions.machine.extractor.uv.name=Vacuum Extractor VII
+gtadditions.machine.extractor.iv.name=Vacuum Extractor
+gtadditions.machine.extractor.luv.name=Vacuum Extractor II
+gtadditions.machine.extractor.zpm.name=Vacuum Extractor III
+gtadditions.machine.extractor.uv.name=Vacuum Extractor IV
 
 gtadditions.machine.extruder.iv.name=Advanced Extruder IV
 gtadditions.machine.extruder.luv.name=Advanced Extruder V
@@ -395,20 +395,20 @@ gtadditions.machine.mixer.luv.name=Advanced Mixer V
 gtadditions.machine.mixer.zpm.name=Advanced Mixer VI
 gtadditions.machine.mixer.uv.name=Advanced Mixer VII
 
-gtadditions.machine.ore_washer.iv.name=Advanced Ore Washing Plant IV
-gtadditions.machine.ore_washer.luv.name=Advanced Ore Washing Plant V
-gtadditions.machine.ore_washer.zpm.name=Advanced Ore Washing Plant VI
-gtadditions.machine.ore_washer.uv.name=Advanced Ore Washing Plant VII
+gtadditions.machine.ore_washer.iv.name=Repurposed Laundry-Washer I-360
+gtadditions.machine.ore_washer.luv.name=Repurposed Laundry-Washer I-720
+gtadditions.machine.ore_washer.zpm.name=Repurposed Laundry-Washer I-1080
+gtadditions.machine.ore_washer.uv.name=Repurposed Laundry-Washer I-1440
 
-gtadditions.machine.packer.iv.name=Advanced Packager III
-gtadditions.machine.packer.luv.name=Advanced Packager IV
-gtadditions.machine.packer.zpm.name=Advanced Packager V
-gtadditions.machine.packer.uv.name=Advanced Packager VI
+gtadditions.machine.packer.iv.name=Boxinator
+gtadditions.machine.packer.luv.name=Boxinator II
+gtadditions.machine.packer.zpm.name=Boxinator III
+gtadditions.machine.packer.uv.name=Boxinator IV
 
-gtadditions.machine.unpacker.iv.name=Advanced Unpackager III
-gtadditions.machine.unpacker.luv.name=Advanced Unpackager IV
-gtadditions.machine.unpacker.zpm.name=Advanced Unpackager V
-gtadditions.machine.unpacker.uv.name=Advanced Unpackager VI
+gtadditions.machine.unpacker.iv.name=Unboxinator
+gtadditions.machine.unpacker.luv.name=Unboxinator II
+gtadditions.machine.unpacker.zpm.name=Unboxinator III
+gtadditions.machine.unpacker.uv.name=Unboxinator IV
 
 gtadditions.machine.plasma_arc_furnace.iv.name=Advanced Plasma Arc Furnace IV
 gtadditions.machine.plasma_arc_furnace.luv.name=Advanced Plasma Arc Furnace V
@@ -430,10 +430,10 @@ gtadditions.machine.sifter.luv.name=Advanced Sifting Machine V
 gtadditions.machine.sifter.zpm.name=Advanced Sifting Machine VI
 gtadditions.machine.sifter.uv.name=Advanced Sifting Machine VII
 
-gtadditions.machine.thermal_centrifuge.iv.name=Advanced Thermal Centrifuge IV
-gtadditions.machine.thermal_centrifuge.luv.name=Advanced Thermal Centrifuge V
-gtadditions.machine.thermal_centrifuge.zpm.name=Advanced Thermal Centrifuge VI
-gtadditions.machine.thermal_centrifuge.uv.name=Advanced Thermal Centrifuge VII
+gtadditions.machine.thermal_centrifuge.iv.name=Blaze Sweatshop T-6350
+gtadditions.machine.thermal_centrifuge.luv.name=Blaze Sweatshop T-6360
+gtadditions.machine.thermal_centrifuge.zpm.name=Blaze Sweatshop T-6370
+gtadditions.machine.thermal_centrifuge.uv.name=Blaze Sweatshop T-6380
 
 gtadditions.machine.wiremill.iv.name=Advanced Wiremill IV
 gtadditions.machine.wiremill.luv.name=Advanced Wiremill V
@@ -519,6 +519,11 @@ gtadditions.machine.fisher.iv.name=Advanced Fisher IV
 gtadditions.machine.fisher.luv.name=Advanced Fisher V
 gtadditions.machine.fisher.zpm.name=Advanced Fisher VI
 gtadditions.machine.fisher.uv.name=Advanced Fisher VII
+
+gtadditions.machine.rock_breaker.iv.name=Rock Destroyer
+gtadditions.machine.rock_breaker.luv.name=Rock Destroyer II
+gtadditions.machine.rock_breaker.zpm.name=Rock Destroyer III
+gtadditions.machine.rock_breaker.uv.name=Rock Destroyer IV
 
 gregtech.machine.rock_breaker.tooltip=Put Water and Lava adjacent
 tile.ga_multiblock_casing.coke_oven_bricks.name=Coke Oven Bricks
