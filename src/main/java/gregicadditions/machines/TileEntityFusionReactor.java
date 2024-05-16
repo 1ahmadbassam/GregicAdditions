@@ -59,7 +59,8 @@ public class TileEntityFusionReactor extends RecipeMapMultiblockController {
 
     @Override
     protected BlockPattern createStructurePattern() {
-        return FactoryBlockPattern.start().start(LEFT, DOWN, BACK)
+        FactoryBlockPattern.start();
+        return FactoryBlockPattern.start(LEFT, DOWN, BACK)
                 .aisle("###############", "######OCO######", "###############")
                 .aisle("######ICI######", "####CCcccCC####", "######ICI######")
                 .aisle("####CC###CC####", "###EccOCOccE###", "####CC###CC####")
@@ -201,27 +202,27 @@ public class TileEntityFusionReactor extends RecipeMapMultiblockController {
 
     protected void addDisplayText(List<ITextComponent> textList) {
         if (!this.isStructureFormed()) {
-            textList.add((new TextComponentTranslation("gregtech.multiblock.invalid_structure", new Object[0])).setStyle((new Style()).setColor(TextFormatting.RED)));
+            textList.add((new TextComponentTranslation("gregtech.multiblock.invalid_structure")).setStyle((new Style()).setColor(TextFormatting.RED)));
         }
         if (this.isStructureFormed()) {
             if (!this.recipeMapWorkable.isWorkingEnabled()) {
-                textList.add(new TextComponentTranslation("gregtech.multiblock.work_paused", new Object[0]));
+                textList.add(new TextComponentTranslation("gregtech.multiblock.work_paused"));
             } else if (this.recipeMapWorkable.isActive()) {
-                textList.add(new TextComponentTranslation("gregtech.multiblock.running", new Object[0]));
+                textList.add(new TextComponentTranslation("gregtech.multiblock.running"));
                 int currentProgress;
                 if (energyContainer.getEnergyCapacity() > 0) {
                     currentProgress = (int) (this.recipeMapWorkable.getProgressPercent() * 100.0D);
-                    textList.add(new TextComponentTranslation("gregtech.multiblock.progress", new Object[]{currentProgress}));
+                    textList.add(new TextComponentTranslation("gregtech.multiblock.progress", currentProgress));
                 } else {
                     currentProgress = -this.recipeMapWorkable.getRecipeEUt();
-                    textList.add(new TextComponentTranslation("gregtech.multiblock.generation_eu", new Object[]{currentProgress}));
+                    textList.add(new TextComponentTranslation("gregtech.multiblock.generation_eu", currentProgress));
                 }
             } else {
-                textList.add(new TextComponentTranslation("gregtech.multiblock.idling", new Object[0]));
+                textList.add(new TextComponentTranslation("gregtech.multiblock.idling"));
             }
 
             if (this.recipeMapWorkable.isHasNotEnoughEnergy()) {
-                textList.add((new TextComponentTranslation("gregtech.multiblock.not_enough_energy", new Object[0])).setStyle((new Style()).setColor(TextFormatting.RED)));
+                textList.add((new TextComponentTranslation("gregtech.multiblock.not_enough_energy")).setStyle((new Style()).setColor(TextFormatting.RED)));
             }
         }
 

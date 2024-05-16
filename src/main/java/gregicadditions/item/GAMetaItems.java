@@ -16,8 +16,6 @@ import java.util.List;
 public class GAMetaItems {
 
 
-    private static List<MetaItem<?>> ITEMS = MetaItem.getMetaItems();
-
     public static MetaItem<?>.MetaValueItem COKE_BRICK;
     public static MetaItem<?>.MetaValueItem FIRECLAY_BRICK;
     public static MetaItem<?>.MetaValueItem ADVANCED_CIRCUIT;
@@ -40,11 +38,9 @@ public class GAMetaItems {
     public static MetaItem<?>.MetaValueItem MAX_BATTERY;
     public static MetaItem<?>.MetaValueItem NEURO_PROCESSOR;
     public static MetaItem<?>.MetaValueItem INTEGRATED_COMPUTER;
-
     public static MetaItem<?>.MetaValueItem MICA_SHHET;
     public static MetaItem<?>.MetaValueItem MICA_INSULATOR_SHHET;
     public static MetaItem<?>.MetaValueItem MICA_INSULATOR_FOI;
-
     public static MetaItem<?>.MetaValueItem BASIC_BOARD;
     public static MetaItem<?>.MetaValueItem GOOD_PHENOLIC_BOARD;
     public static MetaItem<?>.MetaValueItem GOOD_PLASTIC_BOARD;
@@ -52,7 +48,6 @@ public class GAMetaItems {
     public static MetaItem<?>.MetaValueItem EXTREME_BOARD;
     public static MetaItem<?>.MetaValueItem ELITE_BOARD;
     public static MetaItem<?>.MetaValueItem MASTER_BOARD;
-
     public static MetaItem<?>.MetaValueItem ELECTRODE_APATITE;
     public static MetaItem<?>.MetaValueItem ELECTRODE_BLAZE;
     public static MetaItem<?>.MetaValueItem ELECTRODE_BRONZE;
@@ -67,9 +62,7 @@ public class GAMetaItems {
     public static MetaItem<?>.MetaValueItem ELECTRODE_ORCHID;
     public static MetaItem<?>.MetaValueItem ELECTRODE_RUBBER;
     public static MetaItem<?>.MetaValueItem ELECTRODE_TIN;
-
     public static MetaItem<?>.MetaValueItem COMPRESSED_GROUT;
-
     public static MetaItem<?>.MetaValueItem MOLD_FORM_ANVIL;
     public static MetaItem<?>.MetaValueItem MOLD_FORM_BALL;
     public static MetaItem<?>.MetaValueItem MOLD_FORM_BLOCK;
@@ -82,7 +75,6 @@ public class GAMetaItems {
     public static MetaItem<?>.MetaValueItem MOLD_FORM_NUGGETS;
     public static MetaItem<?>.MetaValueItem MOLD_FORM_PLATE;
     public static MetaItem<?>.MetaValueItem MOLD_FORM_SMALL_GEAR;
-
     public static MetaItem<?>.MetaValueItem SHAPE_AXE_HEAD;
     public static MetaItem<?>.MetaValueItem SHAPE_BLOCK;
     public static MetaItem<?>.MetaValueItem SHAPE_BOLT;
@@ -105,9 +97,9 @@ public class GAMetaItems {
     public static MetaItem<?>.MetaValueItem SHAPE_SWORD_BLADE;
     public static MetaItem<?>.MetaValueItem SHAPE_TINY_PIPE;
     public static MetaItem<?>.MetaValueItem SHAPE_WIRE;
-
     public static MetaItem<?>.MetaValueItem BENDING_CYLINDER;
     public static MetaItem<?>.MetaValueItem SMALL_BENDING_CYLINDER;
+    private static final List<MetaItem<?>> ITEMS = MetaItem.getMetaItems();
 
     public static void init() {
         GAMetaItem item = new GAMetaItem();

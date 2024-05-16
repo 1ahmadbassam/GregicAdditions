@@ -9,19 +9,17 @@ import net.minecraftforge.fml.relauncher.Side;
 
 @Mod.EventBusSubscriber(Side.CLIENT)
 public class ClientProxy extends CommonProxy {
+    @SubscribeEvent
+    public static void registerModels(ModelRegistryEvent event) {
+        GAMetaBlocks.registerItemModels();
+    }
+
     public void preInit() {
         super.preInit();
         new GATextures();
     }
 
-    public void postInit()
-    {
+    public void postInit() {
 
-    }
-
-    @SubscribeEvent
-    public static void registerModels(ModelRegistryEvent event)
-    {
-        GAMetaBlocks.registerItemModels();
     }
 }

@@ -2,13 +2,20 @@ package gregicadditions;
 
 import com.google.common.collect.ImmutableList;
 import gregicadditions.item.BasicMaterial;
+import gregtech.api.recipes.ModHandler;
+import gregtech.api.recipes.RecipeMaps;
 import gregtech.api.unification.Element;
+import gregtech.api.unification.OreDictUnifier;
 import gregtech.api.unification.material.IMaterialHandler;
 import gregtech.api.unification.material.MaterialIconSet;
 import gregtech.api.unification.material.Materials;
 import gregtech.api.unification.material.type.*;
 import gregtech.api.unification.ore.OrePrefix;
 import gregtech.api.unification.stack.MaterialStack;
+import gregtech.api.unification.stack.UnificationEntry;
+import gregtech.common.items.MetaItems;
+
+import static gregtech.api.unification.material.type.SolidMaterial.MatFlags.GENERATE_ROD;
 
 @IMaterialHandler.RegisterMaterialHandler
 public class GAMaterials implements IMaterialHandler {
@@ -48,6 +55,28 @@ public class GAMaterials implements IMaterialHandler {
     public static DustMaterial ArsenicTrioxide;
     public static DustMaterial CupricOxide;
     public static DustMaterial Ferrosilite;
+
+    public static void processGem(OrePrefix gemPrefix, GemMaterial material) {
+        if (material.hasFlag(GENERATE_ROD)) {
+            ModHandler.addShapedRecipe(String.format("stick_%s", material),
+                    OreDictUnifier.get(OrePrefix.stick, material, 1),
+                    "f ", " X",
+                    'X', new UnificationEntry(gemPrefix, material));
+            RecipeMaps.EXTRUDER_RECIPES.recipeBuilder()
+                    .input(gemPrefix, material)
+                    .notConsumable(MetaItems.SHAPE_EXTRUDER_ROD)
+                    .outputs(OreDictUnifier.get(OrePrefix.stick, material, 2))
+                    .duration((int) material.getAverageMass() * 2)
+                    .EUt(6 * getVoltageMultiplier(material))
+                    .buildAndRegister();
+
+        }
+    }
+
+    private static int getVoltageMultiplier(Material material) {
+        return material instanceof IngotMaterial && ((IngotMaterial) material)
+                .blastFurnaceTemperature >= 2800 ? 32 : 8;
+    }
 
     @Override
     public void onMaterialsInit() {

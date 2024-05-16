@@ -20,6 +20,25 @@ public class RecipeMapAssemblyLine<R extends RecipeBuilder<R>> extends RecipeMap
         super(unlocalizedName, minInputs, maxInputs, minOutputs, maxOutputs, minFluidInputs, maxFluidInputs, minFluidOutputs, maxFluidOutputs, defaultRecipe);
     }
 
+    protected static int[] determineSlotsGrid(int itemInputsCount) {
+        int itemSlotsToLeft = 0;
+        int itemSlotsToDown = 0;
+        double sqrt = Math.sqrt(itemInputsCount);
+        if (sqrt % 1 == 0) { //check if square root is integer
+            //case for 1, 4, 9 slots - it's square inputs (the most common case)
+            itemSlotsToLeft = itemSlotsToDown = (int) sqrt;
+        } else if (itemInputsCount % 3 == 0) {
+            //case for 3 and 6 slots - 3 by horizontal and i / 3 by vertical (common case too)
+            itemSlotsToDown = itemInputsCount / 3;
+            itemSlotsToLeft = 3;
+        } else if (itemInputsCount % 2 == 0) {
+            //case for 2 inputs - 2 by horizontal and i / 3 by vertical (for 2 slots)
+            itemSlotsToDown = itemInputsCount / 2;
+            itemSlotsToLeft = 2;
+        }
+        return new int[]{itemSlotsToLeft, itemSlotsToDown};
+    }
+
     public RecipeMapAssemblyLine<R> setProgressBar(TextureArea progressBar, ProgressWidget.MoveType moveType) {
         this.progressBarTexture = progressBar;
         this.moveType = moveType;
@@ -40,7 +59,6 @@ public class RecipeMapAssemblyLine<R extends RecipeBuilder<R>> extends RecipeMap
         this.addInventorySlotGroup(builder, exportItems, exportFluids, true);
         return builder;
     }
-
 
     protected void addInventorySlotGroup(ModularUI.Builder builder, IItemHandlerModifiable itemHandler, FluidTankList fluidHandler, boolean isOutputs) {
         int itemInputsCount = itemHandler.getSlots();
@@ -77,24 +95,5 @@ public class RecipeMapAssemblyLine<R extends RecipeBuilder<R>> extends RecipeMap
                 }
             }
         }
-    }
-
-    protected static int[] determineSlotsGrid(int itemInputsCount) {
-        int itemSlotsToLeft = 0;
-        int itemSlotsToDown = 0;
-        double sqrt = Math.sqrt(itemInputsCount);
-        if (sqrt % 1 == 0) { //check if square root is integer
-            //case for 1, 4, 9 slots - it's square inputs (the most common case)
-            itemSlotsToLeft = itemSlotsToDown = (int) sqrt;
-        } else if (itemInputsCount % 3 == 0) {
-            //case for 3 and 6 slots - 3 by horizontal and i / 3 by vertical (common case too)
-            itemSlotsToDown = itemInputsCount / 3;
-            itemSlotsToLeft = 3;
-        } else if (itemInputsCount % 2 == 0) {
-            //case for 2 inputs - 2 by horizontal and i / 3 by vertical (for 2 slots)
-            itemSlotsToDown = itemInputsCount / 2;
-            itemSlotsToLeft = 2;
-        }
-        return new int[]{itemSlotsToLeft, itemSlotsToDown};
     }
 }

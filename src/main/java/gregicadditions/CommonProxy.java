@@ -3,6 +3,8 @@ package gregicadditions;
 import gregicadditions.item.GAMetaBlocks;
 import gregicadditions.item.GAMetaItems;
 import gregicadditions.recipes.*;
+import gregtech.api.unification.material.type.GemMaterial;
+import gregtech.api.unification.ore.OrePrefix;
 import gregtech.common.blocks.VariantItemBlock;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
@@ -19,14 +21,6 @@ import java.util.function.Function;
 
 @Mod.EventBusSubscriber(modid = GregicAdditions.MODID)
 public class CommonProxy {
-
-    public void preInit() {
-    }
-
-    public void postInit() {
-
-    }
-
 
     @SubscribeEvent
     public static void registerBlocks(RegistryEvent.Register<Block> event) {
@@ -51,6 +45,12 @@ public class CommonProxy {
         return itemBlock;
     }
 
+    @SubscribeEvent(priority = EventPriority.HIGH)
+    public static void runEarlyMaterialHandlers(RegistryEvent.Register<IRecipe> event) {
+        // Hook into GT's processing handlers, to automatically generate rod recipes for gems
+        OrePrefix.gem.addProcessingHandler(GemMaterial.class, GAMaterials::processGem);
+    }
+
     @SubscribeEvent(priority = EventPriority.LOW)
     public static void registerRecipes(RegistryEvent.Register<IRecipe> event) {
         GAMachineRecipeRemoval.init();
@@ -65,7 +65,13 @@ public class CommonProxy {
         GeneratorFuels.init();
 
         GAMetaItems.registerOreDict();
-
         GAMetaItems.registerRecipes();
+    }
+
+    public void preInit() {
+    }
+
+    public void postInit() {
+
     }
 }

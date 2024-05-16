@@ -41,9 +41,9 @@ public class TileEntityCokeItemBus extends MetaTileEntityMultiblockPart implemen
         super.update();
         if (!this.getWorld().isRemote && this.getTimer() % 5L == 0L) {
             if (this.isExportHatch) {
-                this.pushItemsIntoNearbyHandlers(new EnumFacing[]{this.getFrontFacing()});
+                this.pushItemsIntoNearbyHandlers(this.getFrontFacing());
             } else {
-                this.pullItemsFromNearbyHandlers(new EnumFacing[]{this.getFrontFacing()});
+                this.pullItemsFromNearbyHandlers(this.getFrontFacing());
             }
         }
 
@@ -83,6 +83,6 @@ public class TileEntityCokeItemBus extends MetaTileEntityMultiblockPart implemen
     }
 
     public void addInformation(ItemStack stack, @Nullable World player, List<String> tooltip, boolean advanced) {
-        tooltip.add(I18n.format("gregtech.universal.tooltip.item_storage_capacity", new Object[]{this.getInventorySize()}));
+        tooltip.add(I18n.format("gregtech.universal.tooltip.item_storage_capacity", this.getInventorySize()));
     }
 }

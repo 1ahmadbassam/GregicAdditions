@@ -28,12 +28,12 @@ public class GAMetaTool extends ToolMetaItem<ToolMetaItem<?>.MetaToolValueItem> 
                 IngotMaterial toolMaterial = (IngotMaterial) material;
 
                 if (GAConfig.GT6.BendingCylinders) {
-                    ModHandler.addShapedRecipe(String.format("cylinder_%s", material.toString()),
+                    ModHandler.addShapedRecipe(String.format("cylinder_%s", material),
                             ((ToolMetaItem<?>.MetaToolValueItem) GAMetaItems.BENDING_CYLINDER).getStackForm(toolMaterial),
                             "sfh", "XXX", "XXX",
                             'X', new UnificationEntry(OrePrefix.ingot, toolMaterial));
 
-                    ModHandler.addShapedRecipe(String.format("small_cylinder_%s", material.toString()),
+                    ModHandler.addShapedRecipe(String.format("small_cylinder_%s", material),
                             ((ToolMetaItem<?>.MetaToolValueItem) GAMetaItems.SMALL_BENDING_CYLINDER).getStackForm(toolMaterial),
                             "sfh", "XXX",
                             'X', new UnificationEntry(OrePrefix.ingot, toolMaterial));
@@ -41,7 +41,7 @@ public class GAMetaTool extends ToolMetaItem<ToolMetaItem<?>.MetaToolValueItem> 
 
                 //GT6 Wrench Recipe
                 if (GAConfig.GT6.ExpensiveWrenches && !OreDictUnifier.get(OrePrefix.plate, material).isEmpty()) {
-                    ModHandler.addShapedRecipe(String.format("ga_wrench_%s", material.toString()),
+                    ModHandler.addShapedRecipe(String.format("ga_wrench_%s", material),
                             MetaItems.WRENCH.getStackForm(toolMaterial),
                             "XhX", "XXX", " X ",
                             'X', new UnificationEntry(OrePrefix.plate, toolMaterial));

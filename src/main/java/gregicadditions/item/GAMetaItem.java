@@ -82,7 +82,7 @@ public class GAMetaItem extends MaterialMetaItem {
         }
 
         if (Loader.isModLoaded("tconstruct") && GAConfig.Misc.TiCIntegration)
-        GAMetaItems.COMPRESSED_GROUT = addItem(22, "ga_compressed.grout");
+            GAMetaItems.COMPRESSED_GROUT = addItem(22, "ga_compressed.grout");
         GAMetaItems.MOLD_FORM_ANVIL = addItem(36, "mold.form.anvil");
         GAMetaItems.MOLD_FORM_BALL = addItem(37, "mold.form.ball");
         GAMetaItems.MOLD_FORM_BLOCK = addItem(38, "mold.form.block");

@@ -22,15 +22,13 @@ public class GregicAdditions {
     public static final String MODID = "gtadditions";
     public static final String NAME = "Gregic Additions";
     public static final String VERSION = "@VERSION@";
-
+    public static Logger logger;
     @SidedProxy(
             modId = MODID,
             clientSide = "gregicadditions.ClientProxy",
             serverSide = "gregicadditions.CommonProxy"
     )
     private static CommonProxy proxy;
-
-    public static Logger logger;
 
     public GregicAdditions() {
         GAEnums.preInit();

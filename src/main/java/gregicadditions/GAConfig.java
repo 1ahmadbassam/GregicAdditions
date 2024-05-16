@@ -7,6 +7,10 @@ public class GAConfig {
 
     @Config.Comment("Config options for GT6 features")
     public static GT6 GT6 = new GT6();
+    @Config.Comment("Config options for GT5U features")
+    public static GT5U GT5U = new GT5U();
+    @Config.Comment("Config options of miscellaneous features")
+    public static Misc Misc = new Misc();
 
     public static class GT6 {
         @Config.Comment("Bending Recipes (disabling Bending Cylinders' recipes disables all of them)")
@@ -41,9 +45,6 @@ public class GAConfig {
         @Config.Name("Should Electrodes be registered?")
         public boolean electrodes = true;
     }
-
-    @Config.Comment("Config options for GT5U features")
-    public static GT5U GT5U = new GT5U();
 
     public static class GT5U {
         @Config.Comment("Set to false to disable GT5U Cable isolation recipes")
@@ -173,9 +174,6 @@ public class GAConfig {
         @Config.Name("Batteries - Replace the Ultimate Battery with a MAX Battery")
         public boolean replaceUVwithMAXBat = false;
     }
-
-    @Config.Comment("Config options of miscellaneous features")
-    public static Misc Misc = new Misc();
 
     public static class Misc {
         @Config.Comment("Set these to flase to disable the generated Packager and Unpackaker recipes")

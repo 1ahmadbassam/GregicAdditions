@@ -26,7 +26,7 @@ public class FluidIngredientFactory implements IIngredientFactory {
 
     public static class FluidIngredient extends Ingredient {
 
-        private FluidStack fluid;
+        private final FluidStack fluid;
 
         public FluidIngredient(String fluidName) {
 

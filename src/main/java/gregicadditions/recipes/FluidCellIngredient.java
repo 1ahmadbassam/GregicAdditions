@@ -18,6 +18,11 @@ public class FluidCellIngredient extends Ingredient {
 
     Fluid fluid;
 
+    public FluidCellIngredient(Fluid fluid) {
+        super(GAMetaItems.getFilledCell(fluid, 1));
+        this.fluid = fluid;
+    }
+
     /**
      * @param fluid
      * @param count Set to 0 for non consumable
@@ -29,11 +34,6 @@ public class FluidCellIngredient extends Ingredient {
 
     public static CountableIngredient getIngredient(FluidMaterial fluidMaterial, int count) {
         return new CountableIngredient(new FluidCellIngredient(fluidMaterial.getMaterialFluid()), count);
-    }
-
-    public FluidCellIngredient(Fluid fluid) {
-        super(GAMetaItems.getFilledCell(fluid, 1));
-        this.fluid = fluid;
     }
 
     @Override

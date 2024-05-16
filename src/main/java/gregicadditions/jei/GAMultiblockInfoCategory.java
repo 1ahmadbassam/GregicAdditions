@@ -14,7 +14,7 @@ import net.minecraft.client.resources.I18n;
 
 public class GAMultiblockInfoCategory implements IRecipeCategory<MultiblockInfoRecipeWrapper> {
     private final IDrawable background;
-    private IGuiHelper guiHelper;
+    private final IGuiHelper guiHelper;
 
     public GAMultiblockInfoCategory(IJeiHelpers helpers) {
         this.background = helpers.getGuiHelper().createBlankDrawable(176, 166);
@@ -37,7 +37,7 @@ public class GAMultiblockInfoCategory implements IRecipeCategory<MultiblockInfoR
     }
 
     public String getTitle() {
-        return I18n.format("gregtech.multiblock.title", new Object[0]);
+        return I18n.format("gregtech.multiblock.title");
     }
 
     public String getModName() {

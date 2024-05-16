@@ -52,7 +52,7 @@ public class GAMachineRecipeRemoval {
 
             //Remove Old Wrench Recipes
             if (m instanceof IngotMaterial && !m.hasFlag(DustMaterial.MatFlags.NO_SMASHING) && GAConfig.GT6.ExpensiveWrenches) {
-                ModHandler.removeRecipeByName(new ResourceLocation(String.format("gregtech:wrench_%s", m.toString())));
+                ModHandler.removeRecipeByName(new ResourceLocation(String.format("gregtech:wrench_%s", m)));
             }
 
             //Remove EV+ Cable Recipes
@@ -225,25 +225,21 @@ public class GAMachineRecipeRemoval {
 
     private static void removeRecipesByInputs(RecipeMap map, ItemStack... itemInputs) {
         List<ItemStack> inputs = new ArrayList<>();
-        for (ItemStack s : itemInputs)
-            inputs.add(s);
+        Collections.addAll(inputs, itemInputs);
         map.removeRecipe(map.findRecipe(Integer.MAX_VALUE, inputs, Collections.EMPTY_LIST, Integer.MAX_VALUE));
     }
 
     private static void removeRecipesByInputs(RecipeMap map, FluidStack... fluidInputs) {
         List<FluidStack> inputs = new ArrayList<>();
-        for (FluidStack s : fluidInputs)
-            inputs.add(s);
+        Collections.addAll(inputs, fluidInputs);
         map.removeRecipe(map.findRecipe(Integer.MAX_VALUE, Collections.EMPTY_LIST, inputs, Integer.MAX_VALUE));
     }
 
     private static void removeRecipesByInputs(RecipeMap map, ItemStack[] itemInputs, FluidStack[] fluidInputs) {
         List<ItemStack> itemIn = new ArrayList<>();
-        for (ItemStack s : itemInputs)
-            itemIn.add(s);
+        Collections.addAll(itemIn, itemInputs);
         List<FluidStack> fluidIn = new ArrayList<>();
-        for (FluidStack s : fluidInputs)
-            fluidIn.add(s);
+        Collections.addAll(fluidIn, fluidInputs);
         map.removeRecipe(map.findRecipe(Integer.MAX_VALUE, itemIn, fluidIn, Integer.MAX_VALUE));
     }
 

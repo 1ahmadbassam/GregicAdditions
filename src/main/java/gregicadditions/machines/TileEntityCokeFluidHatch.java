@@ -27,7 +27,7 @@ import java.util.List;
 
 public class TileEntityCokeFluidHatch extends MetaTileEntityMultiblockPart implements IMultiblockAbilityPart<IFluidTank> {
     private static final int INVENTORY_SIZE = 4000;
-    private boolean isExportHatch = true;
+    private final boolean isExportHatch = true;
 
     public TileEntityCokeFluidHatch(ResourceLocation metaTileEntityId) {
         super(metaTileEntityId, 0);
@@ -42,9 +42,9 @@ public class TileEntityCokeFluidHatch extends MetaTileEntityMultiblockPart imple
         super.update();
         if (!this.getWorld().isRemote && this.getTimer() % 5L == 0L) {
             if (this.isExportHatch) {
-                this.pushFluidsIntoNearbyHandlers(new EnumFacing[]{this.getFrontFacing()});
+                this.pushFluidsIntoNearbyHandlers(this.getFrontFacing());
             } else {
-                this.pullFluidsFromNearbyHandlers(new EnumFacing[]{this.getFrontFacing()});
+                this.pullFluidsFromNearbyHandlers(this.getFrontFacing());
             }
         }
 
@@ -60,11 +60,11 @@ public class TileEntityCokeFluidHatch extends MetaTileEntityMultiblockPart imple
     }
 
     protected FluidTankList createImportFluidHandler() {
-        return this.isExportHatch ? new FluidTankList(false, new IFluidTank[0]) : new FluidTankList(false, new IFluidTank[]{new FluidTank(this.getInventorySize())});
+        return this.isExportHatch ? new FluidTankList(false) : new FluidTankList(false, new FluidTank(this.getInventorySize()));
     }
 
     protected FluidTankList createExportFluidHandler() {
-        return this.isExportHatch ? new FluidTankList(false, new IFluidTank[]{new FluidTank(this.getInventorySize())}) : new FluidTankList(false, new IFluidTank[0]);
+        return this.isExportHatch ? new FluidTankList(false, new FluidTank(this.getInventorySize())) : new FluidTankList(false);
     }
 
     public MultiblockAbility<IFluidTank> getAbility() {
@@ -84,6 +84,6 @@ public class TileEntityCokeFluidHatch extends MetaTileEntityMultiblockPart imple
     }
 
     public void addInformation(ItemStack stack, @Nullable World player, List<String> tooltip, boolean advanced) {
-        tooltip.add(I18n.format("gregtech.universal.tooltip.fluid_storage_capacity", new Object[]{this.getInventorySize()}));
+        tooltip.add(I18n.format("gregtech.universal.tooltip.fluid_storage_capacity", this.getInventorySize()));
     }
 }

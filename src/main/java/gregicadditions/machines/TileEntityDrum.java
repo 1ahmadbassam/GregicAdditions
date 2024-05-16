@@ -61,7 +61,7 @@ public class TileEntityDrum extends MetaTileEntity {
     public int getLightOpacity() {
         return 1;
     }
-  
+
     @Override
     public int getActualComparatorValue() {
         FluidTank fluidTank = this.fluidTank;
@@ -168,8 +168,8 @@ public class TileEntityDrum extends MetaTileEntity {
 
     @Override
     @SideOnly(Side.CLIENT)
-    public Pair<TextureAtlasSprite, Integer>  getParticleTexture() {
-        return Pair.of( material.toString().contains("wood") ?
+    public Pair<TextureAtlasSprite, Integer> getParticleTexture() {
+        return Pair.of(material.toString().contains("wood") ?
                 GATextures.BARREL.getParticleTexture() :
                 GATextures.DRUM.getParticleTexture(), 16777215);
     }

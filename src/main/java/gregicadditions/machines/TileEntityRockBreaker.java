@@ -22,7 +22,7 @@ import net.minecraftforge.items.ItemStackHandler;
 
 public class TileEntityRockBreaker extends TieredMetaTileEntity {
 
-    private OrientedOverlayRenderer renderer;
+    private final OrientedOverlayRenderer renderer;
 
     public TileEntityRockBreaker(ResourceLocation metaTileEntityId, OrientedOverlayRenderer renderer, int tier) {
         super(metaTileEntityId, tier);

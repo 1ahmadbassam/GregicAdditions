@@ -179,15 +179,15 @@ public class TileEntityCokeOven extends MultiblockControllerBase {
         }
     }
 
+    public boolean isActive() {
+        return isActive;
+    }
+
     public void setActive(boolean active) {
         this.isActive = active;
         if (!getWorld().isRemote) {
             writeCustomData(-100, b -> b.writeBoolean(isActive));
         }
-    }
-
-    public boolean isActive() {
-        return isActive;
     }
 
     public double getProgressScaled() {

@@ -34,7 +34,8 @@ public class TileEntityAssemblyLine extends RecipeMapMultiblockController {
 
     @Override
     protected BlockPattern createStructurePattern() {
-        return FactoryBlockPattern.start().start(LEFT, DOWN, BACK)
+        FactoryBlockPattern.start();
+        return FactoryBlockPattern.start(LEFT, DOWN, BACK)
                 .aisle("#Y#", "GAG", "RTR", "COC")
                 .aisle("#Y#", "GAG", "RTR", "FIF").setRepeatable(3, 14)
                 .aisle("#Y#", "GSG", "RTR", "FIF")
