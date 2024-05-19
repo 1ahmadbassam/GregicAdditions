@@ -2,6 +2,7 @@ package gregicadditions.jei;
 
 import gregtech.api.gui.GuiTextures;
 import gregtech.api.recipes.recipes.CokeOvenRecipe;
+import gregtech.integration.jei.recipe.primitive.CokeOvenRecipeWrapper;
 import gregtech.integration.jei.recipe.primitive.PrimitiveRecipeCategory;
 import mezz.jei.api.IGuiHelper;
 import mezz.jei.api.gui.IDrawable;

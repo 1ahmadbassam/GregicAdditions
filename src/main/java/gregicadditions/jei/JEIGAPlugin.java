@@ -3,6 +3,7 @@ package gregicadditions.jei;
 import gregicadditions.machines.GATileEntities;
 import gregicadditions.recipes.GARecipeMaps;
 import gregtech.integration.jei.multiblock.MultiblockInfoRecipeWrapper;
+import gregtech.integration.jei.recipe.primitive.CokeOvenRecipeWrapper;
 import mezz.jei.api.IModPlugin;
 import mezz.jei.api.IModRegistry;
 import mezz.jei.api.JEIPlugin;
