@@ -3,10 +3,12 @@
   "density": 0.3,
   "max_height": 90,
   "min_height": 40,
-
   "generator": {
     "type": "ellipsoid",
-    "radius": [5, 5]
+    "radius": [
+      5,
+      5
+    ]
   },
   "filler": {
     "type": "simple",

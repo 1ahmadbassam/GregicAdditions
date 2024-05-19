@@ -1,8 +1,8 @@
 {
-	"ingredients": {
-		"fluid": "gregicadditions.recipes.FluidIngredientFactory"
-	},
-	"recipes": {
-		"fluid_recipe": "gregicadditions.recipes.FluidRecipeFactory"
-	}
+  "ingredients": {
+    "fluid": "gregicadditions.recipes.FluidIngredientFactory"
+  },
+  "recipes": {
+    "fluid_recipe": "gregicadditions.recipes.FluidRecipeFactory"
+  }
 }
