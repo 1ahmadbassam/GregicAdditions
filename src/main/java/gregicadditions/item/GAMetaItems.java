@@ -16,6 +16,7 @@ import java.util.List;
 public class GAMetaItems {
 
 
+    private static final List<MetaItem<?>> ITEMS = MetaItem.getMetaItems();
     public static MetaItem<?>.MetaValueItem COKE_BRICK;
     public static MetaItem<?>.MetaValueItem FIRECLAY_BRICK;
     public static MetaItem<?>.MetaValueItem ADVANCED_CIRCUIT;
@@ -75,6 +76,7 @@ public class GAMetaItems {
     public static MetaItem<?>.MetaValueItem MOLD_FORM_NUGGETS;
     public static MetaItem<?>.MetaValueItem MOLD_FORM_PLATE;
     public static MetaItem<?>.MetaValueItem MOLD_FORM_SMALL_GEAR;
+    public static MetaItem<?>.MetaValueItem MOLD_FORM_ROTOR;
     public static MetaItem<?>.MetaValueItem SHAPE_AXE_HEAD;
     public static MetaItem<?>.MetaValueItem SHAPE_BLOCK;
     public static MetaItem<?>.MetaValueItem SHAPE_BOLT;
@@ -99,7 +101,6 @@ public class GAMetaItems {
     public static MetaItem<?>.MetaValueItem SHAPE_WIRE;
     public static MetaItem<?>.MetaValueItem BENDING_CYLINDER;
     public static MetaItem<?>.MetaValueItem SMALL_BENDING_CYLINDER;
-    private static final List<MetaItem<?>> ITEMS = MetaItem.getMetaItems();
 
     public static void init() {
         GAMetaItem item = new GAMetaItem();

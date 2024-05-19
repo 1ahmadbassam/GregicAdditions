@@ -1,10 +1,8 @@
 package gregicadditions.recipes;
 
 import gregicadditions.GAConfig;
-import gregtech.api.recipes.ModHandler;
-import gregtech.api.recipes.Recipe;
-import gregtech.api.recipes.RecipeMap;
-import gregtech.api.recipes.RecipeMaps;
+import gregtech.api.items.metaitem.MetaItem;
+import gregtech.api.recipes.*;
 import gregtech.api.recipes.ingredients.IntCircuitIngredient;
 import gregtech.api.unification.OreDictUnifier;
 import gregtech.api.unification.material.MarkerMaterials;
@@ -25,9 +23,9 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fluids.FluidStack;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
+
+import static gregicadditions.recipes.GARecipeAddition.molds;
 
 public class GAMachineRecipeRemoval {
 
@@ -54,6 +52,10 @@ public class GAMachineRecipeRemoval {
             if (m instanceof IngotMaterial && !m.hasFlag(DustMaterial.MatFlags.NO_SMASHING) && GAConfig.GT6.ExpensiveWrenches) {
                 ModHandler.removeRecipeByName(new ResourceLocation(String.format("gregtech:wrench_%s", m)));
             }
+
+            //Remove old mold copying recipes
+            for (ItemStack mold : molds)
+                RecipeMaps.FORMING_PRESS_RECIPES.removeRecipe(RecipeMaps.FORMING_PRESS_RECIPES.findRecipe(22, Arrays.asList(MetaItems.SHAPE_EMPTY.getStackForm(), mold), Collections.emptyList(), Integer.MAX_VALUE));
 
             //Remove EV+ Cable Recipes
             if (GAConfig.GT5U.CablesGT5U) {
@@ -132,7 +134,7 @@ public class GAMachineRecipeRemoval {
         }
 
         removeRecipesByInputs(RecipeMaps.ASSEMBLER_RECIPES, new ItemStack[]{MetaItems.MULTILAYER_FIBER_BOARD.getStackForm(), OreDictUnifier.get(OrePrefix.circuit, MarkerMaterials.Tier.Good)}, new FluidStack[]{Materials.Polystyrene.getFluid(144)});
-        removeRecipesByInputs(RecipeMaps.ASSEMBLER_RECIPES, new ItemStack[]{MetaItems.CENTRAL_PROCESSING_UNIT_WAFER.getStackForm(), MetaItems.CARBON_FIBERS.getStackForm(16)}, new FluidStack[]{Materials.Glowstone.getFluid(576)});
+        removeRecipesByInputs(RecipeMaps.CHEMICAL_RECIPES, new ItemStack[]{MetaItems.CENTRAL_PROCESSING_UNIT_WAFER.getStackForm(), MetaItems.CARBON_FIBERS.getStackForm(16)}, new FluidStack[]{Materials.Glowstone.getFluid(576)});
 
         //Remove GTCE's Engraved Crystal Chip recipes
         removeRecipesByInputs(RecipeMaps.BLAST_RECIPES, new ItemStack[]{OreDictUnifier.get(OrePrefix.plate, Materials.Emerald, 10), OreDictUnifier.get(OrePrefix.gemExquisite, Materials.Emerald)}, new FluidStack[]{Materials.Helium.getFluid(5000)});
@@ -143,8 +145,20 @@ public class GAMachineRecipeRemoval {
         removeRecipesByInputs(RecipeMaps.ASSEMBLER_RECIPES, new ItemStack[]{OreDictUnifier.get(OrePrefix.circuit, MarkerMaterials.Tier.Basic, 4), OreDictUnifier.get(OrePrefix.dust, Materials.EnderPearl)}, new FluidStack[]{Materials.Osmium.getFluid(288)});
         removeRecipesByInputs(RecipeMaps.ASSEMBLER_RECIPES, new ItemStack[]{OreDictUnifier.get(OrePrefix.circuit, MarkerMaterials.Tier.Good, 4), OreDictUnifier.get(OrePrefix.dust, Materials.EnderEye)}, new FluidStack[]{Materials.Osmium.getFluid(576)});
         removeRecipesByInputs(RecipeMaps.ASSEMBLER_RECIPES, new ItemStack[]{OreDictUnifier.get(OrePrefix.circuit, MarkerMaterials.Tier.Advanced, 4), MetaItems.QUANTUM_EYE.getStackForm()}, new FluidStack[]{Materials.Osmium.getFluid(1152)});
-        removeRecipesByInputs(RecipeMaps.ASSEMBLER_RECIPES, new ItemStack[]{OreDictUnifier.get(OrePrefix.circuit, MarkerMaterials.Tier.Elite, 4), OreDictUnifier.get(OrePrefix.dust, Materials.NetherStar)}, new FluidStack[]{Materials.Osmium.getFluid(2304)});
-        removeRecipesByInputs(RecipeMaps.ASSEMBLER_RECIPES, new ItemStack[]{OreDictUnifier.get(OrePrefix.circuit, MarkerMaterials.Tier.Master, 4), MetaItems.QUANTUM_STAR.getStackForm()}, new FluidStack[]{Materials.Osmium.getFluid(4608)});
+        removeRecipesByInputs(RecipeMaps.ASSEMBLER_RECIPES, new ItemStack[]{OreDictUnifier.get(OrePrefix.circuit, MarkerMaterials.Tier.Extreme, 4), OreDictUnifier.get(OrePrefix.dust, Materials.NetherStar)}, new FluidStack[]{Materials.Osmium.getFluid(2304)});
+        removeRecipesByInputs(RecipeMaps.ASSEMBLER_RECIPES, new ItemStack[]{OreDictUnifier.get(OrePrefix.circuit, MarkerMaterials.Tier.Elite, 4), MetaItems.QUANTUM_STAR.getStackForm()}, new FluidStack[]{Materials.Osmium.getFluid(4608)});
+
+        //Remove old component recipes
+        Set<ItemStack> markedForRemoval = new TreeSet<>((o1, o2) -> (o1.getItem().equals(o2.getItem())) ? o1.getMetadata() - o2.getMetadata() : -1);
+        for (int tier = 0; tier <= 8; tier++) {
+            markedForRemoval.add(((MetaItem<?>.MetaValueItem) GACraftingComponents.MOTOR.getIngredient(tier)).getStackForm());
+            markedForRemoval.add(((MetaItem<?>.MetaValueItem) GACraftingComponents.CONVEYOR.getIngredient(tier)).getStackForm());
+            markedForRemoval.add(((MetaItem<?>.MetaValueItem) GACraftingComponents.EMITTER.getIngredient(tier)).getStackForm());
+            markedForRemoval.add(((MetaItem<?>.MetaValueItem) GACraftingComponents.PISTON.getIngredient(tier)).getStackForm());
+            markedForRemoval.add(((MetaItem<?>.MetaValueItem) GACraftingComponents.ROBOT_ARM.getIngredient(tier)).getStackForm());
+            markedForRemoval.add(((MetaItem<?>.MetaValueItem) GACraftingComponents.PUMP.getIngredient(tier)).getStackForm());
+        }
+        removeAllRecipesInSet(RecipeMaps.ASSEMBLER_RECIPES, markedForRemoval);
 
         //Remove GTCE's Solution Electrolyzing Recipes
         removeRecipesByInputs(RecipeMaps.ELECTROLYZER_RECIPES, Materials.NickelSulfateSolution.getFluid(12000));
@@ -223,19 +237,19 @@ public class GAMachineRecipeRemoval {
         }
     }
 
-    private static void removeRecipesByInputs(RecipeMap map, ItemStack... itemInputs) {
+    private static <T extends RecipeBuilder<T>> void removeRecipesByInputs(RecipeMap<T> map, ItemStack... itemInputs) {
         List<ItemStack> inputs = new ArrayList<>();
         Collections.addAll(inputs, itemInputs);
-        map.removeRecipe(map.findRecipe(Integer.MAX_VALUE, inputs, Collections.EMPTY_LIST, Integer.MAX_VALUE));
+        map.removeRecipe(map.findRecipe(Integer.MAX_VALUE, inputs, Collections.emptyList(), Integer.MAX_VALUE));
     }
 
-    private static void removeRecipesByInputs(RecipeMap map, FluidStack... fluidInputs) {
+    private static <T extends RecipeBuilder<T>> void removeRecipesByInputs(RecipeMap<T> map, FluidStack... fluidInputs) {
         List<FluidStack> inputs = new ArrayList<>();
         Collections.addAll(inputs, fluidInputs);
-        map.removeRecipe(map.findRecipe(Integer.MAX_VALUE, Collections.EMPTY_LIST, inputs, Integer.MAX_VALUE));
+        map.removeRecipe(map.findRecipe(Integer.MAX_VALUE, Collections.emptyList(), inputs, Integer.MAX_VALUE));
     }
 
-    private static void removeRecipesByInputs(RecipeMap map, ItemStack[] itemInputs, FluidStack[] fluidInputs) {
+    private static <T extends RecipeBuilder<T>> void removeRecipesByInputs(RecipeMap<T> map, ItemStack[] itemInputs, FluidStack[] fluidInputs) {
         List<ItemStack> itemIn = new ArrayList<>();
         Collections.addAll(itemIn, itemInputs);
         List<FluidStack> fluidIn = new ArrayList<>();
@@ -243,12 +257,13 @@ public class GAMachineRecipeRemoval {
         map.removeRecipe(map.findRecipe(Integer.MAX_VALUE, itemIn, fluidIn, Integer.MAX_VALUE));
     }
 
-    private static void removeAllRecipes(RecipeMap map) {
-
-        List<Recipe> recipes = new ArrayList();
-        recipes.addAll(map.getRecipeList());
-
+    private static <T extends RecipeBuilder<T>> void removeAllRecipesInSet(RecipeMap<T> map, Set<ItemStack> itemsToClear) {
+        List<Recipe> recipes = new ArrayList<>(map.getRecipeList());
         for (Recipe r : recipes)
-            map.removeRecipe(r);
+            for (ItemStack i : r.getOutputs())
+                if (itemsToClear.contains(i)) {
+                    map.removeRecipe(r);
+                    break;
+                }
     }
 }

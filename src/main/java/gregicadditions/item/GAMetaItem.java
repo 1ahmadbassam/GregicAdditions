@@ -95,6 +95,7 @@ public class GAMetaItem extends MaterialMetaItem {
         GAMetaItems.MOLD_FORM_NUGGETS = addItem(44, "mold.form.nuggets");
         GAMetaItems.MOLD_FORM_PLATE = addItem(45, "mold.form.plate");
         GAMetaItems.MOLD_FORM_SMALL_GEAR = addItem(46, "mold.form.small_gear");
+        GAMetaItems.MOLD_FORM_ROTOR = addItem(69, "mold.form.rotor");
         GAMetaItems.SHAPE_AXE_HEAD = addItem(47, "shape.axe_head");
         GAMetaItems.SHAPE_BLOCK = addItem(48, "shape.block");
         GAMetaItems.SHAPE_BOLT = addItem(49, "shape.bolt");
