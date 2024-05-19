@@ -88,8 +88,7 @@ public class GeneratorFuels {
 
     private static void removeAllRecipes(FuelRecipeMap map) {
 
-        List<FuelRecipe> recipes = new ArrayList();
-        recipes.addAll(map.getRecipeList());
+        List<FuelRecipe> recipes = new ArrayList<>(map.getRecipeList());
 
         for (FuelRecipe r : recipes)
             map.removeRecipe(r);

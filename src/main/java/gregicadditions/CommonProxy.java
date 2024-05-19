@@ -41,7 +41,8 @@ public class CommonProxy {
 
     private static <T extends Block> ItemBlock createItemBlock(T block, Function<T, ItemBlock> producer) {
         ItemBlock itemBlock = producer.apply(block);
-        itemBlock.setRegistryName(block.getRegistryName());
+        if (block.getRegistryName() != null)
+            itemBlock.setRegistryName(block.getRegistryName());
         return itemBlock;
     }
 
@@ -57,6 +58,7 @@ public class CommonProxy {
         GAMachineRecipeRemoval.init();
         GARecipeAddition.init();
         GARecipeAddition.init2();
+        GARecipeAddition.registerCokeOvenRecipes();
         if (Loader.isModLoaded("forestry") && GAConfig.GT6.electrodes)
             GARecipeAddition.forestrySupport();
         if (Loader.isModLoaded("tconstruct") && GAConfig.Misc.TiCIntegration)

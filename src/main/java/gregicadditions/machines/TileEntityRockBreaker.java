@@ -72,11 +72,11 @@ public class TileEntityRockBreaker extends TieredMetaTileEntity {
             }
             long energyToConsume = GTValues.V[getTier()] / 16;
             int waitTime = (int) Math.ceil(32 / (Math.pow(2, getTier())));
-            if (checkSides(Blocks.LAVA) && checkSides(Blocks.WATER) && getTimer() % waitTime == 0 && energyContainer.getEnergyStored() >= energyToConsume) {
+            if (checkSides(Blocks.LAVA) && checkSides(Blocks.WATER) && getOffsetTimer() % waitTime == 0 && energyContainer.getEnergyStored() >= energyToConsume) {
                 exportItems.insertItem(0, output, false);
                 energyContainer.removeEnergy(energyToConsume);
             }
-            if (getTimer() % 5 == 0) {
+            if (getOffsetTimer() % 5 == 0) {
                 pushItemsIntoNearbyHandlers(frontFacing);
             }
         }

@@ -38,6 +38,6 @@ public class GAEnums {
     }
 
     private static Predicate<Material> pred(Predicate<Material> in) {
-        return mat -> in.test(mat);
+        return in;
     }
 }

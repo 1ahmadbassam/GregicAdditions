@@ -123,8 +123,8 @@ public class TileEntityFusionReactor extends RecipeMapMultiblockController {
     }
 
     private long getMaxEU() {
-        List<IEnergyContainer> eConts = ObfuscationReflectionHelper.getPrivateValue(EnergyContainerList.class, this.inputEnergyContainers, "energyContainerList");
-        return eConts.size() * 100000L * (tier - 5);
+        List<IEnergyContainer> et = ObfuscationReflectionHelper.getPrivateValue(EnergyContainerList.class, this.inputEnergyContainers, "energyContainerList");
+        return et.size() * 100000L * (tier - 5);
     }
 
     protected void formStructure(PatternMatchContext context) {
@@ -171,7 +171,7 @@ public class TileEntityFusionReactor extends RecipeMapMultiblockController {
                 Recipe recipe = ObfuscationReflectionHelper.getPrivateValue(AbstractRecipeLogic.class, recipeMapWorkable, "previousRecipe");
                 if (previousRecipe != recipe) {
                     if (recipe != null) {
-                        long euToStart = ((Integer) recipe.getProperty("eu_to_start")).intValue();
+                        long euToStart = (Integer) recipe.getRecipePropertyStorage().getRawRecipePropertyValue("eu_to_start");
                         if (this.energyContainer.getEnergyStored() < euToStart) {
                             ObfuscationReflectionHelper.setPrivateValue(AbstractRecipeLogic.class, recipeMapWorkable, 0, "progressTime");
                             recipeMapWorkable.setMaxProgress(0);

@@ -68,7 +68,8 @@ public class GATileEntities {
 
     public static TileEntityCokeOven COKE_OVEN;
     public static TileEntityCokeFluidHatch COKE_FLUID_HATCH;
-    public static TileEntityCokeItemBus COKE_ITEM_BUS;
+    public static TileEntityCokeItemBus COKE_ITEM_IN_BUS;
+    public static TileEntityCokeItemBus COKE_ITEM_OUT_BUS;
 
     public static TileEntityDrum WOODEN_DRUM;
     public static TileEntityDrum BRONZE_DRUM;
@@ -373,16 +374,16 @@ public class GATileEntities {
             WIREMILL[3] = GregTechAPI.registerMetaTileEntity(2171, new SimpleMachineMetaTileEntity(location("wiremill.uv"), RecipeMaps.WIREMILL_RECIPES, Textures.WIREMILL_OVERLAY, 8));
         }
 
-        NAQUADAH_REACTOR[0] = GregTechAPI.registerMetaTileEntity(2172, new SimpleGeneratorMetaTileEntity(location("naquadah_reactor.mk1"), GARecipeMaps.NAQUADAH_REACTOR_FUELS, GATextures.NAQADAH_OVERLAY, 4));
-        NAQUADAH_REACTOR[1] = GregTechAPI.registerMetaTileEntity(2173, new SimpleGeneratorMetaTileEntity(location("naquadah_reactor.mk2"), GARecipeMaps.NAQUADAH_REACTOR_FUELS, GATextures.NAQADAH_OVERLAY, 5));
-        NAQUADAH_REACTOR[2] = GregTechAPI.registerMetaTileEntity(2174, new SimpleGeneratorMetaTileEntity(location("naquadah_reactor.mk3"), GARecipeMaps.NAQUADAH_REACTOR_FUELS, GATextures.NAQADAH_OVERLAY, 6));
-        NAQUADAH_REACTOR[3] = GregTechAPI.registerMetaTileEntity(2191, new SimpleGeneratorMetaTileEntity(location("naquadah_reactor.mk4"), GARecipeMaps.NAQUADAH_REACTOR_FUELS, GATextures.NAQADAH_OVERLAY, 7));
+        NAQUADAH_REACTOR[0] = GregTechAPI.registerMetaTileEntity(2172, new SimpleGeneratorMetaTileEntity(location("naquadah_reactor.mk1"), GARecipeMaps.NAQUADAH_REACTOR_FUELS, GATextures.NAQUADAH_OVERLAY, 4));
+        NAQUADAH_REACTOR[1] = GregTechAPI.registerMetaTileEntity(2173, new SimpleGeneratorMetaTileEntity(location("naquadah_reactor.mk2"), GARecipeMaps.NAQUADAH_REACTOR_FUELS, GATextures.NAQUADAH_OVERLAY, 5));
+        NAQUADAH_REACTOR[2] = GregTechAPI.registerMetaTileEntity(2174, new SimpleGeneratorMetaTileEntity(location("naquadah_reactor.mk3"), GARecipeMaps.NAQUADAH_REACTOR_FUELS, GATextures.NAQUADAH_OVERLAY, 6));
+        NAQUADAH_REACTOR[3] = GregTechAPI.registerMetaTileEntity(2191, new SimpleGeneratorMetaTileEntity(location("naquadah_reactor.mk4"), GARecipeMaps.NAQUADAH_REACTOR_FUELS, GATextures.NAQUADAH_OVERLAY, 7));
 
         MASS_FAB[0] = GregTechAPI.registerMetaTileEntity(2175, new SimpleMachineMetaTileEntity(location("mass_fab.lv"), GARecipeMaps.MASS_FAB_RECIPES, GATextures.MASS_FAB_OVERLAY, 1));
         MASS_FAB[1] = GregTechAPI.registerMetaTileEntity(2176, new SimpleMachineMetaTileEntity(location("mass_fab.mv"), GARecipeMaps.MASS_FAB_RECIPES, GATextures.MASS_FAB_OVERLAY, 2));
         MASS_FAB[2] = GregTechAPI.registerMetaTileEntity(2177, new SimpleMachineMetaTileEntity(location("mass_fab.hv"), GARecipeMaps.MASS_FAB_RECIPES, GATextures.MASS_FAB_OVERLAY, 3));
         MASS_FAB[3] = GregTechAPI.registerMetaTileEntity(2178, new SimpleMachineMetaTileEntity(location("mass_fab.ev"), GARecipeMaps.MASS_FAB_RECIPES, GATextures.MASS_FAB_OVERLAY, 4));
-        if (GAConfig.GT5U.highTierMassFabs) {
+        if (GAConfig.GT5U.highTierMassFabricators) {
             MASS_FAB[4] = GregTechAPI.registerMetaTileEntity(2179, new SimpleMachineMetaTileEntity(location("mass_fab.iv"), GARecipeMaps.MASS_FAB_RECIPES, GATextures.MASS_FAB_OVERLAY, 5));
             MASS_FAB[5] = GregTechAPI.registerMetaTileEntity(2180, new SimpleMachineMetaTileEntity(location("mass_fab.luv"), GARecipeMaps.MASS_FAB_RECIPES, GATextures.MASS_FAB_OVERLAY, 6));
             MASS_FAB[6] = GregTechAPI.registerMetaTileEntity(2181, new SimpleMachineMetaTileEntity(location("mass_fab.zpm"), GARecipeMaps.MASS_FAB_RECIPES, GATextures.MASS_FAB_OVERLAY, 7));
@@ -409,11 +410,12 @@ public class GATileEntities {
         FUSION_REACTOR[2] = GregTechAPI.registerMetaTileEntity(2506, new TileEntityFusionReactor(location("fusion_reactor.uv"), 8));
 
         COKE_FLUID_HATCH = GregTechAPI.registerMetaTileEntity(2507, new TileEntityCokeFluidHatch(location("ga_coke_fluid_hatch")));
-        COKE_ITEM_BUS = GregTechAPI.registerMetaTileEntity(2508, new TileEntityCokeItemBus(location("ga_coke_item_bus")));
+        COKE_ITEM_IN_BUS = GregTechAPI.registerMetaTileEntity(2509, new TileEntityCokeItemBus(location("ga_coke_item_in_bus"), false));
+        COKE_ITEM_OUT_BUS = GregTechAPI.registerMetaTileEntity(2508, new TileEntityCokeItemBus(location("ga_coke_item_out_bus"), true));
 
         STEAM_MIXER = GregTechAPI.registerMetaTileEntity(2221, new TileEntitySteamMixer(location("steam_mixer")));
 
-        if (GAConfig.GT6.registerDums) {
+        if (GAConfig.GT6.registerDrums) {
             WOODEN_DRUM = GregTechAPI.registerMetaTileEntity(2195, new TileEntityDrum(location("drum.wood"), Materials.Wood, 16000));
             BRONZE_DRUM = GregTechAPI.registerMetaTileEntity(2196, new TileEntityDrum(location("drum.bronze"), Materials.Bronze, 32000));
             STEEL_DRUM = GregTechAPI.registerMetaTileEntity(2197, new TileEntityDrum(location("drum.steel"), Materials.Steel, 64000));

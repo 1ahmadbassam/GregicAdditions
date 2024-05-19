@@ -6,7 +6,6 @@ import codechicken.lib.vec.Matrix4;
 import gregicadditions.GATextures;
 import gregicadditions.item.GAMetaBlocks;
 import gregicadditions.item.GAMultiblockCasing;
-import gregicadditions.recipes.GARecipeMaps;
 import gregtech.api.capability.impl.FluidTankList;
 import gregtech.api.capability.impl.ItemHandlerList;
 import gregtech.api.gui.GuiTextures;
@@ -21,7 +20,8 @@ import gregtech.api.metatileentity.multiblock.MultiblockAbility;
 import gregtech.api.metatileentity.multiblock.MultiblockControllerBase;
 import gregtech.api.multiblock.BlockPattern;
 import gregtech.api.multiblock.FactoryBlockPattern;
-import gregtech.api.recipes.Recipe;
+import gregtech.api.recipes.RecipeMaps;
+import gregtech.api.recipes.recipes.CokeOvenRecipe;
 import gregtech.api.render.ICubeRenderer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
@@ -29,42 +29,55 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.network.PacketBuffer;
-import net.minecraft.util.NonNullList;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.util.Constants;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidTank;
+import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
+import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandlerModifiable;
 import net.minecraftforge.items.ItemHandlerHelper;
 import net.minecraftforge.items.ItemStackHandler;
 
-import java.util.ArrayList;
 import java.util.Collections;
-import java.util.List;
 
 public class TileEntityCokeOven extends MultiblockControllerBase {
     private int maxProgressDuration;
     private int currentProgress;
-    private NonNullList<ItemStack> outputsList;
-    private List<FluidStack> outputFluids;
+    private ItemStack outputItem;
+    private FluidStack outputFluid;
     private boolean isActive;
     private boolean wasActiveAndNeedUpdate;
+
+    private ItemStack lastInputStack = ItemStack.EMPTY;
+    private CokeOvenRecipe previousRecipe;
 
     public TileEntityCokeOven(ResourceLocation metaTileEntityId) {
         super(metaTileEntityId);
     }
 
+    private static boolean areItemStacksEqual(ItemStack stackA, ItemStack stackB) {
+        return (stackA.isEmpty() && stackB.isEmpty()) ||
+                (ItemStack.areItemsEqual(stackA, stackB) &&
+                        ItemStack.areItemStackTagsEqual(stackA, stackB));
+    }
+
     @Override
     protected void updateFormedValid() {
+        ItemHandlerList itemInput = new ItemHandlerList(this.getAbilities(MultiblockAbility.IMPORT_ITEMS));
+        if (itemInput.getSlots() > 0 && !itemInput.getStackInSlot(0).isEmpty() && (importItems.getStackInSlot(0).isEmpty() || importItems.getStackInSlot(0).isItemEqual(itemInput.getStackInSlot(0)))) {
+            itemInput.setStackInSlot(0, ItemHandlerHelper.insertItemStacked(importItems, itemInput.getStackInSlot(0), false));
+        }
         FluidTankList fluidOutput = new FluidTankList(true, this.getAbilities(MultiblockAbility.EXPORT_FLUIDS));
-        if (exportFluids.getTankAt(0).getFluidAmount() > 0 && fluidOutput.getFluidTanks().size() > 0) {
+        if (exportFluids.getTankAt(0).getFluidAmount() > 0 && !fluidOutput.getFluidTanks().isEmpty()) {
             exportFluids.drain(fluidOutput.fill(exportFluids.getTankAt(0).getFluid(), true), true);
         }
         ItemHandlerList itemOutput = new ItemHandlerList(this.getAbilities(MultiblockAbility.EXPORT_ITEMS));
         if (!exportItems.getStackInSlot(0).isEmpty() && itemOutput.getSlots() > 0) {
             exportItems.setStackInSlot(0, ItemHandlerHelper.insertItemStacked(itemOutput, exportItems.getStackInSlot(0), false));
         }
-
         if (maxProgressDuration == 0) {
             if (tryPickNewRecipe()) {
                 if (wasActiveAndNeedUpdate) {
@@ -85,34 +98,52 @@ public class TileEntityCokeOven extends MultiblockControllerBase {
     private void finishCurrentRecipe() {
         this.maxProgressDuration = 0;
         this.currentProgress = 0;
-        MetaTileEntity.addItemsToItemHandler(exportItems, false, outputsList);
-        MetaTileEntity.addFluidsToFluidHandler(exportFluids, false, outputFluids);
-        this.outputsList = null;
-        this.outputFluids = null;
+        MetaTileEntity.addItemsToItemHandler(exportItems, false, Collections.singletonList(outputItem));
+        MetaTileEntity.addFluidsToFluidHandler(exportFluids, false, Collections.singletonList(outputFluid));
+        this.outputItem = null;
+        this.outputFluid = null;
         markDirty();
+    }
+
+    private boolean setupRecipe(ItemStack inputStack, CokeOvenRecipe recipe) {
+        return inputStack.getCount() >= recipe.getInput().getCount() &&
+                ItemHandlerHelper.insertItemStacked(exportItems, recipe.getOutput(), true).isEmpty() &&
+                exportFluids.fill(recipe.getFluidOutput(), false) == recipe.getFluidOutput().amount;
     }
 
     private boolean tryPickNewRecipe() {
         ItemStack inputStack = importItems.getStackInSlot(0);
-        if (inputStack.isEmpty()) return false;
-        Recipe recipe = GARecipeMaps.COKE_OVEN_RECIPES.findRecipe(Integer.MAX_VALUE, Collections.singletonList(inputStack), Collections.EMPTY_LIST, Integer.MAX_VALUE);
-        if (recipe == null) return false;
-        NonNullList<ItemStack> outputs = NonNullList.create();
-        outputs.add(recipe.getOutputs().get(0).copy());
-        List<FluidStack> fluidOutputs = new ArrayList();
-        fluidOutputs.addAll(recipe.getFluidOutputs());
-        if (MetaTileEntity.addItemsToItemHandler(exportItems, true, outputs) &&
-                MetaTileEntity.addFluidsToFluidHandler(exportFluids, true, fluidOutputs)) {
-            inputStack.shrink(recipe.getInputs().get(0).getCount());
-            importItems.setStackInSlot(0, inputStack);
-            this.maxProgressDuration = recipe.getDuration();
+        if (inputStack.isEmpty()) {
+            return false;
+        }
+        CokeOvenRecipe currentRecipe = getOrRefreshRecipe(inputStack);
+        if (currentRecipe != null && setupRecipe(inputStack, currentRecipe)) {
+            inputStack.shrink(currentRecipe.getInput().getCount());
+            this.maxProgressDuration = currentRecipe.getDuration();
             this.currentProgress = 0;
-            this.outputsList = outputs;
-            this.outputFluids = fluidOutputs;
+            this.outputItem = currentRecipe.getOutput().copy();
+            this.outputFluid = currentRecipe.getFluidOutput().copy();
             markDirty();
             return true;
         }
         return false;
+    }
+
+    private CokeOvenRecipe getOrRefreshRecipe(ItemStack inputStack) {
+        CokeOvenRecipe currentRecipe = null;
+        if (previousRecipe != null &&
+                previousRecipe.getInput().getIngredient().apply(inputStack)) {
+            currentRecipe = previousRecipe;
+        } else if (!areItemStacksEqual(inputStack, lastInputStack)) {
+            this.lastInputStack = inputStack.isEmpty() ? ItemStack.EMPTY : inputStack.copy();
+            currentRecipe = RecipeMaps.COKE_OVEN_RECIPES.stream()
+                    .filter(it -> it.getInput().getIngredient().test(inputStack))
+                    .findFirst().orElse(null);
+            if (currentRecipe != null) {
+                this.previousRecipe = currentRecipe;
+            }
+        }
+        return currentRecipe;
     }
 
     @Override
@@ -124,14 +155,10 @@ public class TileEntityCokeOven extends MultiblockControllerBase {
         if (maxProgressDuration > 0) {
             data.setInteger("Progress", currentProgress);
             NBTTagList itemOutputs = new NBTTagList();
-            for (ItemStack itemStack : outputsList) {
-                itemOutputs.appendTag(itemStack.writeToNBT(new NBTTagCompound()));
-            }
+            itemOutputs.appendTag(outputItem.writeToNBT(new NBTTagCompound()));
             data.setTag("Outputs", itemOutputs);
             NBTTagList fluidOutputs = new NBTTagList();
-            for (FluidStack fluidStack : outputFluids) {
-                fluidOutputs.appendTag(fluidStack.writeToNBT(new NBTTagCompound()));
-            }
+            fluidOutputs.appendTag(outputFluid.writeToNBT(new NBTTagCompound()));
             data.setTag("FluidOutputs", fluidOutputs);
         }
         return data;
@@ -146,15 +173,9 @@ public class TileEntityCokeOven extends MultiblockControllerBase {
         if (maxProgressDuration > 0) {
             this.currentProgress = data.getInteger("Progress");
             NBTTagList itemOutputs = data.getTagList("Outputs", Constants.NBT.TAG_COMPOUND);
-            this.outputsList = NonNullList.create();
-            for (int i = 0; i < itemOutputs.tagCount(); i++) {
-                this.outputsList.add(new ItemStack(itemOutputs.getCompoundTagAt(i)));
-            }
+            outputItem = new ItemStack(itemOutputs.getCompoundTagAt(0));
             NBTTagList fluidOutputs = data.getTagList("FluidOutputs", Constants.NBT.TAG_COMPOUND);
-            this.outputFluids = new ArrayList();
-            for (int i = 0; i < fluidOutputs.tagCount(); i++) {
-                this.outputFluids.add(FluidStack.loadFluidStackFromNBT(fluidOutputs.getCompoundTagAt(i)));
-            }
+            outputFluid = FluidStack.loadFluidStackFromNBT(fluidOutputs.getCompoundTagAt(0));
         }
     }
 
@@ -231,9 +252,7 @@ public class TileEntityCokeOven extends MultiblockControllerBase {
                 .aisle("XXX", "X#X", "XXX")
                 .aisle("XXX", "XYX", "XXX")
                 .setAmountAtLeast('X', 20)
-                .where('X', statePredicate(getCasingState()).or(tilePredicate((state, tile) -> {
-                    return tile.metaTileEntityId.equals(GATileEntities.COKE_FLUID_HATCH.metaTileEntityId) || tile.metaTileEntityId.equals(GATileEntities.COKE_ITEM_BUS.metaTileEntityId);
-                })))
+                .where('X', statePredicate(getCasingState()).or(tilePredicate((state, tile) -> tile.metaTileEntityId.equals(GATileEntities.COKE_FLUID_HATCH.metaTileEntityId) || tile.metaTileEntityId.equals(GATileEntities.COKE_ITEM_IN_BUS.metaTileEntityId) || tile.metaTileEntityId.equals(GATileEntities.COKE_ITEM_OUT_BUS.metaTileEntityId))))
                 .where('#', isAirPredicate())
                 .where('Y', selfPredicate())
                 .build();
@@ -242,6 +261,15 @@ public class TileEntityCokeOven extends MultiblockControllerBase {
     @Override
     public MetaTileEntity createMetaTileEntity(MetaTileEntityHolder holder) {
         return new TileEntityCokeOven(metaTileEntityId);
+    }
+
+    @Override
+    public <T> T getCapability(Capability<T> capability, EnumFacing side) {
+        if (capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY ||
+                capability == CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY) {
+            return null;
+        }
+        return super.getCapability(capability, side);
     }
 
     @Override

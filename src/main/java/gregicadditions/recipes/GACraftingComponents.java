@@ -442,7 +442,6 @@ public enum GACraftingComponents {
                 case 3:
                     return new UnificationEntry(OrePrefix.wireGtQuadruple, Materials.Copper);
                 case 4:
-                    return new UnificationEntry(OrePrefix.wireGtOctal, Materials.AnnealedCopper);
                 case 5:
                     return new UnificationEntry(OrePrefix.wireGtOctal, Materials.AnnealedCopper);
                 case 6:

@@ -14,6 +14,7 @@ import slimeknights.tconstruct.smeltery.TinkerSmeltery;
 
 public class TinkersIntegration {
     public static void init() {
+        if (Materials.Steel.getMaterialFluid() == null) return;
         ModHandler.removeRecipes(MetaItems.SHAPE_EMPTY.getStackForm());
         TinkerRegistry.registerTableCasting(new CastingRecipe(MetaItems.SHAPE_EMPTY.getStackForm(), Materials.Steel.getMaterialFluid(), 576, 160));
         for (ItemStack mold : GARecipeAddition.molds)

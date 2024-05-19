@@ -14,7 +14,7 @@ public class GATextures {
     public static SimpleCubeRenderer FUSION_TEXTURE;
     public static SimpleCubeRenderer ACTIVE_FUSION_TEXTURE;
     public static OrientedOverlayRenderer COKE_OVEN_OVERLAY;
-    public static OrientedOverlayRenderer NAQADAH_OVERLAY;
+    public static OrientedOverlayRenderer NAQUADAH_OVERLAY;
     public static OrientedOverlayRenderer REPLICATOR_OVERLAY;
     public static OrientedOverlayRenderer MASS_FAB_OVERLAY;
     public static OrientedOverlayRenderer FUSION_REACTOR_OVERLAY;
@@ -32,7 +32,7 @@ public class GATextures {
 
         COKE_OVEN_OVERLAY = new OrientedOverlayRenderer("machines/ga_coke_oven", OverlayFace.FRONT);
 
-        NAQADAH_OVERLAY = new OrientedOverlayRenderer("machines/naquadah_reactor", OverlayFace.FRONT, OverlayFace.BACK, OverlayFace.TOP);
+        NAQUADAH_OVERLAY = new OrientedOverlayRenderer("machines/naquadah_reactor", OverlayFace.FRONT, OverlayFace.BACK, OverlayFace.TOP);
 
         REPLICATOR_OVERLAY = new OrientedOverlayRenderer("machines/replicator", OverlayFace.FRONT);
 

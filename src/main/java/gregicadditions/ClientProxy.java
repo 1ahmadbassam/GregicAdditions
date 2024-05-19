@@ -18,8 +18,4 @@ public class ClientProxy extends CommonProxy {
         super.preInit();
         new GATextures();
     }
-
-    public void postInit() {
-
-    }
 }

@@ -127,15 +127,16 @@ public class GAMetaItems {
     public static ItemStack getFilledCell(Fluid fluid, int count) {
         ItemStack fluidCell = MetaItems.FLUID_CELL.getStackForm().copy();
         IFluidHandlerItem fluidHandlerItem = fluidCell.getCapability(CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY, null);
-        try {
-            fluidHandlerItem.fill(new FluidStack(fluid, 1000), true);
-
-        } catch (Exception e) {
-            GregicAdditions.logger.error("The fluid " + fluid.toString() + " failed to do something with getFilledCell");
-            GregicAdditions.logger.error(e);
-            fluidHandlerItem.fill(new FluidStack(FluidRegistry.WATER, 1000), true);
+        if (fluidHandlerItem != null) {
+            try {
+                fluidHandlerItem.fill(new FluidStack(fluid, 1000), true);
+            } catch (Exception e) {
+                GregicAdditions.logger.error("The fluid " + fluid.toString() + " failed to do something with getFilledCell");
+                GregicAdditions.logger.error(e);
+                fluidHandlerItem.fill(new FluidStack(FluidRegistry.WATER, 1000), true);
+            }
+            fluidCell = fluidHandlerItem.getContainer();
         }
-        fluidCell = fluidHandlerItem.getContainer();
         fluidCell.setCount(count);
         return fluidCell;
     }
@@ -150,9 +151,9 @@ public class GAMetaItems {
                 }
                 if (!valid)
                     continue;
-                return true;
+                return false;
             }
         }
-        return false;
+        return true;
     }
 }

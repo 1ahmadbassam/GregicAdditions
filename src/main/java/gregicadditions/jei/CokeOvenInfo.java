@@ -22,15 +22,16 @@ public class CokeOvenInfo extends MultiblockInfoPage {
 
     @Override
     public List<MultiblockShapeInfo> getMatchingShapes() {
-        MultiblockShapeInfo shapeInfo = MultiblockShapeInfo.builder() //Aisles go from back to front
-                .aisle("XXX", "XXX", "XXX")
-                .aisle("XHX", "X#X", "XBX")
+        MultiblockShapeInfo shapeInfo = MultiblockShapeInfo.builder()
+                .aisle("XXX", "XIX", "XXX")
+                .aisle("XHX", "X#B", "XXX")
                 .aisle("XXX", "XYX", "XXX")
                 .where('X', GAMetaBlocks.MUTLIBLOCK_CASING.getState(GAMultiblockCasing.CasingType.COKE_OVEN_BRICKS))
                 .where('#', Blocks.AIR.getDefaultState())
                 .where('Y', GATileEntities.COKE_OVEN, EnumFacing.SOUTH)
-                .where('H', GATileEntities.COKE_FLUID_HATCH, EnumFacing.WEST)
-                .where('B', GATileEntities.COKE_ITEM_BUS, EnumFacing.EAST)
+                .where('H', GATileEntities.COKE_FLUID_HATCH, EnumFacing.DOWN)
+                .where('B', GATileEntities.COKE_ITEM_IN_BUS, EnumFacing.EAST)
+                .where('I', GATileEntities.COKE_ITEM_OUT_BUS, EnumFacing.NORTH)
                 .build();
         return Lists.newArrayList(shapeInfo);
     }

@@ -71,12 +71,12 @@ public class GAMetaItem extends MaterialMetaItem {
             GAMetaItems.ELECTRODE_TIN = addItem(113, "electrode.tin");
         }
 
-        if (GAConfig.GT5U.enableZPMandUVBats) {
+        if (GAConfig.GT5U.enableZPMAndUVBats) {
             GAMetaItems.ENERGY_MODULE = addItem(19, "energy.module").addStats(new IMetaItemStats[]{ElectricStats.createRechargeableBattery(10000000000L, 7)}).setModelAmount(8);
             GAMetaItems.ENERGY_CLUSTER = addItem(20, "energy.cluster").addStats(new IMetaItemStats[]{ElectricStats.createRechargeableBattery(100000000000L, 8)}).setModelAmount(8);
         }
 
-        if (GAConfig.GT5U.replaceUVwithMAXBat) {
+        if (GAConfig.GT5U.replaceUVWithMAXBat) {
             GAMetaItems.MAX_BATTERY = addItem(21, "max.battery").addStats(new IMetaItemStats[]{ElectricStats.createRechargeableBattery(9223372036854775807L, 9)}).setModelAmount(8);
             MetaItems.ZPM2.setInvisible();
         }

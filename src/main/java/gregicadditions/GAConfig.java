@@ -20,7 +20,7 @@ public class GAConfig {
         public boolean BendingCurvedPlates = true;
         @Config.Name("Bending - Rotors require Curved Plates")
         public boolean BendingRotors = true;
-        @Config.Name("Bending - Rings are crafted with Bending Cyliders")
+        @Config.Name("Bending - Rings are crafted with Bending Cylinders")
         public boolean BendingRings = true;
         @Config.Name("Bending - Foils are made with Bending Cylinders")
         public boolean BendingFoils = true;
@@ -39,7 +39,7 @@ public class GAConfig {
 
         @Config.Comment("Set this to false to disable Drums")
         @Config.Name("Should Drums be registered?")
-        public boolean registerDums = true;
+        public boolean registerDrums = true;
 
         @Config.Comment("Set this to false to disable the support for Forestry Electron Tubes")
         @Config.Name("Should Electrodes be registered?")
@@ -54,6 +54,8 @@ public class GAConfig {
         @Config.Comment("Set these to false to disable the generated Compressor recipes for blocks")
         @Config.Name("Compression - Generate Compressor recipes for blocks")
         public boolean GenerateCompressorRecipes = true;
+        @Config.Name("Compression - Generate Forge Hammer recipes for uncompressing blocks")
+        public boolean GenerateForgeHammerRecipes = true;
         @Config.Name("Compression - Remove 3x3 crafting recipes for blocks")
         public boolean Remove3x3BlockRecipes = true;
         @Config.Name("Compression - Remove crafting recipes for uncompressing blocks")
@@ -61,7 +63,7 @@ public class GAConfig {
 
         @Config.Comment("Set to false to enable Log>Charcoal smelting recipes")
         @Config.Name("All Log to Charcoal smelting recipes will be removed")
-        public boolean DisableLogToCharcoalSmeltg = true;
+        public boolean DisableLogToCharcoalSmelting = true;
 
         @Config.Comment("Set to false to disable generated wood sawing recipes")
         @Config.Name("A saw is required to get 4 Planks per Log")
@@ -112,7 +114,7 @@ public class GAConfig {
         public boolean highTierFermenters = true;
         @Config.Name("Should higher tier Fishers be registered?")
         public boolean highTierFishers = true;
-        @Config.Name("Should higher tier Eluid Canners be registered?")
+        @Config.Name("Should higher tier Fluid Canners be registered?")
         public boolean highTierFluidCanners = true;
         @Config.Name("Should higher tier Fluid Extractors be registered?")
         public boolean highTierFluidExtractors = true;
@@ -153,7 +155,7 @@ public class GAConfig {
         @Config.Name("Should higher tier Macerators be registered?")
         public boolean highTierMacerators = true;
         @Config.Name("Should higher tier Mass Fabricators be registered?")
-        public boolean highTierMassFabs = true;
+        public boolean highTierMassFabricators = true;
         @Config.Name("Should higher tier Unpackagers be registered?")
         public boolean highTierUnpackers = true;
         @Config.Name("Should higher tier Wiremills be registered?")
@@ -170,15 +172,17 @@ public class GAConfig {
 
         @Config.Comment("Set these to true to enable certain Batteries.")
         @Config.Name("Batteries - Enable an extra ZPM and UV Battery (this also makes the Ultimate Battery harder to make)")
-        public boolean enableZPMandUVBats = false;
+        public boolean enableZPMAndUVBats = false;
         @Config.Name("Batteries - Replace the Ultimate Battery with a MAX Battery")
-        public boolean replaceUVwithMAXBat = false;
+        public boolean replaceUVWithMAXBat = false;
     }
 
     public static class Misc {
-        @Config.Comment("Set these to flase to disable the generated Packager and Unpackaker recipes")
-        @Config.Name("Packaging - 1x1 recipes with 9 outputs can be automated with the Unpackaker")
+        @Config.Comment("Set these to false to disable the generated Packager and Unpackager recipes")
+        @Config.Name("Packaging - 1x1 recipes with 9 outputs can be automated with the Unpackager")
         public boolean Unpackager3x3Recipes = true;
+        @Config.Name("Packaging - 1x1 recipes with 4 outputs can be automated with the Unpackager")
+        public boolean Unpackager2x2Recipes = true;
         @Config.Name("Packaging - 3x3 recipes can automated with the Packagers")
         public boolean Packager3x3Recipes = true;
         @Config.Name("Packaging - 2x2 recipes can automated with the Packagers")

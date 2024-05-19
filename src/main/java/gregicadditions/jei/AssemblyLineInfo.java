@@ -29,7 +29,7 @@ public class AssemblyLineInfo extends MultiblockInfoPage {
     public List<MultiblockShapeInfo> getMatchingShapes() {
         List<MultiblockShapeInfo> shapes = new ArrayList<>();
         for (int i = 0; i < 12; i++) {
-            GAMultiblockShapeInfo.Builder builder = GAMultiblockShapeInfo.builder();
+            MultiblockShapeInfo.Builder builder = MultiblockShapeInfo.builder();
             builder.aisle("COC", "RTR", "GAG", "#Y#");
             for (int num = 0; num < 3 + i; num++) {
                 if (num == 4 || num == 9)

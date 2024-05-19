@@ -504,7 +504,8 @@ gtadditions.machine.fusion_reactor.luv.name=Fusion Reactor Computer Mark 1
 gtadditions.machine.fusion_reactor.zpm.name=Fusion Reactor Computer Mark 2
 gtadditions.machine.fusion_reactor.uv.name=Fusion Reactor Computer Mark 3
 
-gtadditions.machine.ga_coke_item_bus.name=Coke Oven Chute
+gtadditions.machine.ga_coke_item_in_bus.name=Coke Oven Input Chute
+gtadditions.machine.ga_coke_item_out_bus.name=Coke Oven Output Chute
 gtadditions.machine.ga_coke_fluid_hatch.name=Coke Oven Faucet
 
 gtadditions.machine.rock_breaker.lv.name=Basic Rock Breaker
