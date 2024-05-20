@@ -400,8 +400,8 @@ public class GATileEntities {
             REPLICATOR[6] = GregTechAPI.registerMetaTileEntity(2189, new SimpleMachineMetaTileEntity(location("replicator.zpm"), GARecipeMaps.REPLICATOR_RECIPES, GATextures.REPLICATOR_OVERLAY, 7));
             REPLICATOR[7] = GregTechAPI.registerMetaTileEntity(2190, new SimpleMachineMetaTileEntity(location("replicator.uv"), GARecipeMaps.REPLICATOR_RECIPES, GATextures.REPLICATOR_OVERLAY, 8));
         }
-
-        COKE_OVEN = GregTechAPI.registerMetaTileEntity(2500, new TileEntityCokeOven(location("ga_coke_oven")));
+        if (GAConfig.Misc.cokeOvenEnable)
+            COKE_OVEN = GregTechAPI.registerMetaTileEntity(2500, new TileEntityCokeOven(location("ga_coke_oven")));
 
         ASSEMBLY_LINE = GregTechAPI.registerMetaTileEntity(2502, new TileEntityAssemblyLine(location("assembly_line")));
 
@@ -409,10 +409,11 @@ public class GATileEntities {
         FUSION_REACTOR[1] = GregTechAPI.registerMetaTileEntity(2505, new TileEntityFusionReactor(location("fusion_reactor.zpm"), 7));
         FUSION_REACTOR[2] = GregTechAPI.registerMetaTileEntity(2506, new TileEntityFusionReactor(location("fusion_reactor.uv"), 8));
 
-        COKE_FLUID_HATCH = GregTechAPI.registerMetaTileEntity(2507, new TileEntityCokeFluidHatch(location("ga_coke_fluid_hatch")));
-        COKE_ITEM_IN_BUS = GregTechAPI.registerMetaTileEntity(2509, new TileEntityCokeItemBus(location("ga_coke_item_in_bus"), false));
-        COKE_ITEM_OUT_BUS = GregTechAPI.registerMetaTileEntity(2508, new TileEntityCokeItemBus(location("ga_coke_item_out_bus"), true));
-
+        if (GAConfig.Misc.cokeOvenEnable) {
+            COKE_FLUID_HATCH = GregTechAPI.registerMetaTileEntity(2507, new TileEntityCokeFluidHatch(location("ga_coke_fluid_hatch")));
+            if (GAConfig.Misc.cokeOvenInputBusEnable) COKE_ITEM_IN_BUS = GregTechAPI.registerMetaTileEntity(2509, new TileEntityCokeItemBus(location("ga_coke_item_in_bus"), false));
+            COKE_ITEM_OUT_BUS = GregTechAPI.registerMetaTileEntity(2508, new TileEntityCokeItemBus(location("ga_coke_item_out_bus"), true));
+        }
         STEAM_MIXER = GregTechAPI.registerMetaTileEntity(2221, new TileEntitySteamMixer(location("steam_mixer")));
 
         if (GAConfig.GT6.registerDrums) {

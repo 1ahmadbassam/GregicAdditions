@@ -41,7 +41,7 @@ public class CokeOvenRecipeCategory extends PrimitiveRecipeCategory<CokeOvenReci
         itemStackGroup.init(0, true, 32, 19);
         itemStackGroup.init(1, false, 84, 19);
         itemStackGroup.set(ingredients);
-        fluidStackGroup.init(0, false, 133, 3, 20, 58, 32000, true, this.fluidTankOverlay);
+        fluidStackGroup.init(0, false, 133, 3, 20, 58, 64000, true, this.fluidTankOverlay);
         fluidStackGroup.set(ingredients);
     }
 

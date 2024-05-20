@@ -9,7 +9,7 @@ public class GAConfig {
     public static GT6 GT6 = new GT6();
     @Config.Comment("Config options for GT5U features")
     public static GT5U GT5U = new GT5U();
-    @Config.Comment("Config options of miscellaneous features")
+    @Config.Comment("Config options for miscellaneous features")
     public static Misc Misc = new Misc();
 
     public static class GT6 {
@@ -41,7 +41,7 @@ public class GAConfig {
         @Config.Name("Should Drums be registered?")
         public boolean registerDrums = true;
 
-        @Config.Comment("Set this to false to disable the support for Forestry Electron Tubes")
+        @Config.Comment("Set this to false to disable support for Forestry Electron Tubes")
         @Config.Name("Should Electrodes be registered?")
         public boolean electrodes = true;
     }
@@ -69,7 +69,7 @@ public class GAConfig {
         @Config.Name("A saw is required to get 4 Planks per Log")
         public boolean GeneratedSawingRecipes = true;
 
-        @Config.Comment("Set these to false to disable the higher tier versions of machines")
+        @Config.Comment("Set these to false to disable higher tier versions of machines")
         @Config.Name("Should higher tier Alloy Smelters be registered?")
         public boolean highTierAlloySmelter = true;
         @Config.Name("Should higher tier Arc Furnaces be registered?")
@@ -183,21 +183,30 @@ public class GAConfig {
         public boolean Unpackager3x3Recipes = true;
         @Config.Name("Packaging - 1x1 recipes with 4 outputs can be automated with the Unpackager")
         public boolean Unpackager2x2Recipes = true;
-        @Config.Name("Packaging - 3x3 recipes can automated with the Packagers")
+        @Config.Name("Packaging - 3x3 recipes can automated with Packagers")
         public boolean Packager3x3Recipes = true;
-        @Config.Name("Packaging - 2x2 recipes can automated with the Packagers")
+        @Config.Name("Packaging - 2x2 recipes can automated with Packagers")
         public boolean Packager2x2Recipes = true;
 
-        @Config.Comment("Set this to false to disable the Forestry Integration")
+        @Config.Comment("Set this to false to disable Forestry Integration")
         @Config.Name("Adds recipes for Forestry's Electrodes")
         public boolean ForestryIntegration = true;
 
-        @Config.Comment("Set this to false to disable the Tinkers' Construct Integration")
+        @Config.Comment("Set this to false to disable Tinkers' Construct Integration")
         @Config.Name("Changes the Molds and Extruder Shapes' recipes to require a Smeltery")
         public boolean TiCIntegration = true;
 
-        @Config.Comment("Set this to false to disable the high tier Air Collectors")
+        @Config.Comment("Set this to false to disable high tier Air Collectors")
         @Config.Name("Air Collector have IV and LuV version")
         public boolean highTierCollector = true;
+
+        @Config.Comment("Set this to false to disable replacement of GTCE's Coke Oven")
+        @Config.Name("Use enhanced Coke Oven which supports automation")
+        public boolean cokeOvenEnable = true;
+
+        @Config.Comment("Set this to false to disable input buses for the enhanced Coke Oven." +
+                "\nOnly takes effect if replacement of GTCE's Coke Oven is enabled")
+        @Config.Name("Enable input bus for enhanced Coke Oven")
+        public boolean cokeOvenInputBusEnable = true;
     }
 }

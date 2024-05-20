@@ -3,6 +3,7 @@ package gregicadditions.machines;
 import codechicken.lib.render.CCRenderState;
 import codechicken.lib.render.pipeline.IVertexOperation;
 import codechicken.lib.vec.Matrix4;
+import gregicadditions.GAConfig;
 import gregicadditions.GATextures;
 import gregicadditions.item.GAMetaBlocks;
 import gregicadditions.item.GAMultiblockCasing;
@@ -66,17 +67,23 @@ public class TileEntityCokeOven extends MultiblockControllerBase {
 
     @Override
     protected void updateFormedValid() {
-        ItemHandlerList itemInput = new ItemHandlerList(this.getAbilities(MultiblockAbility.IMPORT_ITEMS));
-        if (itemInput.getSlots() > 0 && !itemInput.getStackInSlot(0).isEmpty() && (importItems.getStackInSlot(0).isEmpty() || importItems.getStackInSlot(0).isItemEqual(itemInput.getStackInSlot(0)))) {
-            itemInput.setStackInSlot(0, ItemHandlerHelper.insertItemStacked(importItems, itemInput.getStackInSlot(0), false));
+        if (GAConfig.Misc.cokeOvenInputBusEnable && getAbilities(MultiblockAbility.IMPORT_ITEMS) != null) {
+            ItemHandlerList itemInput = new ItemHandlerList(this.getAbilities(MultiblockAbility.IMPORT_ITEMS));
+            if (itemInput.getSlots() > 0 && !itemInput.getStackInSlot(0).isEmpty() && (importItems.getStackInSlot(0).isEmpty() || importItems.getStackInSlot(0).isItemEqual(itemInput.getStackInSlot(0)))) {
+                itemInput.setStackInSlot(0, ItemHandlerHelper.insertItemStacked(importItems, itemInput.getStackInSlot(0), false));
+            }
         }
-        FluidTankList fluidOutput = new FluidTankList(true, this.getAbilities(MultiblockAbility.EXPORT_FLUIDS));
-        if (exportFluids.getTankAt(0).getFluidAmount() > 0 && !fluidOutput.getFluidTanks().isEmpty()) {
-            exportFluids.drain(fluidOutput.fill(exportFluids.getTankAt(0).getFluid(), true), true);
+        if (getAbilities(MultiblockAbility.EXPORT_FLUIDS) != null) {
+            FluidTankList fluidOutput = new FluidTankList(true, this.getAbilities(MultiblockAbility.EXPORT_FLUIDS));
+            if (exportFluids.getTankAt(0).getFluidAmount() > 0 && !fluidOutput.getFluidTanks().isEmpty()) {
+                exportFluids.drain(fluidOutput.fill(exportFluids.getTankAt(0).getFluid(), true), true);
+            }
         }
+        if (getAbilities(MultiblockAbility.EXPORT_ITEMS) != null) {
         ItemHandlerList itemOutput = new ItemHandlerList(this.getAbilities(MultiblockAbility.EXPORT_ITEMS));
         if (!exportItems.getStackInSlot(0).isEmpty() && itemOutput.getSlots() > 0) {
             exportItems.setStackInSlot(0, ItemHandlerHelper.insertItemStacked(itemOutput, exportItems.getStackInSlot(0), false));
+        }
         }
         if (maxProgressDuration == 0) {
             if (tryPickNewRecipe()) {
@@ -189,14 +196,15 @@ public class TileEntityCokeOven extends MultiblockControllerBase {
     public void receiveInitialSyncData(PacketBuffer buf) {
         super.receiveInitialSyncData(buf);
         this.isActive = buf.readBoolean();
-        getHolder().scheduleChunkForRenderUpdate();
     }
 
     @Override
     public void receiveCustomData(int dataId, PacketBuffer buf) {
         super.receiveCustomData(dataId, buf);
-        if (dataId == -100) {
+        if (dataId == 100) {
             this.isActive = buf.readBoolean();
+            getWorld().checkLight(getPos());
+            getHolder().scheduleChunkForRenderUpdate();
         }
     }
 
@@ -204,10 +212,16 @@ public class TileEntityCokeOven extends MultiblockControllerBase {
         return isActive;
     }
 
+    @Override
+    public int getLightValueForPart(IMultiblockPart sourcePart) {
+        return sourcePart == null && isActive ? 15 : 0;
+    }
+
     public void setActive(boolean active) {
         this.isActive = active;
         if (!getWorld().isRemote) {
-            writeCustomData(-100, b -> b.writeBoolean(isActive));
+            writeCustomData(100, b -> b.writeBoolean(isActive));
+            getWorld().checkLight(getPos());
         }
     }
 
@@ -252,7 +266,7 @@ public class TileEntityCokeOven extends MultiblockControllerBase {
                 .aisle("XXX", "X#X", "XXX")
                 .aisle("XXX", "XYX", "XXX")
                 .setAmountAtLeast('X', 20)
-                .where('X', statePredicate(getCasingState()).or(tilePredicate((state, tile) -> tile.metaTileEntityId.equals(GATileEntities.COKE_FLUID_HATCH.metaTileEntityId) || tile.metaTileEntityId.equals(GATileEntities.COKE_ITEM_IN_BUS.metaTileEntityId) || tile.metaTileEntityId.equals(GATileEntities.COKE_ITEM_OUT_BUS.metaTileEntityId))))
+                .where('X', statePredicate(getCasingState()).or(tilePredicate((state, tile) -> tile.metaTileEntityId.equals(GATileEntities.COKE_FLUID_HATCH.metaTileEntityId) || (GATileEntities.COKE_ITEM_IN_BUS != null && tile.metaTileEntityId.equals(GATileEntities.COKE_ITEM_IN_BUS.metaTileEntityId)) || tile.metaTileEntityId.equals(GATileEntities.COKE_ITEM_OUT_BUS.metaTileEntityId))))
                 .where('#', isAirPredicate())
                 .where('Y', selfPredicate())
                 .build();

@@ -134,26 +134,37 @@ public class GARecipeAddition {
     };
 
     public static void registerCokeOvenRecipes() {
-        CokeOvenRecipeBuilder.start().duration(1800).input(OrePrefix.log, Materials.Wood).output(new ItemStack(Items.COAL, 1, 1)).fluidOutput(Materials.Creosote.getFluid(500)).buildAndRegister();
-        CokeOvenRecipeBuilder.start().duration(1800).input(OrePrefix.gem, Materials.Coal).output(OreDictUnifier.get(OrePrefix.gem, Materials.Coke)).fluidOutput(Materials.Creosote.getFluid(500)).buildAndRegister();
-        CokeOvenRecipeBuilder.start().duration(1800).input(OrePrefix.gem, Materials.Lignite).output(OreDictUnifier.get(OrePrefix.gem, GAMaterials.LigniteCoke)).fluidOutput(Materials.Creosote.getFluid(500)).buildAndRegister();
-        CokeOvenRecipeBuilder.start().duration(16200).input(OrePrefix.block, Materials.Coal).output(OreDictUnifier.get(OrePrefix.block, Materials.Coke)).fluidOutput(Materials.Creosote.getFluid(4500)).buildAndRegister();
+        if (GAConfig.Misc.cokeOvenEnable) {
+            CokeOvenRecipeBuilder.start().duration(1800).input(OrePrefix.log, Materials.Wood).output(new ItemStack(Items.COAL, 1, 1)).fluidOutput(Materials.Creosote.getFluid(500)).buildAndRegister();
+            CokeOvenRecipeBuilder.start().duration(1800).input(OrePrefix.gem, Materials.Coal).output(OreDictUnifier.get(OrePrefix.gem, Materials.Coke)).fluidOutput(Materials.Creosote.getFluid(500)).buildAndRegister();
+            CokeOvenRecipeBuilder.start().duration(1800).input(OrePrefix.gem, Materials.Lignite).output(OreDictUnifier.get(OrePrefix.gem, GAMaterials.LigniteCoke)).fluidOutput(Materials.Creosote.getFluid(500)).buildAndRegister();
+            CokeOvenRecipeBuilder.start().duration(16200).input(OrePrefix.block, Materials.Coal).output(OreDictUnifier.get(OrePrefix.block, Materials.Coke)).fluidOutput(Materials.Creosote.getFluid(4500)).buildAndRegister();
+        }
     }
 
     public static void init() {
         //GTNH Bricks
-        ModHandler.removeRecipeByName(new ResourceLocation("gregtech:casing_coke_bricks"));
+        if (GAConfig.Misc.cokeOvenEnable)
+            ModHandler.removeRecipeByName(new ResourceLocation("gregtech:casing_coke_bricks"));
         ModHandler.removeRecipeByName(new ResourceLocation("gregtech:compressed_clay"));
-        ModHandler.removeFurnaceSmelting(MetaItems.COKE_OVEN_BRICK.getStackForm());
-        ModHandler.addSmeltingRecipe(GAMetaItems.COMPRESSED_COKE_CLAY.getStackForm(), GAMetaItems.COKE_BRICK.getStackForm());
+        if (GAConfig.Misc.cokeOvenEnable) {
+            ModHandler.removeFurnaceSmelting(MetaItems.COKE_OVEN_BRICK.getStackForm());
+            ModHandler.addSmeltingRecipe(GAMetaItems.COMPRESSED_COKE_CLAY.getStackForm(), GAMetaItems.COKE_BRICK.getStackForm());
+        } else
+            ModHandler.addSmeltingRecipe(GAMetaItems.COMPRESSED_COKE_CLAY.getStackForm(), MetaItems.COKE_OVEN_BRICK.getStackForm());
         ModHandler.removeFurnaceSmelting(new ItemStack(Items.CLAY_BALL, 1, OreDictionary.WILDCARD_VALUE));
         ModHandler.addSmeltingRecipe(GAMetaItems.COMPRESSED_CLAY.getStackForm(), new ItemStack(Items.BRICK));
-        RecipeMaps.ALLOY_SMELTER_RECIPES.recipeBuilder().duration(400).EUt(8).inputs(GAMetaItems.COMPRESSED_CLAY.getStackForm(2), new ItemStack(Blocks.SAND)).outputs(GAMetaItems.COKE_BRICK.getStackForm(2)).buildAndRegister();
+        if (GAConfig.Misc.cokeOvenEnable)
+            RecipeMaps.ALLOY_SMELTER_RECIPES.recipeBuilder().duration(400).EUt(8).inputs(GAMetaItems.COMPRESSED_CLAY.getStackForm(2), new ItemStack(Blocks.SAND)).outputs(GAMetaItems.COKE_BRICK.getStackForm(2)).buildAndRegister();
+        else
+            RecipeMaps.ALLOY_SMELTER_RECIPES.recipeBuilder().duration(400).EUt(8).inputs(GAMetaItems.COMPRESSED_CLAY.getStackForm(2), new ItemStack(Blocks.SAND)).outputs(MetaItems.COKE_OVEN_BRICK.getStackForm(2)).buildAndRegister();
         RecipeMaps.ALLOY_SMELTER_RECIPES.recipeBuilder().duration(200).EUt(2).inputs(new ItemStack(Items.CLAY_BALL)).notConsumable(MetaItems.SHAPE_MOLD_INGOT).outputs(new ItemStack(Items.BRICK)).buildAndRegister();
         ModHandler.addShapelessRecipe("clay_brick", GAMetaItems.COMPRESSED_CLAY.getStackForm(), new ItemStack(Items.CLAY_BALL), MetaItems.WOODEN_FORM_BRICK);
         ModHandler.addShapedRecipe("eight_clay_brick", GAMetaItems.COMPRESSED_CLAY.getStackForm(8), "BBB", "BFB", "BBB", 'B', new ItemStack(Items.CLAY_BALL), 'F', MetaItems.WOODEN_FORM_BRICK);
         ModHandler.addShapedRecipe("coke_brick", GAMetaItems.COMPRESSED_COKE_CLAY.getStackForm(5), "SSS", "BFB", "BBB", 'B', new ItemStack(Items.CLAY_BALL), 'S', new ItemStack(Blocks.SAND), 'F', MetaItems.WOODEN_FORM_BRICK);
-        ModHandler.addShapedRecipe("coke_bricks", GAMetaBlocks.MUTLIBLOCK_CASING.getItemVariant(GAMultiblockCasing.CasingType.COKE_OVEN_BRICKS), "BB", "BB", 'B', GAMetaItems.COKE_BRICK.getStackForm());
+        if (GAConfig.Misc.cokeOvenEnable) {
+            ModHandler.addShapedRecipe("coke_bricks", GAMetaBlocks.MUTLIBLOCK_CASING.getItemVariant(GAMultiblockCasing.CasingType.COKE_OVEN_BRICKS), "BB", "BB", 'B', GAMetaItems.COKE_BRICK.getStackForm());
+        }
         //GT5U Old Primitive Brick Processing
         ModHandler.removeFurnaceSmelting(MetaItems.FIRECLAY_BRICK.getStackForm());
         ModHandler.removeRecipeByName(new ResourceLocation("gregtech:casing_primitive_bricks"));

@@ -1,5 +1,6 @@
 package gregicadditions.jei;
 
+import gregicadditions.GAConfig;
 import gregicadditions.machines.GATileEntities;
 import gregicadditions.recipes.GARecipeMaps;
 import gregtech.integration.jei.multiblock.MultiblockInfoPage;
@@ -19,12 +20,17 @@ import java.util.stream.Collectors;
 public class JEIGAPlugin implements IModPlugin {
     @Override
     public void registerCategories(IRecipeCategoryRegistration registry) {
-        registry.addRecipeCategories(new CokeOvenRecipeCategory(registry.getJeiHelpers().getGuiHelper()));
+        if (GAConfig.Misc.cokeOvenEnable)
+            registry.addRecipeCategories(new CokeOvenRecipeCategory(registry.getJeiHelpers().getGuiHelper()));
     }
     @Override
     public void register(IModRegistry registry) {
-        List<MultiblockInfoPage> multiblocks = Arrays.asList(
+        List<MultiblockInfoPage> multiblocks = (GAConfig.Misc.cokeOvenEnable) ? Arrays.asList(
                 new CokeOvenInfo(),
+                new AssemblyLineInfo(),
+                new FusionReactor1Info(),
+                new FusionReactor2Info(),
+                new FusionReactor3Info()) : Arrays.asList(
                 new AssemblyLineInfo(),
                 new FusionReactor1Info(),
                 new FusionReactor2Info(),
@@ -33,10 +39,12 @@ public class JEIGAPlugin implements IModPlugin {
                         .map(MultiblockInfoRecipeWrapper::new)
                         .collect(Collectors.toList()),
                 "gregtech:multiblock_info");
-        registry.addRecipes(GARecipeMaps.COKE_OVEN_RECIPES.stream()
-                .map(CokeOvenRecipeWrapper::new)
-                .collect(Collectors.toList()), "gregtech:ga_coke_oven");
-        registry.addRecipeCatalyst(GATileEntities.COKE_OVEN.getStackForm(), "gregtech:ga_coke_oven");
+        if (GAConfig.Misc.cokeOvenEnable) {
+            registry.addRecipes(GARecipeMaps.COKE_OVEN_RECIPES.stream()
+                    .map(CokeOvenRecipeWrapper::new)
+                    .collect(Collectors.toList()), "gregtech:ga_coke_oven");
+            registry.addRecipeCatalyst(GATileEntities.COKE_OVEN.getStackForm(), "gregtech:ga_coke_oven");
+        }
         for (MultiblockInfoPage multiblock : multiblocks) {
             registry.addIngredientInfo(multiblock.getController().getStackForm(),
                     VanillaTypes.ITEM,

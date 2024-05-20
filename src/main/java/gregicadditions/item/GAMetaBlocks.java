@@ -52,11 +52,11 @@ public class GAMetaBlocks {
     @SideOnly(Side.CLIENT)
     private static void registerItemModel(Block block) {
         for (IBlockState state : block.getBlockState().getValidStates()) {
-            //noinspection ConstantConditions
-            ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(block),
-                    block.getMetaFromState(state),
-                    new ModelResourceLocation(block.getRegistryName(),
-                            statePropertiesToString(state.getProperties())));
+            if (block.getRegistryName() != null)
+                ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(block),
+                        block.getMetaFromState(state),
+                        new ModelResourceLocation(block.getRegistryName(),
+                                statePropertiesToString(state.getProperties())));
         }
     }
 

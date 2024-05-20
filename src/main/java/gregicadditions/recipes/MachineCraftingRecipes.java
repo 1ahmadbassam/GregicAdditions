@@ -49,8 +49,10 @@ public class MachineCraftingRecipes {
         ModHandler.removeRecipeByName(new ResourceLocation("gregtech:transformer_zpm"));
         ModHandler.removeRecipeByName(new ResourceLocation("gregtech:transformer_uv"));
         ModHandler.removeRecipeByName(new ResourceLocation("gregtech:transformer_max"));
-        ModHandler.removeRecipeByName(new ResourceLocation("gregtech:coke_oven"));
-        ModHandler.removeRecipeByName(new ResourceLocation("gregtech:coke_oven_hatch"));
+        if (GAConfig.Misc.cokeOvenEnable) {
+            ModHandler.removeRecipeByName(new ResourceLocation("gregtech:coke_oven"));
+            ModHandler.removeRecipeByName(new ResourceLocation("gregtech:coke_oven_hatch"));
+        }
 
         //Power Manipulation Machines
         ItemStack last_bat = (GAConfig.GT5U.replaceUVWithMAXBat ? GAMetaItems.MAX_BATTERY : MetaItems.ZPM2).getStackForm();
@@ -71,10 +73,12 @@ public class MachineCraftingRecipes {
         ModHandler.addShapedRecipe("ga_steam_mixer", GATileEntities.STEAM_MIXER.getStackForm(), "GRG", "GPG", "PMP", 'M', MetaBlocks.MACHINE_CASING.getItemVariant(BlockMachineCasing.MachineCasingType.BRONZE_HULL), 'P', new UnificationEntry(OrePrefix.pipeSmall, Materials.Bronze), 'R', "rotorBronze", 'G', "blockGlass");
 
         //MultiBlocks
-        ModHandler.addShapedRecipe("ga_coke_oven", GATileEntities.COKE_OVEN.getStackForm(), "hRS", "PBR", "dRS", 'R', "stickIron", 'S', "screwIron", 'P', "plateIron", 'B', GAMetaBlocks.MUTLIBLOCK_CASING.getItemVariant(GAMultiblockCasing.CasingType.COKE_OVEN_BRICKS));
-        ModHandler.addShapedRecipe("ga_coke_oven_in_bus", GATileEntities.COKE_ITEM_IN_BUS.getStackForm(), "G", "B", 'B', GATileEntities.COKE_OVEN.getStackForm(), 'G', "chestWood");
-        ModHandler.addShapedRecipe("ga_coke_oven_out_bus", GATileEntities.COKE_ITEM_OUT_BUS.getStackForm(), "B", "G", 'B', GATileEntities.COKE_OVEN.getStackForm(), 'G', "chestWood");
-        ModHandler.addShapedRecipe("ga_coke_oven_hatch", GATileEntities.COKE_FLUID_HATCH.getStackForm(), "B", "C", 'B', GATileEntities.COKE_OVEN.getStackForm(), 'C', new ItemStack(Blocks.GLASS));
+        if (GAConfig.Misc.cokeOvenEnable) {
+            ModHandler.addShapedRecipe("ga_coke_oven", GATileEntities.COKE_OVEN.getStackForm(), "hRS", "PBR", "dRS", 'R', "stickIron", 'S', "screwIron", 'P', "plateIron", 'B', GAMetaBlocks.MUTLIBLOCK_CASING.getItemVariant(GAMultiblockCasing.CasingType.COKE_OVEN_BRICKS));
+            if(GAConfig.Misc.cokeOvenInputBusEnable) ModHandler.addShapedRecipe("ga_coke_oven_in_bus", GATileEntities.COKE_ITEM_IN_BUS.getStackForm(), "G", "B", 'B', GATileEntities.COKE_OVEN.getStackForm(), 'G', "chestWood");
+            ModHandler.addShapedRecipe("ga_coke_oven_out_bus", GATileEntities.COKE_ITEM_OUT_BUS.getStackForm(), "B", "G", 'B', GATileEntities.COKE_OVEN.getStackForm(), 'G', "chestWood");
+            ModHandler.addShapedRecipe("ga_coke_oven_hatch", GATileEntities.COKE_FLUID_HATCH.getStackForm(), "B", "C", 'B', GATileEntities.COKE_OVEN.getStackForm(), 'C', new ItemStack(Blocks.GLASS));
+        }
         ModHandler.addShapedRecipe("ga_primitive_blast_furnace", MetaTileEntities.PRIMITIVE_BLAST_FURNACE.getStackForm(), "hRS", "PBR", "dRS", 'R', OreDictUnifier.get(OrePrefix.stick, Materials.Iron), 'S', OreDictUnifier.get(OrePrefix.screw, Materials.Iron), 'P', "plateIron", 'B', MetaBlocks.METAL_CASING.getItemVariant(BlockMetalCasing.MetalCasingType.PRIMITIVE_BRICKS));
         ModHandler.addShapedRecipe("ga_diesel_engine", MetaTileEntities.DIESEL_ENGINE.getStackForm(), "PCP", "EME", "GWG", 'M', MetaTileEntities.HULL[GTValues.EV].getStackForm(), 'P', MetaItems.ELECTRIC_PISTON_EV, 'E', MetaItems.ELECTRIC_MOTOR_EV, 'C', new UnificationEntry(OrePrefix.circuit, Tier.Elite), 'W', new UnificationEntry(OrePrefix.wireGtSingle, Materials.TungstenSteel), 'G', new UnificationEntry(OrePrefix.gear, Materials.Titanium));
         ModHandler.addShapedRecipe("ga_large_plasma_turbine", MetaTileEntities.LARGE_PLASMA_TURBINE.getStackForm(), "PSP", "SAS", "CSC", 'S', new UnificationEntry(OrePrefix.gear, Materials.TungstenSteel), 'P', new UnificationEntry(OrePrefix.circuit, Tier.Master), 'A', MetaTileEntities.HULL[GTValues.UV].getStackForm(), 'C', OreDictUnifier.get(OrePrefix.pipeLarge, Materials.TungstenSteel));

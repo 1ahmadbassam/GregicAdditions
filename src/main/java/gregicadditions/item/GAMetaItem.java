@@ -21,13 +21,15 @@ public class GAMetaItem extends MaterialMetaItem {
     }
 
     public void registerSubItems() {
-        GAMetaItems.COKE_BRICK = addItem(0, "ga_brick.coke");
+        if (GAConfig.Misc.cokeOvenEnable) {
+            GAMetaItems.COKE_BRICK = addItem(0, "ga_brick.coke");
+        }
+        GAMetaItems.COMPRESSED_COKE_CLAY = addItem(6, "ga_compressed.coke.clay");
         GAMetaItems.FIRECLAY_BRICK = addItem(1, "ga_brick.fireclay").setUnificationData(OrePrefix.ingot, Materials.Fireclay);
         GAMetaItems.ADVANCED_CIRCUIT = addItem(2, "circuit.advanced.regular").setUnificationData(OrePrefix.circuit, Tier.Advanced);
         GAMetaItems.GOOD_CIRCUIT = addItem(3, "circuit.good.regular").setUnificationData(OrePrefix.circuit, Tier.Good);
         GAMetaItems.PETRI_DISH = addItem(4, "component.petri.dish");
         GAMetaItems.COMPRESSED_CLAY = addItem(5, "ga_compressed.clay");
-        GAMetaItems.COMPRESSED_COKE_CLAY = addItem(6, "ga_compressed.coke.clay");
         GAMetaItems.COMPRESSED_FIRECLAY = addItem(7, "ga_compressed.fireclay");
         GAMetaItems.CRYSTAL_COMPUTER = addItem(8, "computer.crystal").setUnificationData(OrePrefix.circuit, Tier.Ultimate);
         GAMetaItems.NANO_COMPUTER = addItem(9, "computer.nano").setUnificationData(OrePrefix.circuit, Tier.Elite);
@@ -119,9 +121,12 @@ public class GAMetaItem extends MaterialMetaItem {
         GAMetaItems.SHAPE_TINY_PIPE = addItem(67, "shape.tiny_pipe");
         GAMetaItems.SHAPE_WIRE = addItem(68, "shape.wire");
 
+        if (GAConfig.Misc.cokeOvenEnable) {
+            MetaItems.COKE_OVEN_BRICK.setInvisible();
+        }
+
         MetaItems.COMPRESSED_CLAY.setInvisible();
         MetaItems.COMPRESSED_FIRECLAY.setInvisible();
-        MetaItems.COKE_OVEN_BRICK.setInvisible();
         MetaItems.FIRECLAY_BRICK.setInvisible();
     }
 }
