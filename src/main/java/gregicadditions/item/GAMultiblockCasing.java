@@ -9,6 +9,8 @@ import net.minecraft.util.IStringSerializable;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 
+import javax.annotation.Nonnull;
+
 public class GAMultiblockCasing extends VariantBlock<GAMultiblockCasing.CasingType> {
     public GAMultiblockCasing() {
         super(Material.IRON);
@@ -21,7 +23,7 @@ public class GAMultiblockCasing extends VariantBlock<GAMultiblockCasing.CasingTy
     }
 
     @Override
-    public boolean canCreatureSpawn(IBlockState state, IBlockAccess world, BlockPos pos, EntityLiving.SpawnPlacementType type) {
+    public boolean canCreatureSpawn(@Nonnull IBlockState state, @Nonnull IBlockAccess world, @Nonnull BlockPos pos, @Nonnull EntityLiving.SpawnPlacementType type) {
         return false;
     }
 
@@ -38,6 +40,7 @@ public class GAMultiblockCasing extends VariantBlock<GAMultiblockCasing.CasingTy
         }
 
         @Override
+        @Nonnull
         public String getName() {
             return this.name;
         }

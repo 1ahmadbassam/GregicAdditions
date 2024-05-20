@@ -14,6 +14,8 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import javax.annotation.Nonnull;
+
 public class GATransparentCasing extends VariantBlock<GATransparentCasing.CasingType> {
     public GATransparentCasing() {
         super(Material.IRON);
@@ -26,22 +28,26 @@ public class GATransparentCasing extends VariantBlock<GATransparentCasing.Casing
     }
 
     @Override
-    public boolean canCreatureSpawn(IBlockState state, IBlockAccess world, BlockPos pos, EntityLiving.SpawnPlacementType type) {
+    public boolean canCreatureSpawn(@Nonnull  IBlockState state, @Nonnull  IBlockAccess world, @Nonnull  BlockPos pos, @Nonnull EntityLiving.SpawnPlacementType type) {
         return false;
     }
 
-
+    @Nonnull
     public BlockRenderLayer getBlockLayer() {
         return BlockRenderLayer.TRANSLUCENT;
     }
 
+    @Override
     @SideOnly(Side.CLIENT)
-    public boolean isOpaqueCube(IBlockState state) {
+    @SuppressWarnings("deprecation")
+    public boolean isOpaqueCube(@Nonnull IBlockState state) {
         return false;
     }
 
+    @Override
     @SideOnly(Side.CLIENT)
-    public boolean shouldSideBeRendered(IBlockState blockState, IBlockAccess blockAccess, BlockPos pos, EnumFacing side) {
+    @SuppressWarnings("deprecation")
+    public boolean shouldSideBeRendered(@Nonnull IBlockState blockState, IBlockAccess blockAccess, BlockPos pos, @Nonnull EnumFacing side) {
         IBlockState iblockstate = blockAccess.getBlockState(pos.offset(side));
         Block block = iblockstate.getBlock();
 
@@ -59,6 +65,7 @@ public class GATransparentCasing extends VariantBlock<GATransparentCasing.Casing
         }
 
         @Override
+        @Nonnull
         public String getName() {
             return this.name;
         }

@@ -1290,13 +1290,13 @@ public class GARecipeAddition {
         RecipeMaps.ALLOY_SMELTER_RECIPES.recipeBuilder().duration(1200).EUt(30).input(OrePrefix.dust, Materials.GreenSapphire).input(OrePrefix.dust, Materials.SiliconDioxide).outputs(OreDictUnifier.get(OrePrefix.dust, GAMaterials.AluminoSilicateWool, 2)).buildAndRegister();
         RecipeMaps.ALLOY_SMELTER_RECIPES.recipeBuilder().duration(1200).EUt(30).input(OrePrefix.dust, Materials.Ruby).input(OrePrefix.dust, Materials.SiliconDioxide).outputs(OreDictUnifier.get(OrePrefix.dust, GAMaterials.AluminoSilicateWool, 2)).buildAndRegister();
 
-        RecipeMaps.FORMING_PRESS_RECIPES.recipeBuilder().duration(400).EUt(28).input(OrePrefix.dust, GAMaterials.MicaPulp, 4).input(OrePrefix.dust, Materials.Asbestos).outputs(GAMetaItems.MICA_SHHET.getStackForm(4)).buildAndRegister();
+        RecipeMaps.FORMING_PRESS_RECIPES.recipeBuilder().duration(400).EUt(28).input(OrePrefix.dust, GAMaterials.MicaPulp, 4).input(OrePrefix.dust, Materials.Asbestos).outputs(GAMetaItems.MICA_SHEET.getStackForm(4)).buildAndRegister();
 
-        RecipeMaps.ALLOY_SMELTER_RECIPES.recipeBuilder().duration(400).EUt(30).inputs(GAMetaItems.MICA_SHHET.getStackForm(4)).input(OrePrefix.dust, Materials.SiliconDioxide).outputs(GAMetaItems.MICA_INSULATOR_SHHET.getStackForm(4)).buildAndRegister();
+        RecipeMaps.ALLOY_SMELTER_RECIPES.recipeBuilder().duration(400).EUt(30).inputs(GAMetaItems.MICA_SHEET.getStackForm(4)).input(OrePrefix.dust, Materials.SiliconDioxide).outputs(GAMetaItems.MICA_INSULATOR_SHEET.getStackForm(4)).buildAndRegister();
         if (GAConfig.GT6.BendingFoilsAutomatic && GAConfig.GT6.BendingCylinders)
-            GARecipeMaps.CLUSTER_MILL_RECIPES.recipeBuilder().duration(100).EUt(30).inputs(GAMetaItems.MICA_INSULATOR_SHHET.getStackForm()).outputs(GAMetaItems.MICA_INSULATOR_FOI.getStackForm(4)).buildAndRegister();
+            GARecipeMaps.CLUSTER_MILL_RECIPES.recipeBuilder().duration(100).EUt(30).inputs(GAMetaItems.MICA_INSULATOR_SHEET.getStackForm()).outputs(GAMetaItems.MICA_INSULATOR_FOI.getStackForm(4)).buildAndRegister();
         else
-            RecipeMaps.BENDER_RECIPES.recipeBuilder().duration(100).EUt(30).inputs(GAMetaItems.MICA_INSULATOR_SHHET.getStackForm()).circuitMeta(1).outputs(GAMetaItems.MICA_INSULATOR_FOI.getStackForm(4)).buildAndRegister();
+            RecipeMaps.BENDER_RECIPES.recipeBuilder().duration(100).EUt(30).inputs(GAMetaItems.MICA_INSULATOR_SHEET.getStackForm()).circuitMeta(1).outputs(GAMetaItems.MICA_INSULATOR_FOI.getStackForm(4)).buildAndRegister();
 
         ModHandler.removeRecipeByName(new ResourceLocation("gregtech:heating_coil_cupronickel"));
         ModHandler.removeRecipeByName(new ResourceLocation("gregtech:heating_coil_kanthal"));

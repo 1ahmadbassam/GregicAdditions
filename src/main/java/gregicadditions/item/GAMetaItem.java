@@ -3,7 +3,7 @@ package gregicadditions.item;
 import gregicadditions.GAConfig;
 import gregtech.api.items.materialitem.MaterialMetaItem;
 import gregtech.api.items.metaitem.ElectricStats;
-import gregtech.api.items.metaitem.stats.IMetaItemStats;
+import gregtech.api.items.metaitem.stats.IItemComponent;
 import gregtech.api.unification.material.MarkerMaterials.Tier;
 import gregtech.api.unification.material.Materials;
 import gregtech.api.unification.ore.OrePrefix;
@@ -40,8 +40,8 @@ public class GAMetaItem extends MaterialMetaItem {
         GAMetaItems.INTEGRATED_COMPUTER = addItem(16, "computer.normal").setUnificationData(OrePrefix.circuit, Tier.Extreme);
         GAMetaItems.RAW_CRYSTAL_CHIP = addItem(17, "crystal.raw");
         GAMetaItems.STEMCELLS = addItem(18, "stemcells");
-        GAMetaItems.MICA_SHHET = addItem(26, "mica_sheet");
-        GAMetaItems.MICA_INSULATOR_SHHET = addItem(27, "mica_insulator_sheet");
+        GAMetaItems.MICA_SHEET = addItem(26, "mica_sheet");
+        GAMetaItems.MICA_INSULATOR_SHEET = addItem(27, "mica_insulator_sheet");
         GAMetaItems.MICA_INSULATOR_FOI = addItem(28, "mica_insulator_foil");
         GAMetaItems.BASIC_BOARD = addItem(29, "board.basic");
         GAMetaItems.GOOD_PHENOLIC_BOARD = addItem(30, "board.good.phenolic");
@@ -72,12 +72,12 @@ public class GAMetaItem extends MaterialMetaItem {
         }
 
         if (GAConfig.GT5U.enableZPMAndUVBats) {
-            GAMetaItems.ENERGY_MODULE = addItem(19, "energy.module").addStats(new IMetaItemStats[]{ElectricStats.createRechargeableBattery(10000000000L, 7)}).setModelAmount(8);
-            GAMetaItems.ENERGY_CLUSTER = addItem(20, "energy.cluster").addStats(new IMetaItemStats[]{ElectricStats.createRechargeableBattery(100000000000L, 8)}).setModelAmount(8);
+            GAMetaItems.ENERGY_MODULE = addItem(19, "energy.module").addComponents(new IItemComponent[]{ElectricStats.createRechargeableBattery(10000000000L, 7)}).setModelAmount(8);
+            GAMetaItems.ENERGY_CLUSTER = addItem(20, "energy.cluster").addComponents(new IItemComponent[]{ElectricStats.createRechargeableBattery(100000000000L, 8)}).setModelAmount(8);
         }
 
         if (GAConfig.GT5U.replaceUVWithMAXBat) {
-            GAMetaItems.MAX_BATTERY = addItem(21, "max.battery").addStats(new IMetaItemStats[]{ElectricStats.createRechargeableBattery(9223372036854775807L, 9)}).setModelAmount(8);
+            GAMetaItems.MAX_BATTERY = addItem(21, "max.battery").addComponents(new IItemComponent[]{ElectricStats.createRechargeableBattery(9223372036854775807L, 9)}).setModelAmount(8);
             MetaItems.ZPM2.setInvisible();
         }
 

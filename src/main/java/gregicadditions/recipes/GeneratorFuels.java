@@ -66,7 +66,7 @@ public class GeneratorFuels {
         //Naquadah Reactor
         registerNaquadahReactorFuel(Materials.NaquadahEnriched.getFluid(1), 750, GTValues.LV);
 
-        //Smefuels
+        //Semi fuels
         FuelRecipes.registerSemiFluidGeneratorFuel(GAMaterials.FishOil.getFluid(64), 1, GTValues.LV);
         if (Loader.isModLoaded("forestry") && GAConfig.Misc.ForestryIntegration)
             FuelRecipes.registerSemiFluidGeneratorFuel(Fluids.SEED_OIL.getFluid(64), 1, GTValues.LV);

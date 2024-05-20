@@ -10,6 +10,7 @@ import gregtech.api.recipes.RecipeMap;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraftforge.items.IItemHandlerModifiable;
 
+import javax.annotation.Nonnull;
 import java.util.function.DoubleSupplier;
 
 public class RecipeMapAssemblyLine<R extends RecipeBuilder<R>> extends RecipeMap<R> {
@@ -39,6 +40,7 @@ public class RecipeMapAssemblyLine<R extends RecipeBuilder<R>> extends RecipeMap
         return new int[]{itemSlotsToLeft, itemSlotsToDown};
     }
 
+    @Nonnull
     public RecipeMapAssemblyLine<R> setProgressBar(TextureArea progressBar, ProgressWidget.MoveType moveType) {
         this.progressBarTexture = progressBar;
         this.moveType = moveType;
@@ -46,8 +48,9 @@ public class RecipeMapAssemblyLine<R extends RecipeBuilder<R>> extends RecipeMap
         return this;
     }
 
+    @Nonnull
     public ModularUI.Builder createUITemplate(DoubleSupplier progressSupplier, IItemHandlerModifiable importItems, IItemHandlerModifiable exportItems, FluidTankList importFluids, FluidTankList exportFluids) {
-        ModularUI.Builder builder = new ModularUI.Builder(GuiTextures.BACKGROUND_EXTENDED, 176, 216) {
+        ModularUI.Builder builder = new ModularUI.Builder(GuiTextures.BACKGROUND, 176, 216) {
             public ModularUI.Builder bindPlayerInventory(InventoryPlayer inventoryPlayer) {
                 this.bindPlayerInventory(inventoryPlayer, 134);
                 return this;

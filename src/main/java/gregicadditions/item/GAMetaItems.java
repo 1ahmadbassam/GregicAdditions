@@ -39,8 +39,8 @@ public class GAMetaItems {
     public static MetaItem<?>.MetaValueItem MAX_BATTERY;
     public static MetaItem<?>.MetaValueItem NEURO_PROCESSOR;
     public static MetaItem<?>.MetaValueItem INTEGRATED_COMPUTER;
-    public static MetaItem<?>.MetaValueItem MICA_SHHET;
-    public static MetaItem<?>.MetaValueItem MICA_INSULATOR_SHHET;
+    public static MetaItem<?>.MetaValueItem MICA_SHEET;
+    public static MetaItem<?>.MetaValueItem MICA_INSULATOR_SHEET;
     public static MetaItem<?>.MetaValueItem MICA_INSULATOR_FOI;
     public static MetaItem<?>.MetaValueItem BASIC_BOARD;
     public static MetaItem<?>.MetaValueItem GOOD_PHENOLIC_BOARD;

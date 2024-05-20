@@ -16,6 +16,8 @@ import net.minecraftforge.fluids.FluidUtil;
 import net.minecraftforge.fluids.capability.IFluidHandlerItem;
 import net.minecraftforge.oredict.ShapedOreRecipe;
 
+import javax.annotation.Nonnull;
+
 public class FluidRecipeFactory implements IRecipeFactory {
     @Override
     public IRecipe parse(JsonContext context, JsonObject json) {
@@ -38,6 +40,7 @@ public class FluidRecipeFactory implements IRecipeFactory {
         }
 
         @Override
+        @Nonnull
         public NonNullList<ItemStack> getRemainingItems(InventoryCrafting inv) {
 
             NonNullList<ItemStack> ret = NonNullList.withSize(inv.getSizeInventory(), ItemStack.EMPTY);

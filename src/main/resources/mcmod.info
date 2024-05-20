@@ -1,13 +1,13 @@
 [
 {
   "modid": "gtadditions",
-  "name": "Gregic Additions",
-  "description": " An addon for GregTech Community Edition with the goal of making it much more complicated and realistic through the use of GregTech 5 Unofficial and GregTech 6 features.",
+  "name": "Gregic Additions Unofficial",
+  "description": "An addon for GregTech Community Edition with the goal of making it much more complicated and realistic through the use of GregTech 5 Unofficial and GregTech 6 features.",
   "version": "${version}",
   "mcversion": "${mcversion}",
   "url": "",
   "updateUrl": "",
-  "authorList": ["TheEmosewaPixel","Bartz24"],
+  "authorList": ["TheEmosewaPixel","Bartz24","1ahmadbassam],
   "credits": "The creators of GTCE, GT5U and most importantly, GregoriusT.",
   "logoFile": "",
   "screenshots": [],

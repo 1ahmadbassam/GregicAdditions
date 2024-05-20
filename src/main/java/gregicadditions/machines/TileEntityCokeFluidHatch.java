@@ -40,7 +40,7 @@ public class TileEntityCokeFluidHatch extends MetaTileEntityMultiblockPart imple
 
     public void update() {
         super.update();
-        if (!this.getWorld().isRemote && this.getTimer() % 5L == 0L) {
+        if (!this.getWorld().isRemote && getOffsetTimer() % 5L == 0L) {
             if (this.isExportHatch) {
                 this.pushFluidsIntoNearbyHandlers(this.getFrontFacing());
             } else {
