@@ -54,10 +54,10 @@ public class GregicAdditions {
 
     @EventHandler
     public void postInit(FMLPostInitializationEvent event) {
-        proxy.postInit();
         // Late loaders for generation of recipes
         GARecipeAddition.generatedRecipes();
         if (Loader.isModLoaded("tconstruct") && GAConfig.Misc.TiCIntegration)
             TinkersIntegration.preInit();
+        proxy.postInit();
     }
 }

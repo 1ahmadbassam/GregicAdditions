@@ -52,8 +52,13 @@ import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.oredict.OreDictionary;
 
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import java.util.*;
 import java.util.stream.Collectors;
+
+import static gregtech.api.GTValues.L;
+import static gregtech.api.GTValues.M;
 
 public class GARecipeAddition {
 
@@ -641,6 +646,7 @@ public class GARecipeAddition {
         RecipeMaps.MIXER_RECIPES.recipeBuilder().duration(125).EUt(16).fluidInputs(Materials.Lead.getFluid(576), Materials.Antimony.getFluid(144)).fluidOutputs(Materials.BatteryAlloy.getFluid(720)).buildAndRegister();
         RecipeMaps.MIXER_RECIPES.recipeBuilder().duration(50).EUt(16).fluidInputs(Materials.Gold.getFluid(144), Materials.Silver.getFluid(144)).fluidOutputs(Materials.Electrum.getFluid(288)).buildAndRegister();
         RecipeMaps.MIXER_RECIPES.recipeBuilder().duration(75).EUt(16).fluidInputs(Materials.Aluminium.getFluid(288), Materials.Magnesium.getFluid(144)).fluidOutputs(Materials.Magnalium.getFluid(432)).buildAndRegister();
+
         //Ferroboron - Tough Alloy support, useful for sme mods
         RecipeMaps.MIXER_RECIPES.recipeBuilder().duration(50).EUt(16).fluidInputs(Materials.Steel.getFluid(144), Materials.Boron.getFluid(144)).fluidOutputs(GAMaterials.Ferroboron.getFluid(288)).buildAndRegister();
         RecipeMaps.MIXER_RECIPES.recipeBuilder().duration(50).EUt(16).fluidInputs(GAMaterials.Ferroboron.getFluid(144), Materials.Lithium.getFluid(144)).fluidOutputs(GAMaterials.ToughAlloy.getFluid(288)).buildAndRegister();
@@ -1656,6 +1662,52 @@ public class GARecipeAddition {
                 }
             }
         }
+
+        // Alloy smelting -> Mixing
+        Collection<Recipe> alloySmeltingRecipes = new ArrayList<>(RecipeMaps.ALLOY_SMELTER_RECIPES.getRecipeList());
+        for (Recipe recipe : alloySmeltingRecipes) {
+            if (recipe.getInputs().size() != 2 || recipe.getOutputs().size() != 1) continue;
+            CountableIngredient input1 = recipe.getInputs().get(0);
+            CountableIngredient input2 = recipe.getInputs().get(1);
+            ItemStack output = recipe.getOutputs().get(0);
+            if (OreDictUnifier.getMaterial(input1.getIngredient().getMatchingStacks()[0]) != null
+            && OreDictUnifier.getMaterial(input2.getIngredient().getMatchingStacks()[0]) != null
+            && OreDictUnifier.getMaterial(output) != null) {
+                MaterialStack input1Material = OreDictUnifier.getMaterial(input1.getIngredient().getMatchingStacks()[0]).copy(M * input1.getCount());
+                MaterialStack input2Material = OreDictUnifier.getMaterial(input2.getIngredient().getMatchingStacks()[0]).copy(M * input2.getCount());
+                MaterialStack outputMaterial = OreDictUnifier.getMaterial(output).copy(M * output.getCount());
+                if (input1Material.material instanceof FluidMaterial && input2Material.material instanceof FluidMaterial && outputMaterial.material instanceof FluidMaterial
+                        && ((FluidMaterial) input1Material.material).getFluid(1) != null
+                        && ((FluidMaterial) input2Material.material).getFluid(1) != null
+                        && ((FluidMaterial) outputMaterial.material).getFluid(1) != null) {
+                    if(getMixerRecipe(input1Material, input2Material) == null) {
+                        int fluid1Amount = (int) (input1Material.amount * L / M);
+                        int fluid2Amount = (int) (input2Material.amount * L / M);
+                        RecipeMaps.MIXER_RECIPES.recipeBuilder()
+                                .duration(((fluid1Amount + fluid2Amount)/L)*25)
+                                .EUt(recipe.getEUt())
+                                .fluidInputs(((FluidMaterial) input1Material.material).getFluid(fluid1Amount),
+                                        ((FluidMaterial) input2Material.material).getFluid(fluid2Amount))
+                                .fluidOutputs(((FluidMaterial) outputMaterial.material).getFluid((int) (outputMaterial.amount * L / M)))
+                                .buildAndRegister();
+                    }
+                    if (GAConfig.Misc.disableAlloySmelterAlloying)
+                        RecipeMaps.ALLOY_SMELTER_RECIPES.removeRecipe(recipe);
+                }
+            }
+        }
+    }
+
+    @Nullable
+    private static Recipe getMixerRecipe(@Nonnull MaterialStack mat1, @Nonnull MaterialStack mat2) {
+        return RecipeMaps.MIXER_RECIPES.findRecipe(Integer.MAX_VALUE,
+                Collections.emptyList(),
+                Arrays.asList(
+                        ((FluidMaterial) mat1.material).getFluid((int) (mat1.amount * L / M)),
+                        ((FluidMaterial) mat2.material).getFluid((int) (mat2.amount * L / M))
+                ),
+                Integer.MAX_VALUE
+        );
     }
 
     public static void recipeCeramicsIntegration() {

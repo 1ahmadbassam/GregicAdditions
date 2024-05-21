@@ -19,7 +19,7 @@ import javax.annotation.Nonnull;
 public class GATransparentCasing extends VariantBlock<GATransparentCasing.CasingType> {
     public GATransparentCasing() {
         super(Material.IRON);
-        setUnlocalizedName("ga_transparent_casing");
+        setTranslationKey("ga_transparent_casing");
         setHardness(5.0f);
         setResistance(5000.0f);
         setSoundType(SoundType.GLASS);
