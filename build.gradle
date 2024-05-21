@@ -11,7 +11,7 @@ apply plugin: 'net.minecraftforge.gradle.forge'
 
 version = "${minecraft_version}-${mod_version}"
 group = "gregicadditions"
-archivesBaseName = "GregicAdditions"
+archivesBaseName = "GregicAdditionsUnofficial"
 
 sourceCompatibility = targetCompatibility = '1.8'
 compileJava {
