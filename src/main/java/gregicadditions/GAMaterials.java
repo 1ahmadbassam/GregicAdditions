@@ -262,6 +262,9 @@ public class GAMaterials implements IMaterialHandler {
         Materials.Clay.addFlag(MatFlags.IS_INGOT_AVAILABLE);
         Materials.Brick.addFlag(MatFlags.IS_INGOT_AVAILABLE);
 
+        Materials.Coal.addFlag(DustMaterial.MatFlags.SMELT_INTO_FLUID);
+        Materials.Diamond.addFlag(DustMaterial.MatFlags.SMELT_INTO_FLUID);
+
         if ((GAConfig.Misc.CeramicsIntegration && Loader.isModLoaded("ceramics")) || (Loader.isModLoaded("tconstruct")))
             Materials.Clay.addFlag(DustMaterial.MatFlags.SMELT_INTO_FLUID);
         if (GAConfig.Misc.CeramicsIntegration && Loader.isModLoaded("ceramics")) {

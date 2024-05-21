@@ -1,8 +1,41 @@
-## The Fork
-This fork completes modernization of original GregicAdditions to 1.17 GTCE (since Shadows of Greg removes essential items for GregBlock to actually work, so it cannot be used).
-Libs:
-```
-GTCEBees-1.12.2-1.0.5.jar (custom build, can be found on my fork)
-```
+# GregicAdditions Unofficial
+A mod intended to make [GregTech Community Edition](https://github.com/GregTechCE/GregTech) harder and more realistic by incorporating
+GT5U and GT6 features.
 
-Note: I have modified ```gradlew.bat``` to point to Java 8 on my system since my Java home is 17. If you want to build this, make sure to change that to the directory of Java 8 on your machine.
+## Description
+
+This mod is a fork of the original GregicAdditions by TheLimePixel, which was originally
+intended to update the mod to end-of-life GTCE 1.17, but is now focusing on adding more integrations
+and enhancing codebase.
+
+Most ideas of this mod are implemented in the popular modpack [GregBlock](https://github.com/1ahmadbassam/Gregblock-revamped117) 
+(which is currently under updating as well, by me).
+Some of the design features of this mod are most fitting in GregBlock; however, this mod is fully
+standalone and configuration options for most options are provided.
+
+In case you are thinking that most of the features of this mod are in GTCE, then you may be thinking of [GTCEu](https://github.com/GTCEu/GTCEu). 
+Because of the aforementioned reason, GregBlock and its mods are currently stuck on GTCE (which includes this mod).
+
+For enhanced Tinker's Construct integration, check out [GregsConstruct](https://github.com/1ahmadbassam/GregsConstruct).
+
+For extended Forestry integration, check out [GTCEBees](https://github.com/1ahmadbassam/GTCEBees).
+
+### Mod Features (Not Comprehensive)
+1. Double ingots, curved plates, and rounds.
+2. Bending cylinders
+3. Rework of GregTech's tier progression, including tougher recipes for electrical components, a variety of new circuits, and superconductor materials.
+4. Cluster Mills (specialized machines to make foils), Matter replication.
+5. Higher-tier machine versions of GregTech machines (up to UV).
+6. The MAX battery (could be an Endgame goal to obtain).
+7. The Assembly Line, and Fusion Reactor multiblocks.
+8. A better version of GTCE's coke oven.
+9. Fluid Drums of various tiers.
+10. Electric [rock breakers](https://reddit.com/r/feedthebeast/comments/bi2h8s/) which replace cobblestone generators and generate various stone types based on the redstone signal they receive.  
+11. Steam Mixer (available in both low and high pressure versions).
+12. A LOT of recipe changes to Minecraft and plain GTCE.
+13. Tinker's Construct integration: Molds and extruder shapes are made in a Tinker Smeltery.
+14. Forestry integration: Electrodes, which are used to make Forestry Electron tubes.
+15. Full Ceramics integration, and extended clay-brick-porcelain crafts.
+
+### License
+This project is licensed under the [GNU Lesser General Public License v3.0](https://www.gnu.org/licenses/lgpl-3.0.en.html).

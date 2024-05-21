@@ -1717,6 +1717,8 @@ public class GARecipeAddition {
         RecipeMaps.ALLOY_SMELTER_RECIPES.recipeBuilder().input(OrePrefix.clump, GAMaterials.Porcelain).notConsumable(MetaItems.SHAPE_MOLD_INGOT).output(OrePrefix.ingot, GAMaterials.Porcelain).duration(200).EUt(2).buildAndRegister();
         RecipeMaps.MACERATOR_RECIPES.recipeBuilder().input(OrePrefix.ingot, GAMaterials.Porcelain).output(OrePrefix.dust, GAMaterials.Porcelain).duration(30).EUt(8).buildAndRegister();
         ModHandler.removeRecipeByName(new ResourceLocation("ceramics:decoration/unfired_porcelain_quartz"));
+        ModHandler.removeRecipeByName(new ResourceLocation("ceramics:decoration/unfired_porcelain_bone_meal"));
+        ModHandler.addShapedRecipe("unfired_porcelain_clump", OreDictUnifier.get(OrePrefix.clump, GAMaterials.Porcelain), " C ", " B ", " m ", 'C', new UnificationEntry(OrePrefix.clump, Materials.Clay), 'B', new UnificationEntry(OrePrefix.dust, Materials.Bone));
 
         ModHandler.removeRecipeByName(new ResourceLocation("ceramics:armor/unfired_clay_plate"));
         ModHandler.addShapedRecipe("clay_plate", OreDictUnifier.get(OrePrefix.plate, Materials.Clay), "C", "C", 'C', new UnificationEntry(OrePrefix.clump, Materials.Clay));
