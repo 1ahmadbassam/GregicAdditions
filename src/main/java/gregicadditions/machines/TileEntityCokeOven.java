@@ -7,6 +7,8 @@ import gregicadditions.GAConfig;
 import gregicadditions.GATextures;
 import gregicadditions.item.GAMetaBlocks;
 import gregicadditions.item.GAMultiblockCasing;
+import gregtech.api.capability.GregtechTileCapabilities;
+import gregtech.api.capability.IWorkable;
 import gregtech.api.capability.impl.FluidTankList;
 import gregtech.api.capability.impl.ItemHandlerList;
 import gregtech.api.gui.GuiTextures;
@@ -44,13 +46,14 @@ import net.minecraftforge.items.ItemStackHandler;
 
 import java.util.Collections;
 
-public class TileEntityCokeOven extends MultiblockControllerBase {
+public class TileEntityCokeOven extends MultiblockControllerBase implements IWorkable {
     private int maxProgressDuration;
     private int currentProgress;
     private ItemStack outputItem;
     private FluidStack outputFluid;
     private boolean isActive;
     private boolean wasActiveAndNeedUpdate;
+    private boolean isWorkingEnabled = true;
 
     private ItemStack lastInputStack = ItemStack.EMPTY;
     private CokeOvenRecipe previousRecipe;
@@ -67,38 +70,40 @@ public class TileEntityCokeOven extends MultiblockControllerBase {
 
     @Override
     protected void updateFormedValid() {
-        if (GAConfig.Misc.cokeOvenInputBusEnable && getAbilities(MultiblockAbility.IMPORT_ITEMS) != null) {
-            ItemHandlerList itemInput = new ItemHandlerList(this.getAbilities(MultiblockAbility.IMPORT_ITEMS));
-            if (itemInput.getSlots() > 0 && !itemInput.getStackInSlot(0).isEmpty() && (importItems.getStackInSlot(0).isEmpty() || importItems.getStackInSlot(0).isItemEqual(itemInput.getStackInSlot(0)))) {
-                itemInput.setStackInSlot(0, ItemHandlerHelper.insertItemStacked(importItems, itemInput.getStackInSlot(0), false));
+        if (isWorkingEnabled) {
+            if (GAConfig.Misc.cokeOvenInputBusEnable && getAbilities(MultiblockAbility.IMPORT_ITEMS) != null) {
+                ItemHandlerList itemInput = new ItemHandlerList(this.getAbilities(MultiblockAbility.IMPORT_ITEMS));
+                if (itemInput.getSlots() > 0 && !itemInput.getStackInSlot(0).isEmpty() && (importItems.getStackInSlot(0).isEmpty() || importItems.getStackInSlot(0).isItemEqual(itemInput.getStackInSlot(0)))) {
+                    itemInput.setStackInSlot(0, ItemHandlerHelper.insertItemStacked(importItems, itemInput.getStackInSlot(0), false));
+                }
             }
-        }
-        if (getAbilities(MultiblockAbility.EXPORT_FLUIDS) != null) {
-            FluidTankList fluidOutput = new FluidTankList(true, this.getAbilities(MultiblockAbility.EXPORT_FLUIDS));
-            if (exportFluids.getTankAt(0).getFluidAmount() > 0 && !fluidOutput.getFluidTanks().isEmpty()) {
-                exportFluids.drain(fluidOutput.fill(exportFluids.getTankAt(0).getFluid(), true), true);
+            if (getAbilities(MultiblockAbility.EXPORT_FLUIDS) != null) {
+                FluidTankList fluidOutput = new FluidTankList(true, this.getAbilities(MultiblockAbility.EXPORT_FLUIDS));
+                if (exportFluids.getTankAt(0).getFluidAmount() > 0 && !fluidOutput.getFluidTanks().isEmpty()) {
+                    exportFluids.drain(fluidOutput.fill(exportFluids.getTankAt(0).getFluid(), true), true);
+                }
             }
-        }
-        if (getAbilities(MultiblockAbility.EXPORT_ITEMS) != null) {
-        ItemHandlerList itemOutput = new ItemHandlerList(this.getAbilities(MultiblockAbility.EXPORT_ITEMS));
-        if (!exportItems.getStackInSlot(0).isEmpty() && itemOutput.getSlots() > 0) {
-            exportItems.setStackInSlot(0, ItemHandlerHelper.insertItemStacked(itemOutput, exportItems.getStackInSlot(0), false));
-        }
-        }
-        if (maxProgressDuration == 0) {
-            if (tryPickNewRecipe()) {
-                if (wasActiveAndNeedUpdate) {
-                    this.wasActiveAndNeedUpdate = false;
-                } else setActive(true);
+            if (getAbilities(MultiblockAbility.EXPORT_ITEMS) != null) {
+                ItemHandlerList itemOutput = new ItemHandlerList(this.getAbilities(MultiblockAbility.EXPORT_ITEMS));
+                if (!exportItems.getStackInSlot(0).isEmpty() && itemOutput.getSlots() > 0) {
+                    exportItems.setStackInSlot(0, ItemHandlerHelper.insertItemStacked(itemOutput, exportItems.getStackInSlot(0), false));
+                }
             }
-        } else if (++currentProgress >= maxProgressDuration) {
-            finishCurrentRecipe();
-            this.wasActiveAndNeedUpdate = true;
-            return;
-        }
-        if (wasActiveAndNeedUpdate) {
-            this.wasActiveAndNeedUpdate = false;
-            setActive(false);
+            if (maxProgressDuration == 0) {
+                if (tryPickNewRecipe()) {
+                    if (wasActiveAndNeedUpdate) {
+                        this.wasActiveAndNeedUpdate = false;
+                    } else setActive(true);
+                }
+            } else if (++currentProgress >= maxProgressDuration) {
+                finishCurrentRecipe();
+                this.wasActiveAndNeedUpdate = true;
+                return;
+            }
+            if (wasActiveAndNeedUpdate) {
+                this.wasActiveAndNeedUpdate = false;
+                setActive(false);
+            }
         }
     }
 
@@ -159,6 +164,7 @@ public class TileEntityCokeOven extends MultiblockControllerBase {
         data.setBoolean("Active", isActive);
         data.setBoolean("WasActive", wasActiveAndNeedUpdate);
         data.setInteger("MaxProgress", maxProgressDuration);
+        data.setBoolean("WorkingEnabled", isWorkingEnabled);
         if (maxProgressDuration > 0) {
             data.setInteger("Progress", currentProgress);
             NBTTagList itemOutputs = new NBTTagList();
@@ -177,6 +183,7 @@ public class TileEntityCokeOven extends MultiblockControllerBase {
         this.isActive = data.getBoolean("Active");
         this.wasActiveAndNeedUpdate = data.getBoolean("WasActive");
         this.maxProgressDuration = data.getInteger("MaxProgress");
+        this.isWorkingEnabled = data.getBoolean("WorkingEnabled");
         if (maxProgressDuration > 0) {
             this.currentProgress = data.getInteger("Progress");
             NBTTagList itemOutputs = data.getTagList("Outputs", Constants.NBT.TAG_COMPOUND);
@@ -208,13 +215,18 @@ public class TileEntityCokeOven extends MultiblockControllerBase {
         }
     }
 
-    public boolean isActive() {
-        return isActive;
+    @Override
+    public int getProgress() {
+        return currentProgress;
     }
 
     @Override
-    public int getLightValueForPart(IMultiblockPart sourcePart) {
-        return sourcePart == null && isActive ? 15 : 0;
+    public int getMaxProgress() {
+        return maxProgressDuration;
+    }
+
+    public boolean isActive() {
+        return isActive;
     }
 
     public void setActive(boolean active) {
@@ -223,6 +235,11 @@ public class TileEntityCokeOven extends MultiblockControllerBase {
             writeCustomData(100, b -> b.writeBoolean(isActive));
             getWorld().checkLight(getPos());
         }
+    }
+
+    @Override
+    public int getLightValueForPart(IMultiblockPart sourcePart) {
+        return sourcePart == null && isActive ? 15 : 0;
     }
 
     public double getProgressScaled() {
@@ -279,7 +296,11 @@ public class TileEntityCokeOven extends MultiblockControllerBase {
 
     @Override
     public <T> T getCapability(Capability<T> capability, EnumFacing side) {
-        if (capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY ||
+        if (capability == GregtechTileCapabilities.CAPABILITY_WORKABLE) {
+            return GregtechTileCapabilities.CAPABILITY_WORKABLE.cast(this);
+        } else if (capability == GregtechTileCapabilities.CAPABILITY_CONTROLLABLE) {
+            return GregtechTileCapabilities.CAPABILITY_CONTROLLABLE.cast(this);
+        } else if (capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY ||
                 capability == CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY) {
             return null;
         }
@@ -301,4 +322,15 @@ public class TileEntityCokeOven extends MultiblockControllerBase {
                 .build(getHolder(), entityPlayer);
     }
 
+
+    @Override
+    public boolean isWorkingEnabled() {
+        return isWorkingEnabled;
+    }
+
+    @Override
+    public void setWorkingEnabled(boolean b) {
+        isWorkingEnabled = b;
+    }
 }
+

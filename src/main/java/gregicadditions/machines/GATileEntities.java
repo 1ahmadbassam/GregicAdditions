@@ -64,7 +64,8 @@ public class GATileEntities {
 
     public static TileEntityAssemblyLine ASSEMBLY_LINE;
 
-    public static TileEntitySteamMixer STEAM_MIXER;
+    public static TileEntitySteamMixer STEAM_MIXER_BRONZE;
+    public static TileEntitySteamMixer STEAM_MIXER_STEEL;
 
     public static TileEntityCokeOven COKE_OVEN;
     public static TileEntityCokeFluidHatch COKE_FLUID_HATCH;
@@ -411,10 +412,12 @@ public class GATileEntities {
 
         if (GAConfig.Misc.cokeOvenEnable) {
             COKE_FLUID_HATCH = GregTechAPI.registerMetaTileEntity(2507, new TileEntityCokeFluidHatch(location("ga_coke_fluid_hatch")));
-            if (GAConfig.Misc.cokeOvenInputBusEnable) COKE_ITEM_IN_BUS = GregTechAPI.registerMetaTileEntity(2509, new TileEntityCokeItemBus(location("ga_coke_item_in_bus"), false));
+            if (GAConfig.Misc.cokeOvenInputBusEnable)
+                COKE_ITEM_IN_BUS = GregTechAPI.registerMetaTileEntity(2509, new TileEntityCokeItemBus(location("ga_coke_item_in_bus"), false));
             COKE_ITEM_OUT_BUS = GregTechAPI.registerMetaTileEntity(2508, new TileEntityCokeItemBus(location("ga_coke_item_out_bus"), true));
         }
-        STEAM_MIXER = GregTechAPI.registerMetaTileEntity(2221, new TileEntitySteamMixer(location("steam_mixer")));
+        STEAM_MIXER_BRONZE = GregTechAPI.registerMetaTileEntity(2221, new TileEntitySteamMixer(location("steam_mixer_bronze"), false));
+        STEAM_MIXER_STEEL = GregTechAPI.registerMetaTileEntity(2222, new TileEntitySteamMixer(location("steam_mixer_steel"), true));
 
         if (GAConfig.GT6.registerDrums) {
             WOODEN_DRUM = GregTechAPI.registerMetaTileEntity(2195, new TileEntityDrum(location("drum.wood"), Materials.Wood, 16000));

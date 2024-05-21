@@ -26,6 +26,7 @@ metaitem.boule.naquadah.name=Naquadah doped Monocrystalline Silicon Boule
 metaitem.boule.naquadah.tooltip=Raw Circuit
 metaitem.ga_brick.coke.name=Coke Oven Brick
 metaitem.ga_brick.fireclay.name=Firebrick
+metaitem.ga_brick.unfired.porcelain.name=Unfired Porcelain Brick
 metaitem.circuit.advanced.regular.name=Advanced Electronic Circuit
 metaitem.circuit.good.regular.name=Good Integrated Circuit
 metaitem.circuit.good.regular.tooltip=A Good Circuit
@@ -444,7 +445,8 @@ gtadditions.machine.wiremill.uv.name=Advanced Wiremill VII
 gtadditions.machine.assembly_line.name=Assembly Line
 gtadditions.machine.ga_coke_oven.name=Coke Oven
 
-gtadditions.machine.steam_mixer.name=Steam Mixer
+gtadditions.machine.steam_mixer_bronze.name=Steam Mixer
+gtadditions.machine.steam_mixer_steel.name=High Pressure Steam Mixer
 
 gtadditions.machine.naquadah_reactor.mk1.name=Naquadah Reactor Mk. 1
 gtadditions.machine.naquadah_reactor.mk2.name=Naquadah Reactor Mk. 2
@@ -512,10 +514,6 @@ gtadditions.machine.rock_breaker.lv.name=Basic Rock Breaker
 gtadditions.machine.rock_breaker.mv.name=Advanced Rock Breaker
 gtadditions.machine.rock_breaker.hv.name=Advanced Rock Breaker II
 gtadditions.machine.rock_breaker.ev.name=Advanced Rock Breaker III
-gtadditions.machine.rock_breaker.iv.name=Advanced Rock Breaker IV
-gtadditions.machine.rock_breaker.luv.name=Advanced Rock Breaker V
-gtadditions.machine.rock_breaker.zpm.name=Advanced Rock Breaker VI
-gtadditions.machine.rock_breaker.uv.name=Advanced Rock Breaker VII
 
 gtadditions.machine.fisher.iv.name=Advanced Fisher IV
 gtadditions.machine.fisher.luv.name=Advanced Fisher V
@@ -689,6 +687,11 @@ item.mica_based.dust=Mica Based Pulp
 material.ultima=Ultima Alloy
 material.iron_chloride=Iron III Chloride
 material.sand=Quartz Sand
+material.iron_compressed=Compressed Iron
+material.tough=Tough Alloy
+material.sky_steel=Sky Steel
+material.ferroboron=Ferroboron
+material.porcelain=Porcelain
 
 item.epoxid.ingot=Epoxy Resin Bar
 item.epoxid.dustTiny=Tiny Pile of Epoxy Resin Pulp
@@ -755,6 +758,7 @@ gregtech.multiblock.assembly_line.description=The Assembly Line is a large multi
 gregtech.multiblock.fusion_reactor_mk1.description=The Fusion Reactor Mark 1 is a large multiblock structure used for fusing elements into heavier ones. The Mark 1 Fusion Reactor can use LuV, ZPM or UV Energy Hatches. For every hatch, its buffer increases by 100k.
 gregtech.multiblock.fusion_reactor_mk2.description=The Fusion Reactor Mark 2 is a large multiblock structure used for fusing elements into heavier ones. The Mark 2 Fusion Reactor can use ZPM or UV Energy Hatches. For every hatch, its has its buffer increases by 200k.
 gregtech.multiblock.fusion_reactor_mk3.description=The Fusion Reactor Mark 3 is a large multiblock structure used for fusing elements into heavier ones. The Mark 3 Fusion Reactor can only use UV Energy Hatches. For every hatch, its buffer increases by 400k.
+gregtech.multiblock.coke_oven.description=
 
 item.material.oreprefix.plateCurved=Curved %s Plate
 item.material.oreprefix.ingotDouble=Double %s Ingot
@@ -786,3 +790,64 @@ gtadditions.machine.drum.tungstensteel.name=Tungstensteel Drum
 
 fluid.tile.water=Water
 fluid.tile.lava=Lava
+
+item.ceramics.unfired.clay_plate_raw.name=Clay Plate
+item.ceramics.unfired.bucket.name=Clay Bucket
+item.ceramics.unfired.shears.name=Clay Shears
+tile.ceramics.clay_barrel_unfired.clay.name=Clay Barrel
+tile.ceramics.clay_barrel_unfired.clay_extension.name=Clay Barrel Extension
+item.ceramics.unfired.clay_plate.name=Brick Plate
+item.ceramics.clay_bucket.name=%s Brick Bucket
+item.ceramics.clay_bucket.empty.name=Brick Bucket
+item.ceramics.clay_bucket.milk.name=Milk Brick Bucket
+item.ceramics.clay_bucket.gravel.name=Gravel Brick Bucket
+item.ceramics.clay_bucket.sand.name=Sand Brick Bucket
+item.ceramics.clay_bucket.red_sand.name=Red Sand Brick Bucket
+item.ceramics.clay_shears.name=Brick Shears
+item.ceramics.clay_helmet_raw.name=Clay Helmet
+item.ceramics.clay_chestplate_raw.name=Clay Chestplate
+item.ceramics.clay_leggings_raw.name=Clay Leggings
+item.ceramics.clay_boots_raw.name=Clay Boots
+item.ceramics.clay_helmet.name=Brick Helmet
+item.ceramics.clay_chestplate.name=Brick Chestplate
+item.ceramics.clay_leggings.name=Brick Leggings
+item.ceramics.clay_boots.name=Brick Boots
+
+tile.ceramics.clay_barrel.barrel.name=Brick Barrel
+tile.ceramics.clay_barrel.barrel_extension.name=Brick Barrel Extension
+
+tile.ceramics.clay_barrel_stained.black.name=Black Brick Barrel
+tile.ceramics.clay_barrel_stained.red.name=Red Brick Barrel
+tile.ceramics.clay_barrel_stained.green.name=Green Brick Barrel
+tile.ceramics.clay_barrel_stained.brown.name=Brown Brick Barrel
+tile.ceramics.clay_barrel_stained.blue.name=Blue Brick Barrel
+tile.ceramics.clay_barrel_stained.purple.name=Purple Brick Barrel
+tile.ceramics.clay_barrel_stained.cyan.name=Cyan Brick Barrel
+tile.ceramics.clay_barrel_stained.silver.name=Light Gray Brick Barrel
+tile.ceramics.clay_barrel_stained.gray.name=Gray Brick Barrel
+tile.ceramics.clay_barrel_stained.pink.name=Pink Brick Barrel
+tile.ceramics.clay_barrel_stained.lime.name=Lime Brick Barrel
+tile.ceramics.clay_barrel_stained.yellow.name=Yellow Brick Barrel
+tile.ceramics.clay_barrel_stained.lightBlue.name=Light Blue Brick Barrel
+tile.ceramics.clay_barrel_stained.magenta.name=Magenta Brick Barrel
+tile.ceramics.clay_barrel_stained.orange.name=Orange Brick Barrel
+tile.ceramics.clay_barrel_stained.white.name=White Brick Barrel
+
+tile.ceramics.clay_barrel_stained_extension.black.name=Black Brick Barrel Extension
+tile.ceramics.clay_barrel_stained_extension.red.name=Red Brick Barrel Extension
+tile.ceramics.clay_barrel_stained_extension.green.name=Green Brick Barrel Extension
+tile.ceramics.clay_barrel_stained_extension.brown.name=Brown Brick Barrel Extension
+tile.ceramics.clay_barrel_stained_extension.blue.name=Blue Brick Barrel Extension
+tile.ceramics.clay_barrel_stained_extension.purple.name=Purple Brick Barrel Extension
+tile.ceramics.clay_barrel_stained_extension.cyan.name=Cyan Brick Barrel Extension
+tile.ceramics.clay_barrel_stained_extension.silver.name=Light Gray Brick Barrel Extension
+tile.ceramics.clay_barrel_stained_extension.gray.name=Gray Brick Barrel Extension
+tile.ceramics.clay_barrel_stained_extension.pink.name=Pink Brick Barrel Extension
+tile.ceramics.clay_barrel_stained_extension.lime.name=Lime Brick Barrel Extension
+tile.ceramics.clay_barrel_stained_extension.yellow.name=Yellow Brick Barrel Extension
+tile.ceramics.clay_barrel_stained_extension.lightBlue.name=Light Blue Brick Barrel Extension
+tile.ceramics.clay_barrel_stained_extension.magenta.name=Magenta Brick Barrel Extension
+tile.ceramics.clay_barrel_stained_extension.orange.name=Orange Brick Barrel Extension
+tile.ceramics.clay_barrel_stained_extension.white.name=White Brick Barrel Extension
+
+ceramics.jei.bucket=Brick buckets are an early game alternative to the standard iron bucket. Like their iron counterparts, they can be used to transport liquids, but will break after pouring out a hot liquid.

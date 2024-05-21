@@ -25,6 +25,7 @@ public class GAMetaItems {
     public static MetaItem<?>.MetaValueItem COMPRESSED_CLAY;
     public static MetaItem<?>.MetaValueItem COMPRESSED_COKE_CLAY;
     public static MetaItem<?>.MetaValueItem COMPRESSED_FIRECLAY;
+    public static MetaItem<?>.MetaValueItem UNFIRED_PORCELAIN_BRICK;
     public static MetaItem<?>.MetaValueItem CRYSTAL_COMPUTER;
     public static MetaItem<?>.MetaValueItem NANO_COMPUTER;
     public static MetaItem<?>.MetaValueItem QUANTUM_COMPUTER;

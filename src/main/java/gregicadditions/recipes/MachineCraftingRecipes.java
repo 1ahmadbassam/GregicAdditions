@@ -70,12 +70,14 @@ public class MachineCraftingRecipes {
         //Steam Machines
         ModHandler.addShapedRecipe("ga_steam_macerator_bronze", MetaTileEntities.STEAM_MACERATOR_BRONZE.getStackForm(), "DXD", "XMX", "PXP", 'M', MetaBlocks.MACHINE_CASING.getItemVariant(BlockMachineCasing.MachineCasingType.BRONZE_HULL), 'X', new UnificationEntry(OrePrefix.pipeSmall, Materials.Bronze), 'P', OreDictNames.craftingPiston, 'D', new ItemStack(Items.FLINT));
         ModHandler.addShapedRecipe("ga_steam_macerator_steel", MetaTileEntities.STEAM_MACERATOR_STEEL.getStackForm(), "DXD", "XMX", "PXP", 'M', MetaBlocks.MACHINE_CASING.getItemVariant(BlockMachineCasing.MachineCasingType.STEEL_HULL), 'X', new UnificationEntry(OrePrefix.pipeSmall, Materials.Steel), 'P', OreDictNames.craftingPiston, 'D', new ItemStack(Items.FLINT));
-        ModHandler.addShapedRecipe("ga_steam_mixer", GATileEntities.STEAM_MIXER.getStackForm(), "GRG", "GPG", "PMP", 'M', MetaBlocks.MACHINE_CASING.getItemVariant(BlockMachineCasing.MachineCasingType.BRONZE_HULL), 'P', new UnificationEntry(OrePrefix.pipeSmall, Materials.Bronze), 'R', "rotorBronze", 'G', "blockGlass");
+        ModHandler.addShapedRecipe("ga_steam_mixer_bronze", GATileEntities.STEAM_MIXER_BRONZE.getStackForm(), "GRG", "GPG", "PMP", 'M', MetaBlocks.MACHINE_CASING.getItemVariant(BlockMachineCasing.MachineCasingType.BRONZE_HULL), 'P', new UnificationEntry(OrePrefix.pipeSmall, Materials.Bronze), 'R', new UnificationEntry(OrePrefix.rotor, Materials.Bronze), 'G', "blockGlass");
+        ModHandler.addShapedRecipe("ga_steam_mixer_steel", GATileEntities.STEAM_MIXER_STEEL.getStackForm(), "GRG", "GPG", "PMP", 'M', MetaBlocks.MACHINE_CASING.getItemVariant(BlockMachineCasing.MachineCasingType.STEEL_HULL), 'P', new UnificationEntry(OrePrefix.pipeSmall, Materials.Steel), 'R', new UnificationEntry(OrePrefix.rotor, Materials.Steel), 'G', "blockGlass");
 
         //MultiBlocks
         if (GAConfig.Misc.cokeOvenEnable) {
             ModHandler.addShapedRecipe("ga_coke_oven", GATileEntities.COKE_OVEN.getStackForm(), "hRS", "PBR", "dRS", 'R', "stickIron", 'S', "screwIron", 'P', "plateIron", 'B', GAMetaBlocks.MUTLIBLOCK_CASING.getItemVariant(GAMultiblockCasing.CasingType.COKE_OVEN_BRICKS));
-            if(GAConfig.Misc.cokeOvenInputBusEnable) ModHandler.addShapedRecipe("ga_coke_oven_in_bus", GATileEntities.COKE_ITEM_IN_BUS.getStackForm(), "G", "B", 'B', GATileEntities.COKE_OVEN.getStackForm(), 'G', "chestWood");
+            if (GAConfig.Misc.cokeOvenInputBusEnable)
+                ModHandler.addShapedRecipe("ga_coke_oven_in_bus", GATileEntities.COKE_ITEM_IN_BUS.getStackForm(), "G", "B", 'B', GATileEntities.COKE_OVEN.getStackForm(), 'G', "chestWood");
             ModHandler.addShapedRecipe("ga_coke_oven_out_bus", GATileEntities.COKE_ITEM_OUT_BUS.getStackForm(), "B", "G", 'B', GATileEntities.COKE_OVEN.getStackForm(), 'G', "chestWood");
             ModHandler.addShapedRecipe("ga_coke_oven_hatch", GATileEntities.COKE_FLUID_HATCH.getStackForm(), "B", "C", 'B', GATileEntities.COKE_OVEN.getStackForm(), 'C', new ItemStack(Blocks.GLASS));
         }

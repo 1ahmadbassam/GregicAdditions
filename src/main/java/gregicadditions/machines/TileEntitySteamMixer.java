@@ -4,6 +4,7 @@ import gregicadditions.GATextures;
 import gregtech.api.capability.impl.FilteredFluidHandler;
 import gregtech.api.capability.impl.FluidTankList;
 import gregtech.api.gui.ModularUI;
+import gregtech.api.gui.resources.TextureArea;
 import gregtech.api.gui.widgets.ProgressWidget;
 import gregtech.api.gui.widgets.SlotWidget;
 import gregtech.api.gui.widgets.TankWidget;
@@ -19,13 +20,16 @@ import net.minecraftforge.items.IItemHandlerModifiable;
 import net.minecraftforge.items.ItemStackHandler;
 
 public class TileEntitySteamMixer extends SteamMetaTileEntity {
-    public TileEntitySteamMixer(ResourceLocation metaTileEntityId) {
-        super(metaTileEntityId, RecipeMaps.MIXER_RECIPES, GATextures.STEAM_MIXER_OVERLAY, false);
+    public final TextureArea BRONZE_FLUID_SLOT;
+
+    public TileEntitySteamMixer(ResourceLocation metaTileEntityId, boolean isHighPressure) {
+        super(metaTileEntityId, RecipeMaps.MIXER_RECIPES, (isHighPressure) ? GATextures.STEAM_MIXER_STEEL_OVERLAY : GATextures.STEAM_MIXER_BRONZE_OVERLAY, isHighPressure);
+        BRONZE_FLUID_SLOT = getFullGuiTexture("slot_fluid_%s");
     }
 
     @Override
     public MetaTileEntity createMetaTileEntity(MetaTileEntityHolder holder) {
-        return new TileEntitySteamMixer(metaTileEntityId);
+        return new TileEntitySteamMixer(metaTileEntityId, isHighPressure);
     }
 
     @Override
@@ -53,23 +57,23 @@ public class TileEntitySteamMixer extends SteamMetaTileEntity {
     public ModularUI createUI(EntityPlayer player) {
         return createUITemplate(player)
                 .widget(new SlotWidget(this.importItems, 0, 36, 25)
-                        .setBackgroundTexture(BRONZE_SLOT_BACKGROUND_TEXTURE))
+                        .setBackgroundTexture(BRONZE_SLOT_BACKGROUND_TEXTURE, getFullGuiTexture("overlay_%s_dust")))
                 .widget(new SlotWidget(this.importItems, 1, 54, 25)
-                        .setBackgroundTexture(BRONZE_SLOT_BACKGROUND_TEXTURE))
+                        .setBackgroundTexture(BRONZE_SLOT_BACKGROUND_TEXTURE, getFullGuiTexture("overlay_%s_dust")))
                 .widget(new SlotWidget(this.importItems, 2, 36, 43)
-                        .setBackgroundTexture(BRONZE_SLOT_BACKGROUND_TEXTURE))
+                        .setBackgroundTexture(BRONZE_SLOT_BACKGROUND_TEXTURE, getFullGuiTexture("overlay_%s_dust")))
                 .widget(new SlotWidget(this.importItems, 3, 54, 43)
-                        .setBackgroundTexture(BRONZE_SLOT_BACKGROUND_TEXTURE))
+                        .setBackgroundTexture(BRONZE_SLOT_BACKGROUND_TEXTURE, getFullGuiTexture("overlay_%s_dust")))
                 .widget(new TankWidget(this.importFluids.getTankAt(1), 18, 24, 18, 18)
-                        .setBackgroundTexture(GATextures.BRONZE_FLUID_SLOT).setAlwaysShowFull(true).setContainerClicking(false, true))
+                        .setBackgroundTexture(BRONZE_FLUID_SLOT).setAlwaysShowFull(true).setContainerClicking(false, true))
                 .widget(new TankWidget(this.importFluids.getTankAt(2), 18, 42, 18, 18)
-                        .setBackgroundTexture(GATextures.BRONZE_FLUID_SLOT).setAlwaysShowFull(true).setContainerClicking(false, true))
-                .widget(new ProgressWidget(workableHandler::getProgressPercent, 78, 34, 20, 16)
-                        .setProgressBar(getFullGuiTexture("progress_bar_%s_furnace"),
-                                getFullGuiTexture("progress_bar_%s_furnace_filled"),
+                        .setBackgroundTexture(BRONZE_FLUID_SLOT).setAlwaysShowFull(true).setContainerClicking(false, true))
+                .widget(new ProgressWidget(workableHandler::getProgressPercent, 78, 32, 21, 18)
+                        .setProgressBar(getFullGuiTexture("progress_bar_%s_mixer"),
+                                getFullGuiTexture("progress_bar_%s_mixer_filled"),
                                 ProgressWidget.MoveType.HORIZONTAL))
                 .widget(new TankWidget(this.exportFluids.getTankAt(0), 104, 33, 18, 18)
-                        .setBackgroundTexture(GATextures.BRONZE_FLUID_SLOT).setAlwaysShowFull(true).setContainerClicking(true, false))
+                        .setBackgroundTexture(BRONZE_FLUID_SLOT).setAlwaysShowFull(true).setContainerClicking(true, false))
                 .build(getHolder(), player);
     }
 }

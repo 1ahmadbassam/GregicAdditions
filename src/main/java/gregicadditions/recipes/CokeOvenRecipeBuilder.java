@@ -21,7 +21,7 @@ import net.minecraftforge.fml.common.Optional.Method;
 import stanhebben.zenscript.annotations.ZenClass;
 import stanhebben.zenscript.annotations.ZenMethod;
 
-@ZenClass("mods.gregtech.recipe.CokeOvenRecipeBuilder")
+@ZenClass("mods.gtadditions.recipe.CokeOvenRecipeBuilder")
 @ZenRegister
 public class CokeOvenRecipeBuilder {
 

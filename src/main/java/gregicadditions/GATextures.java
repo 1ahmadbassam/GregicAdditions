@@ -8,7 +8,7 @@ import gregtech.api.render.SimpleCubeRenderer;
 
 public class GATextures {
     //Gui Textures
-    public static final TextureArea BRONZE_FLUID_SLOT = TextureArea.fullImage("textures/gui/steam/fluid_slot.png");
+    public static final TextureArea BRONZE_FLUID_SLOT = TextureArea.fullImage("textures/gui/steam/bronze/slot_fluid_bronze.png");
     public static final TextureArea COAL_OVERLAY = TextureArea.fullImage("textures/gui/steam/bronze/overlay_bronze_coal.png");
     public static SimpleCubeRenderer COKE_OVEN_BRICKS;
     public static SimpleCubeRenderer FUSION_TEXTURE;
@@ -18,7 +18,8 @@ public class GATextures {
     public static OrientedOverlayRenderer REPLICATOR_OVERLAY;
     public static OrientedOverlayRenderer MASS_FAB_OVERLAY;
     public static OrientedOverlayRenderer FUSION_REACTOR_OVERLAY;
-    public static OrientedOverlayRenderer STEAM_MIXER_OVERLAY;
+    public static OrientedOverlayRenderer STEAM_MIXER_BRONZE_OVERLAY;
+    public static OrientedOverlayRenderer STEAM_MIXER_STEEL_OVERLAY;
     public static DrumRenderer BARREL = new DrumRenderer("storage/drums/barrel");
     public static DrumRenderer DRUM = new DrumRenderer("storage/drums/drum");
     public static OrientedOverlayRenderer BREAKER_OVERLAY;
@@ -42,6 +43,7 @@ public class GATextures {
 
         BREAKER_OVERLAY = new OrientedOverlayRenderer("machines/rock_breaker", OverlayFace.BACK);
 
-        STEAM_MIXER_OVERLAY = new OrientedOverlayRenderer("machines/steam_mixer", OverlayFace.FRONT, OverlayFace.SIDE, OverlayFace.TOP);
+        STEAM_MIXER_BRONZE_OVERLAY = new OrientedOverlayRenderer("machines/steam_mixer/bronze", OverlayFace.FRONT, OverlayFace.SIDE, OverlayFace.TOP);
+        STEAM_MIXER_STEEL_OVERLAY = new OrientedOverlayRenderer("machines/steam_mixer/steel", OverlayFace.FRONT, OverlayFace.SIDE, OverlayFace.TOP);
     }
 }

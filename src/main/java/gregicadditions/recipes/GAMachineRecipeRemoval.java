@@ -17,8 +17,10 @@ import gregtech.api.unification.stack.UnificationEntry;
 import gregtech.common.blocks.BlockMachineCasing;
 import gregtech.common.blocks.MetaBlocks;
 import gregtech.common.items.MetaItems;
+import gregtech.common.metatileentities.MetaTileEntities;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
+import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fluids.FluidStack;
@@ -160,6 +162,15 @@ public class GAMachineRecipeRemoval {
         }
         removeAllRecipesInSet(RecipeMaps.ASSEMBLER_RECIPES, markedForRemoval);
 
+        //Pure Chemical Reactor Recipes
+        ModHandler.removeRecipeByName(new ResourceLocation("minecraft:ender_eye"));
+        ModHandler.removeRecipes(Items.GOLDEN_APPLE);
+        ModHandler.removeRecipes(Items.GOLDEN_CARROT);
+        ModHandler.removeRecipes(Items.MAGMA_CREAM);
+
+        //Remove Vanilla Glass Panes Recipes
+        ModHandler.removeRecipes(ItemBlock.getItemFromBlock(Blocks.GLASS_PANE));
+
         //Remove GTCE's Solution Electrolyzing Recipes
         removeRecipesByInputs(RecipeMaps.ELECTROLYZER_RECIPES, Materials.NickelSulfateSolution.getFluid(12000));
         removeRecipesByInputs(RecipeMaps.ELECTROLYZER_RECIPES, Materials.CopperSulfateSolution.getFluid(11000));
@@ -235,6 +246,9 @@ public class GAMachineRecipeRemoval {
                 ModHandler.removeFurnaceSmelting(new UnificationEntry(OrePrefix.oreSand, mat));
             }
         }
+
+        //Remove GTCE Magic energy absorber
+        ModHandler.removeRecipes(MetaTileEntities.MAGIC_ENERGY_ABSORBER.getStackForm());
     }
 
     private static <T extends RecipeBuilder<T>> void removeRecipesByInputs(RecipeMap<T> map, ItemStack... itemInputs) {

@@ -169,6 +169,9 @@ public class GAConfig {
         @Config.Name("Should higher tier Quantum Tanks be registered?")
         public boolean highTierQuantumTanks = true;
 
+        @Config.Comment("Set this to false to disable enhanced piston recipes")
+        @Config.Name("Enhanced piston recipes")
+        public boolean enhancedPistonRecipes = true;
 
         @Config.Comment("Set these to true to enable certain Batteries.")
         @Config.Name("Batteries - Enable an extra ZPM and UV Battery (this also makes the Ultimate Battery harder to make)")
@@ -188,6 +191,10 @@ public class GAConfig {
         @Config.Name("Packaging - 2x2 recipes can automated with Packagers")
         public boolean Packager2x2Recipes = true;
 
+        @Config.Comment("Set this to false to disable converting TNT to Dynamite in the Implosion Compressor")
+        @Config.Name("Replace TNT in Implosion Compressor")
+        public boolean replaceTNTImplosion = true;
+
         @Config.Comment("Set this to false to disable Forestry Integration")
         @Config.Name("Adds recipes for Forestry's Electrodes")
         public boolean ForestryIntegration = true;
@@ -195,6 +202,10 @@ public class GAConfig {
         @Config.Comment("Set this to false to disable Tinkers' Construct Integration")
         @Config.Name("Changes the Molds and Extruder Shapes' recipes to require a Smeltery")
         public boolean TiCIntegration = true;
+
+        @Config.Comment("Set this to false to disable Ceramics Integration")
+        @Config.Name("Enhanced Integration for Ceramics mod")
+        public boolean CeramicsIntegration = true;
 
         @Config.Comment("Set this to false to disable high tier Air Collectors")
         @Config.Name("Air Collector have IV and LuV version")

@@ -24,12 +24,14 @@ public class GAMetaItem extends MaterialMetaItem {
         if (GAConfig.Misc.cokeOvenEnable) {
             GAMetaItems.COKE_BRICK = addItem(0, "ga_brick.coke");
         }
+        if (GAConfig.Misc.CeramicsIntegration && Loader.isModLoaded("ceramics"))
+            GAMetaItems.UNFIRED_PORCELAIN_BRICK = addItem(70, "ga_brick.unfired.porcelain");
         GAMetaItems.COMPRESSED_COKE_CLAY = addItem(6, "ga_compressed.coke.clay");
         GAMetaItems.FIRECLAY_BRICK = addItem(1, "ga_brick.fireclay").setUnificationData(OrePrefix.ingot, Materials.Fireclay);
         GAMetaItems.ADVANCED_CIRCUIT = addItem(2, "circuit.advanced.regular").setUnificationData(OrePrefix.circuit, Tier.Advanced);
         GAMetaItems.GOOD_CIRCUIT = addItem(3, "circuit.good.regular").setUnificationData(OrePrefix.circuit, Tier.Good);
         GAMetaItems.PETRI_DISH = addItem(4, "component.petri.dish");
-        GAMetaItems.COMPRESSED_CLAY = addItem(5, "ga_compressed.clay");
+        GAMetaItems.COMPRESSED_CLAY = addItem(5, "ga_compressed.clay").setUnificationData(OrePrefix.ingot, Materials.Clay);
         GAMetaItems.COMPRESSED_FIRECLAY = addItem(7, "ga_compressed.fireclay");
         GAMetaItems.CRYSTAL_COMPUTER = addItem(8, "computer.crystal").setUnificationData(OrePrefix.circuit, Tier.Ultimate);
         GAMetaItems.NANO_COMPUTER = addItem(9, "computer.nano").setUnificationData(OrePrefix.circuit, Tier.Elite);

@@ -1,6 +1,5 @@
 buildscript {
     repositories {
-        jcenter()
         maven { url = "https://files.minecraftforge.net/maven" }
     }
     dependencies {
@@ -66,6 +65,8 @@ dependencies {
     deobfCompile "slimeknights:TConstruct:${minecraft_version}-${tconstruct_version}"
     deobfCompile "gregtechce:gregtech:${minecraft_version}:${gt_version}"
     deobfCompile "team.chisel.ctm:CTM:MC${minecraft_version}-${ctm_version}"
+    deobfCompile "mcjty.theoneprobe:TheOneProbe-${short_version}:${short_version}-${top_version}"
+    deobfCompile "curse.maven:ceramics-250617:3158763"
     compile files("libs/GTCEBees-${minecraft_version}-${gtcebees_version}.jar")
 }
 

@@ -13,12 +13,23 @@ import gregtech.api.unification.material.type.*;
 import gregtech.api.unification.ore.OrePrefix;
 import gregtech.api.unification.stack.MaterialStack;
 import gregtech.api.unification.stack.UnificationEntry;
+import gregtech.api.util.GTUtility;
 import gregtech.common.items.MetaItems;
+import knightminer.ceramics.Ceramics;
+import knightminer.ceramics.blocks.BlockStained;
+import knightminer.ceramics.items.ItemClayUnfired;
+import net.minecraft.init.Items;
+import net.minecraft.item.ItemStack;
+import net.minecraft.util.Tuple;
+import net.minecraftforge.fml.common.Loader;
+import net.minecraftforge.oredict.OreDictionary;
 
-import static gregtech.api.unification.material.type.SolidMaterial.MatFlags.GENERATE_ROD;
+import java.util.ArrayList;
+import java.util.List;
 
 @IMaterialHandler.RegisterMaterialHandler
 public class GAMaterials implements IMaterialHandler {
+    public static final List<Tuple<String, ItemStack>> oreDictionaryRemovals = new ArrayList<>();
     public static FluidMaterial FishOil;
     public static FluidMaterial RawGrowthMedium;
     public static FluidMaterial SterilizedGrowthMedium;
@@ -56,8 +67,52 @@ public class GAMaterials implements IMaterialHandler {
     public static DustMaterial CupricOxide;
     public static DustMaterial Ferrosilite;
 
+    public static IngotMaterial CompressedIron;
+    public static IngotMaterial ToughAlloy;
+    public static IngotMaterial SkySteel;
+    public static IngotMaterial Ferroboron;
+
+    public static DustMaterial Porcelain;
+
+    public static void oreDictInit() {
+        oreDictionaryRemovals.add(new Tuple<>("ingotClay", new ItemStack(Items.CLAY_BALL)));
+        if (GAConfig.Misc.CeramicsIntegration && Loader.isModLoaded("ceramics")) {
+            oreDictionaryRemovals.add(new Tuple<>("plateClay", new ItemStack(Ceramics.clayUnfired, 1, ItemClayUnfired.UnfiredType.CLAY_PLATE.getMeta())));
+            oreDictionaryRemovals.add(new Tuple<>("plateClayRaw", new ItemStack(Ceramics.clayUnfired, 1, ItemClayUnfired.UnfiredType.CLAY_PLATE_RAW.getMeta())));
+        }
+
+        for (Tuple<String, ItemStack> entry : oreDictionaryRemovals) {
+            for (ItemStack contained : OreDictionary.getOres(entry.getFirst())) {
+                if (contained.getItem() == entry.getSecond().getItem() && contained.getMetadata() == entry.getSecond().getMetadata()) {
+                    OreDictionary.getOres(entry.getFirst()).remove(contained);
+                    break;
+                }
+            }
+        }
+        OreDictUnifier.registerOre(new ItemStack(Items.CLAY_BALL), OrePrefix.clump, Materials.Clay);
+        if (GAConfig.Misc.CeramicsIntegration && Loader.isModLoaded("ceramics")) {
+            OreDictUnifier.registerOre(new ItemStack(Ceramics.clayUnfired, 1, ItemClayUnfired.UnfiredType.CLAY_PLATE.getMeta()), OrePrefix.plate, Materials.Brick);
+            OreDictUnifier.registerOre(new ItemStack(Ceramics.clayUnfired, 1, ItemClayUnfired.UnfiredType.CLAY_PLATE_RAW.getMeta()), OrePrefix.plate, Materials.Clay);
+            OreDictUnifier.registerOre(new ItemStack(Ceramics.clayUnfired, 1, ItemClayUnfired.UnfiredType.PORCELAIN.getMeta()), OrePrefix.clump, GAMaterials.Porcelain);
+            OreDictUnifier.registerOre(new ItemStack(Ceramics.clayUnfired, 1, ItemClayUnfired.UnfiredType.PORCELAIN_BRICK.getMeta()), OrePrefix.ingot, GAMaterials.Porcelain);
+            OreDictUnifier.registerOre(new ItemStack(Ceramics.porcelain), OrePrefix.block, GAMaterials.Porcelain);
+            for (int i = 1; i <= 15; i++) {
+                OreDictUnifier.registerOre(new ItemStack(Ceramics.porcelain, 1, i), "blockPorcelainStained");
+                StringBuilder color = new StringBuilder(BlockStained.StainedColor.fromMeta(i).getName().toLowerCase());
+                if (color.toString().contains("_")) {
+                    int idx = color.toString().indexOf('_');
+                    color.deleteCharAt(idx);
+                    color.setCharAt(idx, Character.toUpperCase(color.charAt(idx)));
+                }
+                if (color.length() > 0)
+                    color.setCharAt(0, Character.toUpperCase(color.charAt(0)));
+                OreDictUnifier.registerOre(new ItemStack(Ceramics.porcelain, 1, i), "blockPorcelain" + color);
+            }
+        }
+    }
+
     public static void processGem(OrePrefix gemPrefix, GemMaterial material) {
-        if (material.hasFlag(GENERATE_ROD)) {
+        if (material.hasFlag(SolidMaterial.MatFlags.GENERATE_ROD)) {
             ModHandler.addShapedRecipe(String.format("stick_%s", material),
                     OreDictUnifier.get(OrePrefix.stick, material, 1),
                     "f ", " X",
@@ -80,6 +135,7 @@ public class GAMaterials implements IMaterialHandler {
 
     @Override
     public void onMaterialsInit() {
+        long STD_SOLID = DustMaterial.MatFlags.GENERATE_PLATE | SolidMaterial.MatFlags.GENERATE_ROD | IngotMaterial.MatFlags.GENERATE_BOLT_SCREW | SolidMaterial.MatFlags.GENERATE_LONG_ROD;
         long STD_METAL = DustMaterial.MatFlags.GENERATE_PLATE;
         long EXT_METAL = STD_METAL | gregtech.api.unification.material.type.SolidMaterial.MatFlags.GENERATE_ROD |
                 gregtech.api.unification.material.type.IngotMaterial.MatFlags.GENERATE_BOLT_SCREW;
@@ -125,6 +181,13 @@ public class GAMaterials implements IMaterialHandler {
         UVSuperconductorBase = new IngotMaterial(962, "uv_superconductor_base", 0xff0000, MaterialIconSet.SHINY, 3, ImmutableList.of(new MaterialStack(Materials.NaquadahAlloy, 6), new MaterialStack(Materials.Ultimet, 4), new MaterialStack(Materials.Americium, 2), new MaterialStack(Materials.Tritanium, 2)), EXT2_METAL | Material.MatFlags.DISABLE_DECOMPOSITION, null, 9000);
         UVSuperconductor = new BasicMaterial(961, "uv_superconductor", 0xff0000, MaterialIconSet.SHINY);
 
+        Ferroboron = new IngotMaterial(699, "ferroboron", 0x535353, MaterialIconSet.METALLIC, 2, ImmutableList.of(new MaterialStack(Materials.Steel, 1), new MaterialStack(Materials.Boron, 1)), STD_METAL);
+        CompressedIron = new IngotMaterial(700, "iron_compressed", 0x6f6f6f, MaterialIconSet.DULL, 2, ImmutableList.of(), STD_SOLID | EXT2_METAL, Element.Fe);
+        ToughAlloy = new IngotMaterial(701, "tough", 0x171221, MaterialIconSet.METALLIC, 2, ImmutableList.of(new MaterialStack(Ferroboron, 1), new MaterialStack(Materials.Lithium, 1)), STD_METAL);
+        SkySteel = new IngotMaterial(702, "sky_steel", 0x797979, MaterialIconSet.SHINY, 4, ImmutableList.of(), STD_SOLID, Element.Fe, 7.0F, 3.0f, 900, 1850);
+
+        Materials.Boron.addFlag(DustMaterial.MatFlags.SMELT_INTO_FLUID);
+
         MVSuperconductorBase.setCableProperties(128, 1, 2);
         HVSuperconductorBase.setCableProperties(512, 1, 2);
         EVSuperconductorBase.setCableProperties(2048, 2, 2);
@@ -134,6 +197,15 @@ public class GAMaterials implements IMaterialHandler {
         UVSuperconductorBase.setCableProperties(524288, 3, 2);
 
         Ultima.setCableProperties(524288, 3, 2);
+
+        Materials.Copper.addFlag(SolidMaterial.MatFlags.GENERATE_LONG_ROD);
+        Materials.Copper.addFlag(IngotMaterial.MatFlags.GENERATE_SPRING);
+        Materials.Bronze.addFlag(SolidMaterial.MatFlags.GENERATE_LONG_ROD);
+        Materials.Bronze.addFlag(IngotMaterial.MatFlags.GENERATE_SPRING);
+        Materials.Brass.addFlag(SolidMaterial.MatFlags.GENERATE_LONG_ROD);
+        Materials.Brass.addFlag(IngotMaterial.MatFlags.GENERATE_SPRING);
+
+        Materials.Iron.addFlag(IngotMaterial.MatFlags.GENERATE_SMALL_GEAR);
 
         Materials.NiobiumTitanium.setFluidPipeProperties(450, 2900, true);
         Enderium.setFluidPipeProperties(650, 1500, true);
@@ -168,18 +240,52 @@ public class GAMaterials implements IMaterialHandler {
         Materials.GreenSapphire.addFlag(DustMaterial.MatFlags.GENERATE_PLATE);
 
         Materials.Apatite.addFlag(SolidMaterial.MatFlags.GENERATE_ROD);
+        Materials.EnderEye.addFlag(SolidMaterial.MatFlags.GENERATE_ROD);
+        Materials.Plastic.addFlag(SolidMaterial.MatFlags.GENERATE_ROD);
 
         Materials.Rubber.addFlag(IngotMaterial.MatFlags.GENERATE_BOLT_SCREW);
         Materials.Apatite.addFlag(IngotMaterial.MatFlags.GENERATE_BOLT_SCREW);
 
         Materials.Tritanium.addFlag(SolidMaterial.MatFlags.GENERATE_FRAME);
 
+        Materials.Tantalum.addFlag(IngotMaterial.MatFlags.GENERATE_DENSE);
+
         Materials.NitroFuel.addFlag(Material.MatFlags.DISABLE_DECOMPOSITION);
         Materials.Ash.addFlag(Material.MatFlags.DISABLE_DECOMPOSITION);
+
+        Materials.Flint.addFlag(SolidMaterial.MatFlags.MORTAR_GRINDABLE);
+        Materials.Diamond.addFlag(MatFlags.GENERATE_CURVED_PLATE);
+
+        for (Material m : IngotMaterial.MATERIAL_REGISTRY)
+            if (m instanceof IngotMaterial)
+                m.addFlag(MatFlags.IS_INGOT_AVAILABLE);
+        Materials.Clay.addFlag(MatFlags.IS_INGOT_AVAILABLE);
+        Materials.Brick.addFlag(MatFlags.IS_INGOT_AVAILABLE);
+
+        if ((GAConfig.Misc.CeramicsIntegration && Loader.isModLoaded("ceramics")) || (Loader.isModLoaded("tconstruct")))
+            Materials.Clay.addFlag(DustMaterial.MatFlags.SMELT_INTO_FLUID);
+        if (GAConfig.Misc.CeramicsIntegration && Loader.isModLoaded("ceramics")) {
+            Porcelain = new DustMaterial(703, "porcelain", 0xdfe7e6, MaterialIconSet.FINE, 1, ImmutableList.of(new MaterialStack(Materials.Clay, 1), new MaterialStack(Materials.Bone, 1)), SolidMaterial.MatFlags.MORTAR_GRINDABLE | STD_METAL | Material.MatFlags.DECOMPOSITION_BY_CENTRIFUGING);
+            Materials.Clay.addFlag(DustMaterial.MatFlags.GENERATE_PLATE);
+            Materials.Brick.addFlag(DustMaterial.MatFlags.GENERATE_PLATE);
+            if (GAConfig.GT6.BendingCurvedPlates) {
+                Materials.Clay.addFlag(MatFlags.GENERATE_CURVED_PLATE);
+            }
+            Porcelain.addFlag(MatFlags.IS_INGOT_AVAILABLE);
+            if (GAConfig.GT6.PlateDoubleIngot)
+                Porcelain.addFlag(MatFlags.GENERATE_DOUBLE_INGOT);
+        }
 
         OrePrefix.gemChipped.setIgnored(LigniteCoke);
         OrePrefix.gemFlawed.setIgnored(LigniteCoke);
         OrePrefix.gemFlawless.setIgnored(LigniteCoke);
         OrePrefix.gemExquisite.setIgnored(LigniteCoke);
+    }
+
+    public static class MatFlags {
+        public static final long GENERATE_CURVED_PLATE = GTUtility.createFlag(50);
+        public static final long GENERATE_DOUBLE_INGOT = GTUtility.createFlag(51);
+        public static final long GENERATE_ROUND = GTUtility.createFlag(52);
+        public static final long IS_INGOT_AVAILABLE = GTUtility.createFlag(53);
     }
 }
