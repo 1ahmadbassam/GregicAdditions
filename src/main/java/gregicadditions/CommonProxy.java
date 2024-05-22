@@ -73,6 +73,8 @@ public class CommonProxy {
         // Initialize ore dictionary entries, removals can occur later no problem
         CeramicsIntegration.oreDictInit();
         GAMachineRecipeRemoval.init();
+        GARecipeGeneration.registerExtraComponents();
+        GARecipeGeneration.registerRecyclingRecipes();
         GARecipeAddition.init();
         GARecipeAddition.init2();
         GARecipeAddition.registerCokeOvenRecipes();
@@ -85,6 +87,7 @@ public class CommonProxy {
         MatterReplication.init();
         MachineCraftingRecipes.init();
         GeneratorFuels.init();
+
     }
 
     public void preInit() {
