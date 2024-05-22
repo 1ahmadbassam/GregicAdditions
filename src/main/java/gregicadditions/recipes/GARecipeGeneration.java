@@ -248,7 +248,10 @@ public class GARecipeGeneration {
                 if (input1Material.material instanceof FluidMaterial && input2Material.material instanceof FluidMaterial && outputMaterial.material instanceof FluidMaterial
                         && ((FluidMaterial) input1Material.material).getFluid(1) != null
                         && ((FluidMaterial) input2Material.material).getFluid(1) != null
-                        && ((FluidMaterial) outputMaterial.material).getFluid(1) != null) {
+                        && ((FluidMaterial) outputMaterial.material).getFluid(1) != null
+                        && (input1Material.material != input2Material.material)
+                        && (input1Material.material != outputMaterial.material)
+                        && (input2Material.material != outputMaterial.material)) {
                     if (getMixerRecipe(input1Material, input2Material) == null) {
                         int fluid1Amount = (int) (input1Material.amount * L / M);
                         int fluid2Amount = (int) (input2Material.amount * L / M);
