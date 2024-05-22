@@ -246,9 +246,9 @@ public class GARecipeGeneration {
                 MaterialStack input2Material = OreDictUnifier.getMaterial(input2.getIngredient().getMatchingStacks()[0]).copy(M * input2.getCount());
                 MaterialStack outputMaterial = OreDictUnifier.getMaterial(output).copy(M * output.getCount());
                 if (input1Material.material instanceof FluidMaterial && input2Material.material instanceof FluidMaterial && outputMaterial.material instanceof FluidMaterial
-                        && ((FluidMaterial) input1Material.material).getFluid(1) != null
-                        && ((FluidMaterial) input2Material.material).getFluid(1) != null
-                        && ((FluidMaterial) outputMaterial.material).getFluid(1) != null
+                        && ((FluidMaterial) input1Material.material).getMaterialFluid() != null
+                        && ((FluidMaterial) input2Material.material).getMaterialFluid() != null
+                        && ((FluidMaterial) outputMaterial.material).getMaterialFluid() != null
                         && (input1Material.material != input2Material.material)
                         && (input1Material.material != outputMaterial.material)
                         && (input2Material.material != outputMaterial.material)) {
