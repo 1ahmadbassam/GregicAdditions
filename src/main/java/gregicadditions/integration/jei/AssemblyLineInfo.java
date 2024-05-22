@@ -1,4 +1,4 @@
-package gregicadditions.jei;
+package gregicadditions.integration.jei;
 
 import gregicadditions.item.GAMetaBlocks;
 import gregicadditions.item.GAMultiblockCasing;

@@ -1,6 +1,7 @@
 package gregicadditions.recipes;
 
 import gregicadditions.GAConfig;
+import gregicadditions.GAUtils;
 import gregtech.api.items.metaitem.MetaItem;
 import gregtech.api.recipes.*;
 import gregtech.api.recipes.ingredients.IntCircuitIngredient;
@@ -26,8 +27,6 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fluids.FluidStack;
 
 import java.util.*;
-
-import static gregicadditions.recipes.GARecipeAddition.molds;
 
 public class GAMachineRecipeRemoval {
 
@@ -56,7 +55,7 @@ public class GAMachineRecipeRemoval {
             }
 
             //Remove old mold copying recipes
-            for (ItemStack mold : molds)
+            for (ItemStack mold : GAUtils.molds)
                 RecipeMaps.FORMING_PRESS_RECIPES.removeRecipe(RecipeMaps.FORMING_PRESS_RECIPES.findRecipe(22, Arrays.asList(MetaItems.SHAPE_EMPTY.getStackForm(), mold), Collections.emptyList(), Integer.MAX_VALUE));
 
             //Remove EV+ Cable Recipes

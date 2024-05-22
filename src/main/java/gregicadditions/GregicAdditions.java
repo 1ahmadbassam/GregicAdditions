@@ -3,9 +3,6 @@ package gregicadditions;
 import gregicadditions.item.GAMetaBlocks;
 import gregicadditions.item.GAMetaItems;
 import gregicadditions.machines.GATileEntities;
-import gregicadditions.recipes.GARecipeAddition;
-import gregicadditions.recipes.TinkersIntegration;
-import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.SidedProxy;
@@ -47,17 +44,12 @@ public class GregicAdditions {
 
     @EventHandler
     public void init(FMLInitializationEvent event) {
-        GAMaterials.oreDictInit();
         proxy.init();
     }
 
 
     @EventHandler
     public void postInit(FMLPostInitializationEvent event) {
-        // Late loaders for generation of recipes
-        GARecipeAddition.generatedRecipes();
-        if (Loader.isModLoaded("tconstruct") && GAConfig.Misc.TiCIntegration)
-            TinkersIntegration.preInit();
         proxy.postInit();
     }
 }

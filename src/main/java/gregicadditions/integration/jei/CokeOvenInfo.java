@@ -1,4 +1,4 @@
-package gregicadditions.jei;
+package gregicadditions.integration.jei;
 
 import com.google.common.collect.Lists;
 import gregicadditions.GAConfig;

@@ -1,4 +1,4 @@
-package gregicadditions.jei;
+package gregicadditions.integration.jei;
 
 import com.google.common.collect.Lists;
 import gregicadditions.machines.GATileEntities;
@@ -15,11 +15,11 @@ import net.minecraft.util.EnumFacing;
 
 import java.util.List;
 
-public class FusionReactor3Info extends MultiblockInfoPage {
+public class FusionReactor2Info extends MultiblockInfoPage {
 
     @Override
     public MultiblockControllerBase getController() {
-        return GATileEntities.FUSION_REACTOR[2];
+        return GATileEntities.FUSION_REACTOR[1];
     }
 
     @Override
@@ -40,19 +40,19 @@ public class FusionReactor3Info extends MultiblockInfoPage {
                 .aisle("####CC###CC####", "###nccSCSccn###", "####CC###CC####")
                 .aisle("######DCD######", "####CCcccCC####", "######UCU######")
                 .aisle("###############", "######NMN######", "###############")
-                .where('M', GATileEntities.FUSION_REACTOR[2], EnumFacing.SOUTH)
-                .where('C', MetaBlocks.MUTLIBLOCK_CASING.getState(BlockMultiblockCasing.MultiblockCasingType.FUSION_CASING_MK2))
+                .where('M', GATileEntities.FUSION_REACTOR[1], EnumFacing.SOUTH)
+                .where('C', MetaBlocks.MUTLIBLOCK_CASING.getState(BlockMultiblockCasing.MultiblockCasingType.FUSION_CASING))
                 .where('c', MetaBlocks.WIRE_COIL.getState(BlockWireCoil.CoilType.FUSION_COIL))
-                .where('W', MetaTileEntities.FLUID_EXPORT_HATCH[8], EnumFacing.WEST)
-                .where('E', MetaTileEntities.FLUID_EXPORT_HATCH[8], EnumFacing.EAST)
-                .where('S', MetaTileEntities.FLUID_EXPORT_HATCH[8], EnumFacing.SOUTH)
-                .where('N', MetaTileEntities.FLUID_EXPORT_HATCH[8], EnumFacing.NORTH)
-                .where('w', MetaTileEntities.ENERGY_INPUT_HATCH[8], EnumFacing.WEST)
-                .where('e', MetaTileEntities.ENERGY_INPUT_HATCH[8], EnumFacing.EAST)
-                .where('s', MetaTileEntities.ENERGY_INPUT_HATCH[8], EnumFacing.SOUTH)
-                .where('n', MetaTileEntities.ENERGY_INPUT_HATCH[8], EnumFacing.NORTH)
-                .where('U', MetaTileEntities.FLUID_IMPORT_HATCH[8], EnumFacing.UP)
-                .where('D', MetaTileEntities.FLUID_IMPORT_HATCH[8], EnumFacing.DOWN)
+                .where('W', MetaTileEntities.FLUID_EXPORT_HATCH[7], EnumFacing.WEST)
+                .where('E', MetaTileEntities.FLUID_EXPORT_HATCH[7], EnumFacing.EAST)
+                .where('S', MetaTileEntities.FLUID_EXPORT_HATCH[7], EnumFacing.SOUTH)
+                .where('N', MetaTileEntities.FLUID_EXPORT_HATCH[7], EnumFacing.NORTH)
+                .where('w', MetaTileEntities.ENERGY_INPUT_HATCH[7], EnumFacing.WEST)
+                .where('e', MetaTileEntities.ENERGY_INPUT_HATCH[7], EnumFacing.EAST)
+                .where('s', MetaTileEntities.ENERGY_INPUT_HATCH[7], EnumFacing.SOUTH)
+                .where('n', MetaTileEntities.ENERGY_INPUT_HATCH[7], EnumFacing.NORTH)
+                .where('U', MetaTileEntities.FLUID_IMPORT_HATCH[7], EnumFacing.UP)
+                .where('D', MetaTileEntities.FLUID_IMPORT_HATCH[7], EnumFacing.DOWN)
                 .where('#', Blocks.AIR.getDefaultState())
                 .build();
 
@@ -61,7 +61,7 @@ public class FusionReactor3Info extends MultiblockInfoPage {
 
     @Override
     public String[] getDescription() {
-        return new String[]{I18n.format("gregtech.multiblock.fusion_reactor_mk3.description")};
+        return new String[]{I18n.format("gregtech.multiblock.fusion_reactor_mk2.description")};
     }
 
 }

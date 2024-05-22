@@ -1,4 +1,4 @@
-package gregicadditions.jei;
+package gregicadditions.integration.jei;
 
 import gregtech.api.gui.GuiTextures;
 import gregtech.api.recipes.recipes.CokeOvenRecipe;

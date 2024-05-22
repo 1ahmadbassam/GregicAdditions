@@ -1,5 +1,6 @@
-package gregicadditions.recipes;
+package gregicadditions.integration;
 
+import gregicadditions.GAUtils;
 import gregicadditions.item.GAMetaItems;
 import gregtech.api.recipes.ModHandler;
 import gregtech.api.recipes.RecipeMaps;
@@ -13,11 +14,11 @@ import slimeknights.tconstruct.shared.TinkerCommons;
 import slimeknights.tconstruct.smeltery.TinkerSmeltery;
 
 public class TinkersIntegration {
-    public static void init() {
+    public static void recipes() {
         if (Materials.Steel.getMaterialFluid() == null) return;
         ModHandler.removeRecipes(MetaItems.SHAPE_EMPTY.getStackForm());
         TinkerRegistry.registerTableCasting(new CastingRecipe(MetaItems.SHAPE_EMPTY.getStackForm(), Materials.Steel.getMaterialFluid(), 576, 160));
-        for (ItemStack mold : GARecipeAddition.molds)
+        for (ItemStack mold : GAUtils.molds)
             ModHandler.removeRecipes(mold);
         ModHandler.addShapedRecipe("anvil_mold_form", GAMetaItems.MOLD_FORM_ANVIL.getStackForm(), "fx ", " M ", "   ", 'M', new ItemStack(TinkerSmeltery.cast));
         TinkerRegistry.registerTableCasting(new CastingRecipe(MetaItems.SHAPE_MOLD_ANVIL.getStackForm(), RecipeMatch.of(GAMetaItems.MOLD_FORM_ANVIL.getStackForm()), Materials.Steel.getMaterialFluid(), 576, true, false));
@@ -92,7 +93,7 @@ public class TinkersIntegration {
         TinkerRegistry.registerTableCasting(new CastingRecipe(MetaItems.SHAPE_EXTRUDER_WIRE.getStackForm(), RecipeMatch.of(GAMetaItems.SHAPE_WIRE.getStackForm()), Materials.Steel.getMaterialFluid(), 576, true, false));
     }
 
-    public static void preInit() {
+    public static void postInit() {
         ModHandler.removeFurnaceSmelting(TinkerCommons.grout);
         ModHandler.addShapelessRecipe("seared_brick", GAMetaItems.COMPRESSED_GROUT.getStackForm(), TinkerCommons.grout, MetaItems.WOODEN_FORM_BRICK);
         ModHandler.addShapedRecipe("eight_seared_brick", GAMetaItems.COMPRESSED_GROUT.getStackForm(8), "BBB", "BFB", "BBB", 'B', TinkerCommons.grout, 'F', MetaItems.WOODEN_FORM_BRICK);

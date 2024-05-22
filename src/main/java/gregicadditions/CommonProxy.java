@@ -1,5 +1,8 @@
 package gregicadditions;
 
+import gregicadditions.integration.CeramicsIntegration;
+import gregicadditions.integration.ForestryIntegration;
+import gregicadditions.integration.TinkersIntegration;
 import gregicadditions.item.GAMetaBlocks;
 import gregicadditions.item.GAMetaItems;
 import gregicadditions.recipes.*;
@@ -15,7 +18,6 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
-import net.minecraft.util.text.translation.LanguageMap;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.Loader;
@@ -27,28 +29,10 @@ import net.minecraftforge.registries.IForgeRegistry;
 import slimeknights.tconstruct.library.events.TinkerRegisterEvent;
 import slimeknights.tconstruct.shared.TinkerFluids;
 
-import java.io.ByteArrayInputStream;
 import java.util.function.Function;
 
 @Mod.EventBusSubscriber(modid = GregicAdditions.MODID)
 public class CommonProxy {
-    private static final String shapeSmelterTranslations = "recipemap.alloy_smelter.name=Shape Smelter" +
-            "\ngregtech.machine.steam_alloy_smelter_bronze.name=Steam Shape Smelter" +
-            "\ngregtech.machine.steam_alloy_smelter_steel.name=High Pressure Shape Smelter" +
-            "\ngregtech.machine.alloy_smelter.lv.name=Basic Shape Smelter" +
-            "\ngregtech.machine.alloy_smelter.mv.name=Advanced Shape Smelter" +
-            "\ngregtech.machine.alloy_smelter.hv.name=Advanced Shape Smelter II" +
-            "\ngregtech.machine.alloy_smelter.ev.name=Advanced Shape Smelter III" +
-            "\ngtadditions.machine.alloy_smelter.iv.name=Advanced Shape Smelter IV" +
-            "\ngtadditions.machine.alloy_smelter.luv.name=Advanced Shape Smelter V" +
-            "\ngtadditions.machine.alloy_smelter.zpm.name=Advanced Shape Smelter VI" +
-            "\ngtadditions.machine.alloy_smelter.uv.name=Advanced Shape Smelter VII";
-
-    private static void loadAlternateTranslations() {
-        if (GAConfig.Misc.disableAlloySmelterAlloying) {
-            LanguageMap.inject(new ByteArrayInputStream(shapeSmelterTranslations.getBytes()));
-        }
-    }
     @SubscribeEvent
     public static void registerBlocks(RegistryEvent.Register<Block> event) {
         IForgeRegistry<Block> registry = event.getRegistry();
@@ -87,34 +71,39 @@ public class CommonProxy {
     @SubscribeEvent(priority = EventPriority.LOWEST)
     public static void registerRecipesLate(RegistryEvent.Register<IRecipe> event) {
         // Initialize ore dictionary entries, removals can occur later no problem
-        GAMaterials.oreDictInit();
+        CeramicsIntegration.oreDictInit();
         GAMachineRecipeRemoval.init();
         GARecipeAddition.init();
         GARecipeAddition.init2();
         GARecipeAddition.registerCokeOvenRecipes();
         if (Loader.isModLoaded("forestry") && GAConfig.GT6.electrodes)
-            GARecipeAddition.forestrySupport();
+            ForestryIntegration.recipes();
         if (Loader.isModLoaded("tconstruct") && GAConfig.Misc.TiCIntegration)
-            TinkersIntegration.init();
+            TinkersIntegration.recipes();
         if (Loader.isModLoaded("ceramics") && GAConfig.Misc.CeramicsIntegration)
-            GARecipeAddition.recipeCeramicsIntegration();
+            CeramicsIntegration.recipes();
         MatterReplication.init();
         MachineCraftingRecipes.init();
         GeneratorFuels.init();
     }
 
-
     public void preInit() {
-        loadAlternateTranslations();
+        GARecipeGeneration.loadAlternateTranslations();
         if (GAConfig.Misc.CeramicsIntegration && GAConfig.Misc.TiCIntegration && Loader.isModLoaded("tconstruct") && Loader.isModLoaded("ceramics"))
             MinecraftForge.EVENT_BUS.register(new TinkerIntegrationEventBus());
     }
 
-    public void postInit() {}
-
     public void init() {
+        CeramicsIntegration.oreDictInit();
         if (Loader.isModLoaded("ceramics") && GAConfig.Misc.CeramicsIntegration)
-            GARecipeAddition.initCeramicsIntegration();
+            CeramicsIntegration.init();
+    }
+
+    public void postInit() {
+        // Late loaders for generation of recipes
+        GARecipeGeneration.init();
+        if (Loader.isModLoaded("tconstruct") && GAConfig.Misc.TiCIntegration)
+            TinkersIntegration.postInit();
     }
 
     public static class TinkerIntegrationEventBus {
