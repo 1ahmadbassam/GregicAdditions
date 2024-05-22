@@ -24,8 +24,10 @@ public class GAMetaItem extends MaterialMetaItem {
         if (GAConfig.Misc.cokeOvenEnable) {
             GAMetaItems.COKE_BRICK = addItem(0, "ga_brick.coke");
         }
-        if (GAConfig.Misc.CeramicsIntegration && Loader.isModLoaded("ceramics"))
+        if (GAConfig.Misc.CeramicsIntegration && Loader.isModLoaded("ceramics")) {
             GAMetaItems.UNFIRED_PORCELAIN_BRICK = addItem(70, "ga_brick.unfired.porcelain");
+            GAMetaItems.UNFIRED_PORCELAIN_PLATE = addItem(71, "ga_plate.unfired.porcelain");
+        }
         GAMetaItems.COMPRESSED_COKE_CLAY = addItem(6, "ga_compressed.coke.clay");
         GAMetaItems.FIRECLAY_BRICK = addItem(1, "ga_brick.fireclay").setUnificationData(OrePrefix.ingot, Materials.Fireclay);
         GAMetaItems.ADVANCED_CIRCUIT = addItem(2, "circuit.advanced.regular").setUnificationData(OrePrefix.circuit, Tier.Advanced);

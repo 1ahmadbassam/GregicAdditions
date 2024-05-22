@@ -25,16 +25,16 @@ public class GAEnums {
         EnumHelper.addEnum(OrePrefix.class, "plateCurved",
                 new Class[]{String.class, long.class, Material.class, MaterialIconType.class, long.class, Predicate.class},
                 "Curved Plate", GTValues.M, null, MaterialIconType.valueOf("plateCurved"), OrePrefix.Flags.ENABLE_UNIFICATION,
-                pred((mat) -> ((mat instanceof IngotMaterial && mat.hasFlag(DustMaterial.MatFlags.GENERATE_PLATE)) || (mat.hasFlag(DustMaterial.MatFlags.GENERATE_PLATE) && mat.hasFlag(GAMaterials.MatFlags.GENERATE_CURVED_PLATE)))));
+                pred((mat) -> ((mat instanceof IngotMaterial && mat.hasFlag(DustMaterial.MatFlags.GENERATE_PLATE)) || (mat.hasFlag(DustMaterial.MatFlags.GENERATE_PLATE) && mat.hasFlag(GAMaterials.GAMatFlags.GENERATE_CURVED_PLATE)))));
 
         EnumHelper.addEnum(OrePrefix.class, "ingotDouble",
                 new Class[]{String.class, long.class, Material.class, MaterialIconType.class, long.class, Predicate.class},
                 "Double Ingot", GTValues.M, null, MaterialIconType.valueOf("ingotDouble"), OrePrefix.Flags.ENABLE_UNIFICATION,
-                pred((mat) -> ((mat instanceof IngotMaterial && mat.hasFlag(DustMaterial.MatFlags.GENERATE_PLATE)) || (mat.hasFlag(GAMaterials.MatFlags.GENERATE_DOUBLE_INGOT) && mat.hasFlag(GAMaterials.MatFlags.IS_INGOT_AVAILABLE)))));
+                pred((mat) -> ((mat instanceof IngotMaterial && mat.hasFlag(DustMaterial.MatFlags.GENERATE_PLATE)) || (mat.hasFlag(GAMaterials.GAMatFlags.GENERATE_DOUBLE_INGOT) && mat.hasFlag(GAMaterials.GAMatFlags.IS_INGOT_AVAILABLE)))));
         EnumHelper.addEnum(OrePrefix.class, "round",
                 new Class[]{String.class, long.class, Material.class, MaterialIconType.class, long.class, Predicate.class},
                 "Round", GTValues.M, null, MaterialIconType.valueOf("round"), OrePrefix.Flags.ENABLE_UNIFICATION,
-                pred((mat) -> ((mat instanceof IngotMaterial && mat.hasFlag(DustMaterial.MatFlags.GENERATE_PLATE)) || (mat.hasFlag(GAMaterials.MatFlags.GENERATE_ROUND)))));
+                pred((mat) -> ((mat instanceof IngotMaterial && mat.hasFlag(DustMaterial.MatFlags.GENERATE_PLATE)) || (mat.hasFlag(GAMaterials.GAMatFlags.GENERATE_ROUND)))));
     }
 
     private static Predicate<Material> pred(Predicate<Material> in) {

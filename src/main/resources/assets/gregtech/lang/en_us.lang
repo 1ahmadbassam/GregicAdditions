@@ -27,6 +27,7 @@ metaitem.boule.naquadah.tooltip=Raw Circuit
 metaitem.ga_brick.coke.name=Coke Oven Brick
 metaitem.ga_brick.fireclay.name=Firebrick
 metaitem.ga_brick.unfired.porcelain.name=Unfired Porcelain Brick
+metaitem.ga_plate.unfired.porcelain.name=Unfired Porcelain Plate
 metaitem.circuit.advanced.regular.name=Advanced Electronic Circuit
 metaitem.circuit.good.regular.name=Good Integrated Circuit
 metaitem.circuit.good.regular.tooltip=A Good Circuit

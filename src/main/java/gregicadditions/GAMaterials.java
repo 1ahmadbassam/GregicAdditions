@@ -106,6 +106,10 @@ public class GAMaterials implements IMaterialHandler {
                 }
                 if (color.length() > 0)
                     color.setCharAt(0, Character.toUpperCase(color.charAt(0)));
+                if (color.toString().equals("Silver")) {
+                    color.setLength(0);
+                    color.append("LightGray");
+                }
                 OreDictUnifier.registerOre(new ItemStack(Ceramics.porcelain, 1, i), "blockPorcelain" + color);
             }
         }
@@ -254,13 +258,13 @@ public class GAMaterials implements IMaterialHandler {
         Materials.Ash.addFlag(Material.MatFlags.DISABLE_DECOMPOSITION);
 
         Materials.Flint.addFlag(SolidMaterial.MatFlags.MORTAR_GRINDABLE);
-        Materials.Diamond.addFlag(MatFlags.GENERATE_CURVED_PLATE);
+        Materials.Diamond.addFlag(GAMatFlags.GENERATE_CURVED_PLATE);
 
         for (Material m : IngotMaterial.MATERIAL_REGISTRY)
             if (m instanceof IngotMaterial)
-                m.addFlag(MatFlags.IS_INGOT_AVAILABLE);
-        Materials.Clay.addFlag(MatFlags.IS_INGOT_AVAILABLE);
-        Materials.Brick.addFlag(MatFlags.IS_INGOT_AVAILABLE);
+                m.addFlag(GAMatFlags.IS_INGOT_AVAILABLE);
+        Materials.Clay.addFlag(GAMatFlags.IS_INGOT_AVAILABLE);
+        Materials.Brick.addFlag(GAMatFlags.IS_INGOT_AVAILABLE);
 
         Materials.Coal.addFlag(DustMaterial.MatFlags.SMELT_INTO_FLUID);
         Materials.Diamond.addFlag(DustMaterial.MatFlags.SMELT_INTO_FLUID);
@@ -272,11 +276,11 @@ public class GAMaterials implements IMaterialHandler {
             Materials.Clay.addFlag(DustMaterial.MatFlags.GENERATE_PLATE);
             Materials.Brick.addFlag(DustMaterial.MatFlags.GENERATE_PLATE);
             if (GAConfig.GT6.BendingCurvedPlates) {
-                Materials.Clay.addFlag(MatFlags.GENERATE_CURVED_PLATE);
+                Materials.Clay.addFlag(GAMatFlags.GENERATE_CURVED_PLATE);
             }
-            Porcelain.addFlag(MatFlags.IS_INGOT_AVAILABLE);
+            Porcelain.addFlag(GAMatFlags.IS_INGOT_AVAILABLE);
             if (GAConfig.GT6.PlateDoubleIngot)
-                Porcelain.addFlag(MatFlags.GENERATE_DOUBLE_INGOT);
+                Porcelain.addFlag(GAMatFlags.GENERATE_DOUBLE_INGOT);
         }
 
         OrePrefix.gemChipped.setIgnored(LigniteCoke);
@@ -285,7 +289,7 @@ public class GAMaterials implements IMaterialHandler {
         OrePrefix.gemExquisite.setIgnored(LigniteCoke);
     }
 
-    public static class MatFlags {
+    public static class GAMatFlags {
         public static final long GENERATE_CURVED_PLATE = GTUtility.createFlag(50);
         public static final long GENERATE_DOUBLE_INGOT = GTUtility.createFlag(51);
         public static final long GENERATE_ROUND = GTUtility.createFlag(52);
