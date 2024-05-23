@@ -195,6 +195,10 @@ public class GAConfig {
         @Config.Name("Replace TNT in Implosion Compressor")
         public boolean replaceTNTImplosion = true;
 
+        @Config.Comment("Set this to false to disable extended fluid extractor recipes for most versions of items")
+        @Config.Name("Fluid extractor can extract fluid from a lot more variations")
+        public boolean fluidExtractDust = true;
+
         @Config.Comment("Set this to true to disable the Alloy Smelter alloying.\nUseful if using TConstruct's smeltery.")
         @Config.Name("Disable alloy smelter alloying")
         public boolean disableAlloySmelterAlloying = false;

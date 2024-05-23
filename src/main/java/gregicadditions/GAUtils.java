@@ -1,10 +1,14 @@
 package gregicadditions;
 
 import gregtech.api.unification.material.Materials;
+import gregtech.api.unification.ore.OrePrefix;
 import gregtech.api.unification.stack.MaterialStack;
 import gregtech.common.items.MetaItems;
 import knightminer.ceramics.blocks.BlockStained;
 import net.minecraft.item.ItemStack;
+
+import java.util.HashSet;
+import java.util.Set;
 
 public final class GAUtils {
 
@@ -91,6 +95,30 @@ public final class GAUtils {
             new MaterialStack(Materials.Lazurite, 1),
             new MaterialStack(Materials.Sodalite, 1)
     };
+
+    public static final Set<OrePrefix> blastPrefix = new HashSet<OrePrefix>(){{
+        add(OrePrefix.dust);
+        add(OrePrefix.dustSmall);
+        add(OrePrefix.dustTiny);
+        add(OrePrefix.dustImpure);
+        add(OrePrefix.dustPure);
+        add(OrePrefix.crushed);
+        add(OrePrefix.crushedCentrifuged);
+        add(OrePrefix.crushedPurified);
+        add(OrePrefix.ingotHot);
+    }};
+
+    public static final Set<OrePrefix> blacklistPrefix = new HashSet<OrePrefix>(){{
+        add(OrePrefix.ore);
+        add(OrePrefix.oreBlackgranite);
+        add(OrePrefix.oreMarble);
+        add(OrePrefix.oreRedgranite);
+        add(OrePrefix.oreGravel);
+        add(OrePrefix.oreNetherrack);
+        add(OrePrefix.oreSand);
+        add(OrePrefix.oreBasalt);
+        add(OrePrefix.oreEndstone);
+    }};
 
     private GAUtils() {
     }

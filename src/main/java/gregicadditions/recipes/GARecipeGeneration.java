@@ -275,6 +275,32 @@ public class GARecipeGeneration {
                 }
             }
         }
+
+        if (GAConfig.Misc.fluidExtractDust) {
+            for (Material mat : Material.MATERIAL_REGISTRY) {
+                if (mat != Materials.Glass && mat != Materials.Ice && mat instanceof FluidMaterial && ((FluidMaterial) mat).getMaterialFluid() != null) {
+                    for (OrePrefix prefix : OrePrefix.values()) {
+                        if (!OreDictUnifier.get(prefix, mat).isEmpty()
+                                && !(GAUtils.blacklistPrefix.contains(prefix))
+                                && !(mat instanceof IngotMaterial && ((IngotMaterial) mat).blastFurnaceTemperature > 0 && GAUtils.blastPrefix.contains(prefix))
+                                && prefix.getMaterialAmount(mat) >= M/9) {
+                            int voltageMultiplier = 1;
+                            if (mat instanceof IngotMaterial) {
+                                int blastFurnaceTemperature = ((IngotMaterial) mat).blastFurnaceTemperature;
+                                voltageMultiplier = blastFurnaceTemperature == 0 ? 1 : blastFurnaceTemperature > 2000 ? 16 : 4;
+                            }
+                            if (RecipeMaps.FLUID_EXTRACTION_RECIPES.findRecipe(Integer.MAX_VALUE, Collections.singletonList(OreDictUnifier.get(prefix, mat)), Collections.emptyList(), Integer.MAX_VALUE) == null)
+                                RecipeMaps.FLUID_EXTRACTION_RECIPES.recipeBuilder()
+                                        .input(prefix, mat)
+                                        .fluidOutputs(((FluidMaterial) mat).getFluid((int) (prefix.getMaterialAmount(mat) * L / M)))
+                                        .duration((int) Math.max(1L, prefix.getMaterialAmount(mat) * 80 / M))
+                                        .EUt(32 * voltageMultiplier)
+                                        .buildAndRegister();
+                        }
+                    }
+                }
+            }
+        }
     }
 
     @Nullable
