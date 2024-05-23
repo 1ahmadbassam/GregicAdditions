@@ -220,8 +220,9 @@ public class GAMaterials implements IMaterialHandler {
         if ((GAConfig.Misc.CeramicsIntegration && Loader.isModLoaded("ceramics")) || (Loader.isModLoaded("tconstruct")))
             Materials.Clay.addFlag(DustMaterial.MatFlags.SMELT_INTO_FLUID);
         if (GAConfig.Misc.CeramicsIntegration && Loader.isModLoaded("ceramics")) {
-            Porcelain = new DustMaterial(703, "porcelain", 0xdfe7e6, MaterialIconSet.FINE, 1, ImmutableList.of(new MaterialStack(Materials.Clay, 1), new MaterialStack(Materials.Bone, 1)), SolidMaterial.MatFlags.MORTAR_GRINDABLE | STD_METAL | Material.MatFlags.DECOMPOSITION_BY_CENTRIFUGING);
+            Porcelain = new DustMaterial(703, "porcelain", 0xdfe7e6, MaterialIconSet.FINE, 1, ImmutableList.of(new MaterialStack(Materials.Clay, 1), new MaterialStack(Materials.Bone, 1)), SolidMaterial.MatFlags.MORTAR_GRINDABLE | STD_METAL | Material.MatFlags.DECOMPOSITION_BY_CENTRIFUGING | DustMaterial.MatFlags.EXCLUDE_BLOCK_CRAFTING_BY_HAND_RECIPES | DustMaterial.MatFlags.EXCLUDE_BLOCK_CRAFTING_RECIPES);
             Materials.Clay.addFlag(DustMaterial.MatFlags.GENERATE_PLATE);
+            Materials.Clay.addFlag(SolidMaterial.MatFlags.MORTAR_GRINDABLE);
             Materials.Brick.addFlag(DustMaterial.MatFlags.GENERATE_PLATE);
             if (GAConfig.GT6.BendingCurvedPlates) {
                 Materials.Clay.addFlag(GAMatFlags.GENERATE_CURVED_PLATE);

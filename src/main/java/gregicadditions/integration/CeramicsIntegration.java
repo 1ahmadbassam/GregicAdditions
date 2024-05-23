@@ -76,13 +76,13 @@ public class CeramicsIntegration {
     }
 
     public static void recipes() {
-        ModHandler.addShapelessRecipe("unfired_porcelain_brick_shapeless", GAMetaItems.UNFIRED_PORCELAIN_BRICK.getStackForm(), "clayPorcelain", MetaItems.WOODEN_FORM_BRICK);
-        ModHandler.addShapedRecipe("unfired_porcelain_brick", GAMetaItems.UNFIRED_PORCELAIN_BRICK.getStackForm(8), "PPP", "PFP", "PPP", 'P', "clayPorcelain", 'F', MetaItems.WOODEN_FORM_BRICK);
+        ModHandler.addShapelessRecipe("unfired_porcelain_brick_shapeless", GAMetaItems.UNFIRED_PORCELAIN_BRICK.getStackForm(), new UnificationEntry(OrePrefix.valueOf("clay"), GAMaterials.Porcelain), MetaItems.WOODEN_FORM_BRICK);
+        ModHandler.addShapedRecipe("unfired_porcelain_brick", GAMetaItems.UNFIRED_PORCELAIN_BRICK.getStackForm(8), "PPP", "PFP", "PPP", 'P', new UnificationEntry(OrePrefix.valueOf("clay"), GAMaterials.Porcelain), 'F', MetaItems.WOODEN_FORM_BRICK);
 
-        ModHandler.addShapelessRecipe("unfired_porcelain_plate_shapeless", GAMetaItems.UNFIRED_PORCELAIN_PLATE.getStackForm(), 'h', "clayPorcelain");
-        ModHandler.addShapedRecipe("unfired_porcelain_plate", GAMetaItems.UNFIRED_PORCELAIN_PLATE.getStackForm(), "P", "P", 'P', "clayPorcelain");
+        ModHandler.addShapelessRecipe("unfired_porcelain_plate_shapeless", GAMetaItems.UNFIRED_PORCELAIN_PLATE.getStackForm(), 'h', new UnificationEntry(OrePrefix.valueOf("clay"), GAMaterials.Porcelain));
+        ModHandler.addShapedRecipe("unfired_porcelain_plate", GAMetaItems.UNFIRED_PORCELAIN_PLATE.getStackForm(), "P", "P", 'P', new UnificationEntry(OrePrefix.valueOf("clay"), GAMaterials.Porcelain));
 
-        RecipeMaps.ALLOY_SMELTER_RECIPES.recipeBuilder().input("clayPorcelain", 1).notConsumable(MetaItems.SHAPE_MOLD_INGOT).output(OrePrefix.ingot, GAMaterials.Porcelain).duration(200).EUt(2).buildAndRegister();
+        RecipeMaps.ALLOY_SMELTER_RECIPES.recipeBuilder().input(OrePrefix.valueOf("clay"), GAMaterials.Porcelain).notConsumable(MetaItems.SHAPE_MOLD_INGOT).output(OrePrefix.ingot, GAMaterials.Porcelain).duration(200).EUt(2).buildAndRegister();
         RecipeMaps.MACERATOR_RECIPES.recipeBuilder().input(OrePrefix.ingot, GAMaterials.Porcelain).output(OrePrefix.dust, GAMaterials.Porcelain).duration(30).EUt(8).buildAndRegister();
         ModHandler.removeRecipeByName(new ResourceLocation("ceramics:decoration/unfired_porcelain_quartz"));
         ModHandler.removeRecipeByName(new ResourceLocation("ceramics:decoration/unfired_porcelain_bone_meal"));
@@ -97,9 +97,9 @@ public class CeramicsIntegration {
         ModHandler.addShapedRecipe("clay_bucket", new ItemStack(Ceramics.clayUnfired, 1, ItemClayUnfired.UnfiredType.BUCKET.getMeta()), "   ", "P P", " P ", 'P', new UnificationEntry(OrePrefix.plate, Materials.Clay));
         ModHandler.removeRecipes(new ItemStack(Ceramics.clayUnfired, 1, ItemClayUnfired.UnfiredType.SHEARS.getMeta()));
         ModHandler.addShapedRecipe("clay_shears", new ItemStack(Ceramics.clayUnfired, 1, ItemClayUnfired.UnfiredType.SHEARS.getMeta()), "hP", "Pf", 'P', new UnificationEntry(OrePrefix.plate, Materials.Clay));
-        ModHandler.addShapelessRecipe("porcelain_to_dust", OreDictUnifier.get(OrePrefix.dust, GAMaterials.Porcelain), 'm', "clayPorcelain");
+        ModHandler.addShapelessRecipe("porcelain_to_dust", OreDictUnifier.get(OrePrefix.dust, GAMaterials.Porcelain), 'm', new UnificationEntry(OrePrefix.valueOf("clay"), GAMaterials.Porcelain));
 
-        RecipeMaps.ALLOY_SMELTER_RECIPES.recipeBuilder().input("clayPorcelain", 4).notConsumable(MetaItems.SHAPE_MOLD_BLOCK).output(OrePrefix.block, GAMaterials.Porcelain).EUt(2).duration(600).buildAndRegister();
+        RecipeMaps.ALLOY_SMELTER_RECIPES.recipeBuilder().input(OrePrefix.valueOf("clay"), GAMaterials.Porcelain, 4).notConsumable(MetaItems.SHAPE_MOLD_BLOCK).output(OrePrefix.block, GAMaterials.Porcelain).EUt(2).duration(600).buildAndRegister();
         RecipeMaps.MIXER_RECIPES.recipeBuilder().input(OrePrefix.dust, Materials.Clay).input(OrePrefix.dust, Materials.Bone).output(OrePrefix.dust, GAMaterials.Porcelain).EUt(8).duration(30).buildAndRegister();
         RecipeMaps.MACERATOR_RECIPES.recipeBuilder().duration(120).EUt(8).inputs(new ItemStack(Ceramics.clayHard)).output(OrePrefix.dust, GAMaterials.Porcelain, 4).buildAndRegister();
         RecipeMaps.MACERATOR_RECIPES.recipeBuilder().duration(120).EUt(8).inputs(new ItemStack(Ceramics.clayHard, 1, 2)).output(OrePrefix.dust, GAMaterials.Porcelain, 4).buildAndRegister();
@@ -136,10 +136,10 @@ public class CeramicsIntegration {
             ModHandler.removeRecipes(new ItemStack(Ceramics.clayLeggingsRaw));
             ModHandler.removeRecipes(new ItemStack(Ceramics.clayBootsRaw));
 
-            ModHandler.addShapedRecipe("clay_helmet", new ItemStack(Ceramics.clayHelmetRaw), "PPP", "ChC", 'P', new UnificationEntry(OrePrefix.plate, Materials.Clay), 'C', OreDictUnifier.get(OrePrefix.valueOf("plateCurved"), Materials.Clay));
-            ModHandler.addShapedRecipe("clay_chestplate", new ItemStack(Ceramics.clayChestplateRaw), "PhP", "CPC", "CPC", 'P', new UnificationEntry(OrePrefix.plate, Materials.Clay), 'C', OreDictUnifier.get(OrePrefix.valueOf("plateCurved"), Materials.Clay));
-            ModHandler.addShapedRecipe("clay_leggings", new ItemStack(Ceramics.clayLeggingsRaw), "PCP", "ChC", "C C", 'P', new UnificationEntry(OrePrefix.plate, Materials.Clay), 'C', OreDictUnifier.get(OrePrefix.valueOf("plateCurved"), Materials.Clay));
-            ModHandler.addShapedRecipe("clay_boots", new ItemStack(Ceramics.clayBootsRaw), "P P", "ChC", 'P', new UnificationEntry(OrePrefix.plate, Materials.Clay), 'C', OreDictUnifier.get(OrePrefix.valueOf("plateCurved"), Materials.Clay));
+            ModHandler.addShapedRecipe("clay_helmet", new ItemStack(Ceramics.clayHelmetRaw), "PPP", "ChC", 'P', new UnificationEntry(OrePrefix.plate, Materials.Clay), 'C', new UnificationEntry(OrePrefix.valueOf("plateCurved"), Materials.Clay));
+            ModHandler.addShapedRecipe("clay_chestplate", new ItemStack(Ceramics.clayChestplateRaw), "PhP", "CPC", "CPC", 'P', new UnificationEntry(OrePrefix.plate, Materials.Clay), 'C', new UnificationEntry(OrePrefix.valueOf("plateCurved"), Materials.Clay));
+            ModHandler.addShapedRecipe("clay_leggings", new ItemStack(Ceramics.clayLeggingsRaw), "PCP", "ChC", "C C", 'P', new UnificationEntry(OrePrefix.plate, Materials.Clay), 'C', new UnificationEntry(OrePrefix.valueOf("plateCurved"), Materials.Clay));
+            ModHandler.addShapedRecipe("clay_boots", new ItemStack(Ceramics.clayBootsRaw), "P P", "ChC", 'P', new UnificationEntry(OrePrefix.plate, Materials.Clay), 'C', new UnificationEntry(OrePrefix.valueOf("plateCurved"), Materials.Clay));
 
             ModHandler.removeRecipes(new ItemStack(Ceramics.clayHelmet));
             ModHandler.removeRecipes(new ItemStack(Ceramics.clayChestplate));
@@ -150,9 +150,9 @@ public class CeramicsIntegration {
             ModHandler.addShapedRecipe("porcelain_plate", OreDictUnifier.get(OrePrefix.plate, GAMaterials.Porcelain), "h", "I", "I", 'I', new UnificationEntry(OrePrefix.ingot, GAMaterials.Porcelain));
         }
         ModHandler.removeRecipes(new ItemStack(Ceramics.clayUnfired, 1, ItemClayUnfired.UnfiredType.FAUCET.getMeta()));
-        ModHandler.addShapedRecipe("unfired_faucet", new ItemStack(Ceramics.clayUnfired, 1, ItemClayUnfired.UnfiredType.FAUCET.getMeta()), "   ", "ChC", " P ", 'C', "clayPorcelain", 'P', GAMetaItems.UNFIRED_PORCELAIN_PLATE.getStackForm());
+        ModHandler.addShapedRecipe("unfired_faucet", new ItemStack(Ceramics.clayUnfired, 1, ItemClayUnfired.UnfiredType.FAUCET.getMeta()), "   ", "ChC", " P ", 'C', new UnificationEntry(OrePrefix.valueOf("clay"), GAMaterials.Porcelain), 'P', GAMetaItems.UNFIRED_PORCELAIN_PLATE.getStackForm());
         ModHandler.removeRecipes(new ItemStack(Ceramics.clayUnfired, 3, ItemClayUnfired.UnfiredType.CHANNEL.getMeta()));
-        ModHandler.addShapedRecipe("unfired_channel", new ItemStack(Ceramics.clayUnfired, 3, ItemClayUnfired.UnfiredType.CHANNEL.getMeta()), "   ", "ChC", "PPP", 'C', "clayPorcelain", 'P', GAMetaItems.UNFIRED_PORCELAIN_PLATE.getStackForm());
+        ModHandler.addShapedRecipe("unfired_channel", new ItemStack(Ceramics.clayUnfired, 3, ItemClayUnfired.UnfiredType.CHANNEL.getMeta()), "   ", "ChC", "PPP", 'C', new UnificationEntry(OrePrefix.valueOf("clay"), GAMaterials.Porcelain), 'P', GAMetaItems.UNFIRED_PORCELAIN_PLATE.getStackForm());
 
         ModHandler.removeRecipes(new ItemStack(Ceramics.clayBarrelUnfired));
         ModHandler.addShapedRecipe("unfired_barrel_clay", new ItemStack(Ceramics.clayBarrelUnfired), "P P", "PhP", " P ", 'P', new UnificationEntry(OrePrefix.plate, Materials.Clay));
