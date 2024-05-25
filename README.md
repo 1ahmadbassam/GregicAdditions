@@ -2,7 +2,11 @@
 A mod intended to make [GregTech Community Edition](https://github.com/GregTechCE/GregTech) harder and more realistic by incorporating
 GT5U and GT6 features.
 
+## [CurseForge Release](https://legacy.curseforge.com/minecraft/mc-mods/gregicadditions-unofficial/)
+
 ## Description
+
+**If you find a bug, [please let me know](https://github.com/1ahmadbassam/GregicAdditionsUnofficial/issues)!**
 
 This mod is a fork of the original GregicAdditions by TheLimePixel, which was originally
 intended to update the mod to end-of-life GTCE 1.17, but is now focusing on adding more integrations
@@ -13,10 +17,10 @@ Most ideas of this mod are implemented in the popular modpack [GregBlock](https:
 Some of the design features of this mod are most fitting in GregBlock; however, this mod is fully
 standalone and configuration options for most options are provided.
 
-In case you are thinking that most of the features of this mod are in GTCE, then you may be thinking of [GTCEu](https://github.com/GTCEu/GTCEu). 
+In case you are thinking that most of the features of this mod are in GTCE, then you may be thinking of [GTCEu](https://github.com/GregTechCEu/GregTech). 
 Because of the aforementioned reason, GregBlock and its mods are currently stuck on GTCE (which includes this mod).
 
-For enhanced Tinker's Construct integration, check out [GregsConstruct](https://github.com/1ahmadbassam/GregsConstruct).
+For enhanced Tinker's Construct integration, check out [Greg's Construct Unofficial](https://github.com/1ahmadbassam/GregsConstructUnofficial).
 
 For extended Forestry integration, check out [GTCEBees](https://github.com/1ahmadbassam/GTCEBees).
 
