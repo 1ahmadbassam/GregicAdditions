@@ -20,7 +20,7 @@ standalone and configuration options for most options are provided.
 In case you are thinking that most of the features of this mod are in GTCE, then you may be thinking of [GTCEu](https://github.com/GregTechCEu/GregTech). 
 Because of the aforementioned reason, GregBlock and its mods are currently stuck on GTCE (which includes this mod).
 
-For enhanced Tinker's Construct integration, check out [Greg's Construct Unofficial](https://github.com/1ahmadbassam/GregsConstructUnofficial).
+For GTCE Tinker's Construct integration, check out [Greg's Construct Unofficial](https://github.com/1ahmadbassam/GregsConstructUnofficial).
 
 For extended Forestry integration, check out [GTCEBees](https://github.com/1ahmadbassam/GTCEBees).
 
@@ -37,9 +37,8 @@ For extended Forestry integration, check out [GTCEBees](https://github.com/1ahma
 10. Electric [rock breakers](https://reddit.com/r/feedthebeast/comments/bi2h8s/) which replace cobblestone generators and generate various stone types based on the redstone signal they receive.  
 11. Steam Mixer (available in both low and high pressure versions).
 12. A LOT of recipe changes to Minecraft and plain GTCE.
-13. Tinker's Construct integration: Molds and extruder shapes are made in a Tinker Smeltery.
-14. Forestry integration: Electrodes, which are used to make Forestry Electron tubes.
-15. Full Ceramics integration, and extended clay-brick-porcelain crafts.
+13. Forestry integration: Electrodes, which are used to make Forestry Electron tubes.
+14. Full Ceramics integration, and extended clay-brick-porcelain crafts.
 
 ### License
 This project is licensed under the [GNU Lesser General Public License v3.0](https://www.gnu.org/licenses/lgpl-3.0.en.html).
