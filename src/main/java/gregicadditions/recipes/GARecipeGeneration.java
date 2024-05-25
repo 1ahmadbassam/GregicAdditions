@@ -30,6 +30,7 @@ import net.minecraft.item.crafting.CraftingManager;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.translation.LanguageMap;
+import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.oredict.OreDictionary;
 
 import javax.annotation.Nonnull;
@@ -299,6 +300,13 @@ public class GARecipeGeneration {
                     }
                 }
             }
+            if ((GAConfig.Misc.CeramicsIntegration && Loader.isModLoaded("ceramics")) || (Loader.isModLoaded("tconstruct")))
+                RecipeMaps.FLUID_EXTRACTION_RECIPES.recipeBuilder()
+                        .input("clay", 1)
+                        .fluidOutputs(Materials.Clay.getFluid(144))
+                        .duration(80)
+                        .EUt(32)
+                        .buildAndRegister();
         }
     }
 
