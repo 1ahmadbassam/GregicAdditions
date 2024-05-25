@@ -36,13 +36,23 @@ import net.minecraft.init.Items;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.Tuple;
 import net.minecraftforge.oredict.OreDictionary;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
 public class GARecipeAddition {
+    public static final List<Tuple<String, ItemStack>> oreDictionaryRemovals = new ArrayList<>();
+
+    public static void oreDictInit() {
+        oreDictionaryRemovals.add(new Tuple<>("ingotClay", new ItemStack(Items.CLAY_BALL)));
+        GAUtils.oreDictRemoval(oreDictionaryRemovals);
+        OreDictUnifier.registerOre(new ItemStack(Items.CLAY_BALL), OrePrefix.clump, Materials.Clay);
+    }
+
     public static void registerCokeOvenRecipes() {
         if (GAConfig.Misc.cokeOvenEnable) {
             CokeOvenRecipeBuilder.start().duration(1800).input(OrePrefix.log, Materials.Wood).output(new ItemStack(Items.COAL, 1, 1)).fluidOutput(Materials.Creosote.getFluid(500)).buildAndRegister();

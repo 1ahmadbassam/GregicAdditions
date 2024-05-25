@@ -16,11 +16,9 @@ import gregtech.api.unification.stack.UnificationEntry;
 import gregtech.common.items.MetaItems;
 import knightminer.ceramics.Ceramics;
 import knightminer.ceramics.items.ItemClayUnfired;
-import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.Tuple;
-import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.oredict.OreDictionary;
 
@@ -32,32 +30,20 @@ public class CeramicsIntegration {
     public static final List<Tuple<String, ItemStack>> oreDictionaryRemovals = new ArrayList<>();
 
     public static void oreDictInit() {
-        oreDictionaryRemovals.add(new Tuple<>("ingotClay", new ItemStack(Items.CLAY_BALL)));
-        if (GAConfig.Misc.CeramicsIntegration && Loader.isModLoaded("ceramics")) {
-            oreDictionaryRemovals.add(new Tuple<>("plateClay", new ItemStack(Ceramics.clayUnfired, 1, ItemClayUnfired.UnfiredType.CLAY_PLATE.getMeta())));
-            oreDictionaryRemovals.add(new Tuple<>("plateClayRaw", new ItemStack(Ceramics.clayUnfired, 1, ItemClayUnfired.UnfiredType.CLAY_PLATE_RAW.getMeta())));
-        }
+        oreDictionaryRemovals.add(new Tuple<>("plateClay", new ItemStack(Ceramics.clayUnfired, 1, ItemClayUnfired.UnfiredType.CLAY_PLATE.getMeta())));
+        oreDictionaryRemovals.add(new Tuple<>("plateClayRaw", new ItemStack(Ceramics.clayUnfired, 1, ItemClayUnfired.UnfiredType.CLAY_PLATE_RAW.getMeta())));
 
-        for (Tuple<String, ItemStack> entry : oreDictionaryRemovals) {
-            for (ItemStack contained : OreDictionary.getOres(entry.getFirst())) {
-                if (contained.getItem() == entry.getSecond().getItem() && contained.getMetadata() == entry.getSecond().getMetadata()) {
-                    OreDictionary.getOres(entry.getFirst()).remove(contained);
-                    break;
-                }
-            }
-        }
-        OreDictUnifier.registerOre(new ItemStack(Items.CLAY_BALL), OrePrefix.clump, Materials.Clay);
-        if (GAConfig.Misc.CeramicsIntegration && Loader.isModLoaded("ceramics")) {
-            OreDictUnifier.registerOre(new ItemStack(Ceramics.clayUnfired, 1, ItemClayUnfired.UnfiredType.CLAY_PLATE.getMeta()), OrePrefix.plate, Materials.Brick);
-            OreDictUnifier.registerOre(new ItemStack(Ceramics.clayUnfired, 1, ItemClayUnfired.UnfiredType.CLAY_PLATE_RAW.getMeta()), OrePrefix.plate, Materials.Clay);
-            OreDictUnifier.registerOre(new ItemStack(Ceramics.clayUnfired, 1, ItemClayUnfired.UnfiredType.PORCELAIN.getMeta()), OrePrefix.clump, GAMaterials.Porcelain);
-            OreDictUnifier.registerOre(new ItemStack(Ceramics.clayUnfired, 1, ItemClayUnfired.UnfiredType.PORCELAIN_BRICK.getMeta()), OrePrefix.ingot, GAMaterials.Porcelain);
-            OreDictUnifier.registerOre(new ItemStack(Ceramics.porcelain), OrePrefix.block, GAMaterials.Porcelain);
-            for (int i = 1; i <= 15; i++) {
-                OreDictUnifier.registerOre(new ItemStack(Ceramics.porcelain, 1, i), "blockPorcelainStained");
-                String color = GAUtils.getColorFromMeta(i);
-                OreDictUnifier.registerOre(new ItemStack(Ceramics.porcelain, 1, i), "blockPorcelain" + color);
-            }
+        GAUtils.oreDictRemoval(oreDictionaryRemovals);
+
+        OreDictUnifier.registerOre(new ItemStack(Ceramics.clayUnfired, 1, ItemClayUnfired.UnfiredType.CLAY_PLATE.getMeta()), OrePrefix.plate, Materials.Brick);
+        OreDictUnifier.registerOre(new ItemStack(Ceramics.clayUnfired, 1, ItemClayUnfired.UnfiredType.CLAY_PLATE_RAW.getMeta()), OrePrefix.plate, Materials.Clay);
+        OreDictUnifier.registerOre(new ItemStack(Ceramics.clayUnfired, 1, ItemClayUnfired.UnfiredType.PORCELAIN.getMeta()), OrePrefix.clump, GAMaterials.Porcelain);
+        OreDictUnifier.registerOre(new ItemStack(Ceramics.clayUnfired, 1, ItemClayUnfired.UnfiredType.PORCELAIN_BRICK.getMeta()), OrePrefix.ingot, GAMaterials.Porcelain);
+        OreDictUnifier.registerOre(new ItemStack(Ceramics.porcelain), OrePrefix.block, GAMaterials.Porcelain);
+        for (int i = 1; i <= 15; i++) {
+            OreDictUnifier.registerOre(new ItemStack(Ceramics.porcelain, 1, i), "blockPorcelainStained");
+            String color = GAUtils.getColorFromMeta(i);
+            OreDictUnifier.registerOre(new ItemStack(Ceramics.porcelain, 1, i), "blockPorcelain" + color);
         }
     }
 

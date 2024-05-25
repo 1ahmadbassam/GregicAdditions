@@ -6,8 +6,11 @@ import gregtech.api.unification.stack.MaterialStack;
 import gregtech.common.items.MetaItems;
 import knightminer.ceramics.blocks.BlockStained;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.Tuple;
+import net.minecraftforge.oredict.OreDictionary;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 public final class GAUtils {
@@ -137,5 +140,16 @@ public final class GAUtils {
             color.append("LightGray");
         }
         return color.toString();
+    }
+
+    public static void oreDictRemoval(List<Tuple<String, ItemStack>> oreDictionaryRemovals) {
+        for (Tuple<String, ItemStack> entry : oreDictionaryRemovals) {
+            for (ItemStack contained : OreDictionary.getOres(entry.getFirst())) {
+                if (contained.getItem() == entry.getSecond().getItem() && contained.getMetadata() == entry.getSecond().getMetadata()) {
+                    OreDictionary.getOres(entry.getFirst()).remove(contained);
+                    break;
+                }
+            }
+        }
     }
 }

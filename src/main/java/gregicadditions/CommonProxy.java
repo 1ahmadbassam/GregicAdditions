@@ -71,7 +71,7 @@ public class CommonProxy {
     @SubscribeEvent(priority = EventPriority.LOWEST)
     public static void registerRecipesLate(RegistryEvent.Register<IRecipe> event) {
         // Initialize ore dictionary entries, removals can occur later no problem
-        CeramicsIntegration.oreDictInit();
+        GARecipeAddition.oreDictInit();
         GAMachineRecipeRemoval.init();
         GARecipeGeneration.registerExtraComponents();
         GARecipeGeneration.registerRecyclingRecipes();
@@ -82,8 +82,10 @@ public class CommonProxy {
             ForestryIntegration.recipes();
         if (Loader.isModLoaded("tconstruct") && GAConfig.Misc.TiCIntegration)
             TinkersIntegration.recipes();
-        if (Loader.isModLoaded("ceramics") && GAConfig.Misc.CeramicsIntegration)
+        if (Loader.isModLoaded("ceramics") && GAConfig.Misc.CeramicsIntegration) {
+            CeramicsIntegration.oreDictInit();
             CeramicsIntegration.recipes();
+        }
         MatterReplication.init();
         MachineCraftingRecipes.init();
         GeneratorFuels.init();
@@ -97,9 +99,11 @@ public class CommonProxy {
     }
 
     public void init() {
-        CeramicsIntegration.oreDictInit();
-        if (Loader.isModLoaded("ceramics") && GAConfig.Misc.CeramicsIntegration)
+        GARecipeAddition.oreDictInit();
+        if (Loader.isModLoaded("ceramics") && GAConfig.Misc.CeramicsIntegration) {
+            CeramicsIntegration.oreDictInit();
             CeramicsIntegration.init();
+        }
     }
 
     public void postInit() {
