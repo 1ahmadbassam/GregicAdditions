@@ -283,7 +283,7 @@ public class GARecipeGeneration {
                         if (!OreDictUnifier.get(prefix, mat).isEmpty()
                                 && !(GAUtils.blacklistPrefix.contains(prefix))
                                 && !(mat instanceof IngotMaterial && ((IngotMaterial) mat).blastFurnaceTemperature > 0 && GAUtils.blastPrefix.contains(prefix))
-                                && prefix.getMaterialAmount(mat) >= M/9) {
+                                && prefix.getMaterialAmount(mat) >= M / 9) {
                             int voltageMultiplier = 1;
                             if (mat instanceof IngotMaterial) {
                                 int blastFurnaceTemperature = ((IngotMaterial) mat).blastFurnaceTemperature;
@@ -300,7 +300,7 @@ public class GARecipeGeneration {
                     }
                 }
             }
-            if ((GAConfig.Misc.CeramicsIntegration && Loader.isModLoaded("ceramics")) || (Loader.isModLoaded("tconstruct")))
+            if ((GAConfig.Misc.CeramicsIntegration && Loader.isModLoaded("ceramics")) || (Loader.isModLoaded("gtconstruct")))
                 RecipeMaps.FLUID_EXTRACTION_RECIPES.recipeBuilder()
                         .input("clay", 1)
                         .fluidOutputs(Materials.Clay.getFluid(144))

@@ -99,7 +99,7 @@ public final class GAUtils {
             new MaterialStack(Materials.Sodalite, 1)
     };
 
-    public static final Set<OrePrefix> blastPrefix = new HashSet<OrePrefix>(){{
+    public static final Set<OrePrefix> blastPrefix = new HashSet<OrePrefix>() {{
         add(OrePrefix.dust);
         add(OrePrefix.dustSmall);
         add(OrePrefix.dustTiny);
@@ -111,7 +111,7 @@ public final class GAUtils {
         add(OrePrefix.ingotHot);
     }};
 
-    public static final Set<OrePrefix> blacklistPrefix = new HashSet<OrePrefix>(){{
+    public static final Set<OrePrefix> blacklistPrefix = new HashSet<OrePrefix>() {{
         add(OrePrefix.ore);
         add(OrePrefix.oreBlackgranite);
         add(OrePrefix.oreMarble);

@@ -217,7 +217,7 @@ public class GAMaterials implements IMaterialHandler {
         Materials.Coal.addFlag(DustMaterial.MatFlags.SMELT_INTO_FLUID);
         Materials.Diamond.addFlag(DustMaterial.MatFlags.SMELT_INTO_FLUID);
 
-        if ((GAConfig.Misc.CeramicsIntegration && Loader.isModLoaded("ceramics")) || (Loader.isModLoaded("tconstruct")))
+        if ((GAConfig.Misc.CeramicsIntegration && Loader.isModLoaded("ceramics")))
             Materials.Clay.addFlag(DustMaterial.MatFlags.SMELT_INTO_FLUID);
         if (GAConfig.Misc.CeramicsIntegration && Loader.isModLoaded("ceramics")) {
             Porcelain = new DustMaterial(703, "porcelain", 0xdfe7e6, MaterialIconSet.FINE, 1, ImmutableList.of(new MaterialStack(Materials.Clay, 1), new MaterialStack(Materials.Bone, 1)), SolidMaterial.MatFlags.MORTAR_GRINDABLE | STD_METAL | Material.MatFlags.DECOMPOSITION_BY_CENTRIFUGING | DustMaterial.MatFlags.EXCLUDE_BLOCK_CRAFTING_BY_HAND_RECIPES | DustMaterial.MatFlags.EXCLUDE_BLOCK_CRAFTING_RECIPES);

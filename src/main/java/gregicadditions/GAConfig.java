@@ -207,10 +207,6 @@ public class GAConfig {
         @Config.Name("Adds recipes for Forestry's Electrodes")
         public boolean ForestryIntegration = true;
 
-        @Config.Comment("Set this to false to disable Tinkers' Construct Integration")
-        @Config.Name("Changes the Molds and Extruder Shapes' recipes to require a Smeltery")
-        public boolean TiCIntegration = true;
-
         @Config.Comment("Set this to false to disable Ceramics Integration")
         @Config.Name("Enhanced Integration for Ceramics mod")
         public boolean CeramicsIntegration = true;
