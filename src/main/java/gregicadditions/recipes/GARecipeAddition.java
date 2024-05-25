@@ -488,7 +488,7 @@ public class GARecipeAddition {
         for (MaterialStack stack : GAUtils.sawLubricants) {
             FluidMaterial material = (FluidMaterial) stack.material;
             int multiplier = (int) stack.amount;
-            int time = multiplier == 1L ? 4 : 1;
+            int time = multiplier == 1L ? 4 : multiplier == 3L ? 2 : 1;
             RecipeMaps.CUTTER_RECIPES.recipeBuilder().duration(960 / time).EUt(420).inputs(MetaItems.CRYSTAL_CENTRAL_PROCESSING_UNIT.getStackForm()).fluidInputs(material.getFluid(2 * multiplier)).outputs(GAMetaItems.RAW_CRYSTAL_CHIP.getStackForm(2)).buildAndRegister();
         }
 
