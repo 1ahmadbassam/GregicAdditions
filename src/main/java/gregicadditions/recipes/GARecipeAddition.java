@@ -49,6 +49,7 @@ public class GARecipeAddition {
 
     public static void oreDictInit() {
         oreDictionaryRemovals.add(new Tuple<>("ingotClay", new ItemStack(Items.CLAY_BALL)));
+        oreDictionaryRemovals.add(new Tuple<>("plankWood", OreDictUnifier.get(OrePrefix.plate, Materials.Wood)));
         GAUtils.oreDictRemoval(oreDictionaryRemovals);
         OreDictUnifier.registerOre(new ItemStack(Items.CLAY_BALL), OrePrefix.clump, Materials.Clay);
     }
@@ -107,6 +108,8 @@ public class GARecipeAddition {
         ModHandler.addSmeltingRecipe(GAMetaItems.COMPRESSED_FIRECLAY.getStackForm(), GAMetaItems.FIRECLAY_BRICK.getStackForm());
         RecipeMaps.MACERATOR_RECIPES.recipeBuilder().input(OrePrefix.plank.name(), 1).output(OrePrefix.dust, Materials.Wood).EUt(8).duration(30).buildAndRegister();
 
+        ModHandler.addShapelessRecipe("wood_plate_saw", OreDictUnifier.get(OrePrefix.plate, Materials.Wood), 's', new UnificationEntry(OrePrefix.plank, Materials.Wood));
+
         //Shears
         ModHandler.removeRecipes(Items.SHEARS);
         ModHandler.addShapedRecipe("shears_iron", new ItemStack(Items.SHEARS), "hP", "Pf", 'P', new UnificationEntry(OrePrefix.plate, Materials.Iron));
@@ -155,9 +158,9 @@ public class GARecipeAddition {
         if (GAConfig.GT6.BendingPipes && GAConfig.GT6.BendingCylinders) {
             ModHandler.removeRecipeByName(new ResourceLocation("gregtech:small_wooden_pipe"));
             ModHandler.removeRecipeByName(new ResourceLocation("gregtech:medium_wooden_pipe"));
-            ModHandler.addShapedRecipe("pipe_ga_wood", OreDictUnifier.get(OrePrefix.pipeMedium, Materials.Wood, 2), "PPP", "sCh", "PPP", 'P', "plankWood", 'C', "craftingToolBendingCylinder");
-            ModHandler.addShapedRecipe("pipe_ga_large_wood", OreDictUnifier.get(OrePrefix.pipeLarge, Materials.Wood), "PhP", "PCP", "PsP", 'P', "plankWood", 'C', "craftingToolBendingCylinder");
-            ModHandler.addShapedRecipe("pipe_ga_small_wood", OreDictUnifier.get(OrePrefix.pipeSmall, Materials.Wood, 6), "PsP", "PCP", "PhP", 'P', "plankWood", 'C', "craftingToolBendingCylinder");
+            ModHandler.addShapedRecipe("pipe_ga_wood", OreDictUnifier.get(OrePrefix.pipeMedium, Materials.Wood, 2), "PPP", "sCh", "PPP", 'P', new UnificationEntry(OrePrefix.plank, Materials.Wood), 'C', "craftingToolBendingCylinder");
+            ModHandler.addShapedRecipe("pipe_ga_large_wood", OreDictUnifier.get(OrePrefix.pipeLarge, Materials.Wood), "PhP", "PCP", "PsP", 'P', new UnificationEntry(OrePrefix.plank, Materials.Wood), 'C', "craftingToolBendingCylinder");
+            ModHandler.addShapedRecipe("pipe_ga_small_wood", OreDictUnifier.get(OrePrefix.pipeSmall, Materials.Wood, 6), "PsP", "PCP", "PhP", 'P', new UnificationEntry(OrePrefix.plank, Materials.Wood), 'C', "craftingToolBendingCylinder");
         }
 
         //Compressed Iron support - useful for some mods

@@ -125,14 +125,7 @@ public class GARecipeGeneration {
                 }
             }
             if (recipe.getIngredients().size() == 1 && recipe.getIngredients().get(0).getMatchingStacks().length > 0 && recipe.getRecipeOutput().getCount() == 9 && Block.getBlockFromItem(recipe.getIngredients().get(0).getMatchingStacks()[0].getItem()) == Blocks.AIR) {
-                boolean match = true;
-                for (int i = 1; i < recipe.getIngredients().size(); i++) {
-                    if (recipe.getIngredients().get(i).getMatchingStacks().length == 0 || !recipe.getIngredients().get(0).getMatchingStacks()[0].isItemEqual(recipe.getIngredients().get(i).getMatchingStacks()[0])) {
-                        match = false;
-                        break;
-                    }
-                }
-                if (match && !recipesToRemove.contains(recipe.getRegistryName()) && GAMetaItems.hasPrefix(recipe.getIngredients().get(0).getMatchingStacks()[0], "dust", "dustTiny") && GAMetaItems.hasPrefix(recipe.getIngredients().get(0).getMatchingStacks()[0], "ingot") && recipe.getRecipeOutput().getCount() == 9 && GAConfig.Misc.Unpackager3x3Recipes) {
+                if (!recipesToRemove.contains(recipe.getRegistryName()) && GAMetaItems.hasPrefix(recipe.getIngredients().get(0).getMatchingStacks()[0], "dust", "dustTiny") && GAMetaItems.hasPrefix(recipe.getIngredients().get(0).getMatchingStacks()[0], "ingot") && GAConfig.Misc.Unpackager3x3Recipes) {
                     if (RecipeMaps.UNPACKER_RECIPES.findRecipe(Integer.MAX_VALUE, Arrays.asList(new ItemStack(recipe.getIngredients().get(0).getMatchingStacks()[0].getItem(), 1, recipe.getIngredients().get(0).getMatchingStacks()[0].getMetadata()), (new IntCircuitIngredient(1)).getMatchingStacks()[0]), Collections.emptyList(), Integer.MAX_VALUE) == null
                             && RecipeMaps.UNPACKER_RECIPES.findRecipe(Integer.MAX_VALUE, Arrays.asList(OreDictUnifier.getUnificated(new ItemStack(recipe.getIngredients().get(0).getMatchingStacks()[0].getItem(), 1, recipe.getIngredients().get(0).getMatchingStacks()[0].getMetadata())), (new IntCircuitIngredient(1)).getMatchingStacks()[0]), Collections.emptyList(), Integer.MAX_VALUE) == null)
                         if (OreDictUnifier.getUnificated(recipe.getIngredients().get(0).getMatchingStacks()[0]) != ItemStack.EMPTY)
@@ -142,14 +135,7 @@ public class GARecipeGeneration {
                 }
             }
             if (recipe.getIngredients().size() == 1 && recipe.getIngredients().get(0).getMatchingStacks().length > 0 && recipe.getRecipeOutput().getCount() == 4) {
-                boolean match = true;
-                for (int i = 1; i < recipe.getIngredients().size(); i++) {
-                    if (recipe.getIngredients().get(i).getMatchingStacks().length == 0 || !recipe.getIngredients().get(0).getMatchingStacks()[0].isItemEqual(recipe.getIngredients().get(i).getMatchingStacks()[0])) {
-                        match = false;
-                        break;
-                    }
-                }
-                if (match && !recipesToRemove.contains(recipe.getRegistryName()) && GAMetaItems.hasPrefix(recipe.getIngredients().get(0).getMatchingStacks()[0], "dust", "dustSmall") && recipe.getRecipeOutput().getCount() == 1 && GAConfig.Misc.Unpackager2x2Recipes)
+                if (!recipesToRemove.contains(recipe.getRegistryName()) && GAMetaItems.hasPrefix(recipe.getIngredients().get(0).getMatchingStacks()[0], "dust", "dustSmall") && GAConfig.Misc.Unpackager2x2Recipes)
                     if (RecipeMaps.UNPACKER_RECIPES.findRecipe(Integer.MAX_VALUE, Arrays.asList(new ItemStack(recipe.getIngredients().get(0).getMatchingStacks()[0].getItem(), recipe.getIngredients().size(), recipe.getIngredients().get(0).getMatchingStacks()[0].getMetadata()), (new IntCircuitIngredient(2)).getMatchingStacks()[0]), Collections.emptyList(), Integer.MAX_VALUE) == null
                             && RecipeMaps.UNPACKER_RECIPES.findRecipe(Integer.MAX_VALUE, Arrays.asList(OreDictUnifier.getUnificated(new ItemStack(recipe.getIngredients().get(0).getMatchingStacks()[0].getItem(), recipe.getIngredients().size(), recipe.getIngredients().get(0).getMatchingStacks()[0].getMetadata())), (new IntCircuitIngredient(2)).getMatchingStacks()[0]), Collections.emptyList(), Integer.MAX_VALUE) == null)
                         if (OreDictUnifier.getUnificated(recipe.getIngredients().get(0).getMatchingStacks()[0]) != ItemStack.EMPTY)
