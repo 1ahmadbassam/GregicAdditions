@@ -22,6 +22,7 @@ import gregtech.api.util.GTUtility;
 import gregtech.common.items.MetaItems;
 import gregtech.loaders.recipe.RecyclingRecipes;
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockSlab;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemBlock;
@@ -162,16 +163,38 @@ public class GARecipeGeneration {
                 }
             }
             //Generate Plank Recipes
-            if (!recipe.getRecipeOutput().isEmpty() && !recipesToRemove.contains(recipe.getRegistryName()))
+            if (!recipe.getRecipeOutput().isEmpty() && !recipesToRemove.contains(recipe.getRegistryName())) {
                 for (int i : OreDictionary.getOreIDs(recipe.getRecipeOutput())) {
                     if (OreDictionary.getOreName(i).equals("plankWood") && recipe.getIngredients().size() == 1 && recipe.getRecipeOutput().getCount() == 4) {
                         if (GAConfig.GT5U.GeneratedSawingRecipes) {
-                            ModHandler.removeRecipeByName(recipe.getRegistryName());
+                            recipesToRemove.add(recipe.getRegistryName());
                             ModHandler.addShapelessRecipe("log_to_4_" + recipe.getRecipeOutput(), GTUtility.copyAmount(4, recipe.getRecipeOutput()), recipe.getIngredients().get(0).getMatchingStacks()[0], ToolDictNames.craftingToolSaw);
                             ModHandler.addShapelessRecipe("log_to_2_" + recipe.getRecipeOutput(), GTUtility.copyAmount(2, recipe.getRecipeOutput()), recipe.getIngredients().get(0).getMatchingStacks()[0]);
                         }
                     }
                 }
+            }
+            if (Block.getBlockFromItem(recipe.getRecipeOutput().getItem()) instanceof BlockSlab
+                    && !recipe.getIngredients().isEmpty() && recipe.getIngredients().get(0).getMatchingStacks().length > 0
+                    && recipe.getRecipeOutput().getCount() > 1
+                    && !recipesToRemove.contains(recipe.getRegistryName())
+                    && recipe.getRegistryName() != null
+                    && !Objects.equals(recipe.getRegistryName().getNamespace(),"gtadditions")) {
+                if (GAConfig.Misc.harderSlabs) {
+                    recipesToRemove.add(recipe.getRegistryName());
+                    ModHandler.addShapedRecipe("plank_to_3_" + recipe.getRecipeOutput(), GTUtility.copyAmount(3, recipe.getRecipeOutput()), "SSS", 'S', recipe.getIngredients().get(0).getMatchingStacks()[0]);
+                    ModHandler.addShapedRecipe("plank_to_6_" + recipe.getRecipeOutput(), GTUtility.copyAmount(6, recipe.getRecipeOutput()), "SSS", " s ", 'S', recipe.getIngredients().get(0).getMatchingStacks()[0]);
+                }
+                boolean match = RecipeMaps.CUTTER_RECIPES.findRecipe(Integer.MAX_VALUE, Collections.singletonList(recipe.getIngredients().get(0).getMatchingStacks()[0]), Collections.singletonList(Materials.Lubricant.getFluid(1)), Integer.MAX_VALUE) == null;
+                if (RecipeMaps.CUTTER_RECIPES.findRecipe(Integer.MAX_VALUE, Collections.singletonList(GTUtility.copyAmount(3, recipe.getIngredients().get(0).getMatchingStacks()[0])), Collections.singletonList(Materials.Lubricant.getFluid(1)), Integer.MAX_VALUE) != null)
+                    match = false;
+                if (match) {
+                    for (MaterialStack lube : GAUtils.sawLubricants) {
+                        int duration = lube.amount == 4L ? 50 : lube.amount == 3L ? 32 : 12;
+                        RecipeMaps.CUTTER_RECIPES.recipeBuilder().EUt(8).duration(duration).fluidInputs(((FluidMaterial) lube.material).getFluid((int) lube.amount)).inputs(new CountableIngredient(recipe.getIngredients().get(0), 1)).outputs(GTUtility.copyAmount(2, recipe.getRecipeOutput())).buildAndRegister();
+                    }
+                }
+            }
         }
 
 
@@ -187,7 +210,7 @@ public class GARecipeGeneration {
         for (ItemStack stack : allWoodLogs) {
             ItemStack smeltingOutput = ModHandler.getSmeltingOutput(stack);
             if (!smeltingOutput.isEmpty() && smeltingOutput.getItem() == Items.COAL && smeltingOutput.getMetadata() == 1 && GAConfig.GT5U.DisableLogToCharcoalSmelting) {
-                ItemStack woodStack = stack.copy();
+                ItemStack woodStack = GTUtility.copy(stack);
                 woodStack.setItemDamage(OreDictionary.WILDCARD_VALUE);
                 ModHandler.removeFurnaceSmelting(woodStack);
             }

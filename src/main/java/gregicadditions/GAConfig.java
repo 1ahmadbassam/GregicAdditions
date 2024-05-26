@@ -203,6 +203,10 @@ public class GAConfig {
         @Config.Name("Disable alloy smelter alloying")
         public boolean disableAlloySmelterAlloying = false;
 
+        @Config.Comment("Set this to false to disable harder recipes for slabs")
+        @Config.Name("Slabs require saws")
+        public boolean harderSlabs = true;
+
         @Config.Comment("Set this to false to disable Forestry Integration")
         @Config.Name("Adds recipes for Forestry's Electrodes")
         public boolean ForestryIntegration = true;
