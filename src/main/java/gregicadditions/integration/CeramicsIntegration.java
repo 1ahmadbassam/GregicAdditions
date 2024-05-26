@@ -112,7 +112,7 @@ public class CeramicsIntegration {
 
         for (Material m : Arrays.asList(Materials.Clay, Materials.Brick, GAMaterials.Porcelain)) {
             RecipeMaps.BENDER_RECIPES.recipeBuilder().duration(30).EUt(8).input(OrePrefix.ingot, m).notConsumable(new IntCircuitIngredient(0)).output(OrePrefix.plate, m).buildAndRegister();
-            RecipeMaps.ALLOY_SMELTER_RECIPES.recipeBuilder().duration(60).EUt(8).input(OrePrefix.ingot, m, 2).notConsumable(MetaItems.SHAPE_MOLD_INGOT).output(OrePrefix.plate, m).buildAndRegister();
+            RecipeMaps.ALLOY_SMELTER_RECIPES.recipeBuilder().duration(60).EUt(8).input(OrePrefix.ingot, m, 2).notConsumable(MetaItems.SHAPE_MOLD_PLATE).output(OrePrefix.plate, m).buildAndRegister();
         }
 
         if (GAConfig.GT6.BendingCurvedPlates) {
