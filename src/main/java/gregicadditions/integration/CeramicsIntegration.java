@@ -19,11 +19,7 @@ import knightminer.ceramics.items.ItemClayUnfired;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.Tuple;
-import net.minecraftforge.fml.common.eventhandler.EventPriority;
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.registry.GameRegistry;
-import slimeknights.tconstruct.library.events.TinkerRegisterEvent;
-import slimeknights.tconstruct.shared.TinkerFluids;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -181,25 +177,6 @@ public class CeramicsIntegration {
             ModHandler.addShapelessRecipe("brick_barrel_shapeless_" + color.toLowerCase(), new ItemStack(Ceramics.clayBarrelStained, 1, i), new ItemStack(Ceramics.clayBarrel), "dye" + color);
             ModHandler.addShapedRecipe("brick_barrel_extension_" + color.toLowerCase(), new ItemStack(Ceramics.clayBarrelStainedExtension, 8, i), "WWW", "WDW", "WWW", 'W', new ItemStack(Ceramics.clayBarrel, 1, 1), 'D', "dye" + color);
             ModHandler.addShapelessRecipe("brick_barrel_extension_shapeless_" + color.toLowerCase(), new ItemStack(Ceramics.clayBarrelStainedExtension, 1, i), new ItemStack(Ceramics.clayBarrel, 1, 1), "dye" + color);
-        }
-    }
-
-    public static class CeramicsTinkerIntegrationBus {
-        @SubscribeEvent(priority = EventPriority.HIGH)
-        public void castingRemoval(TinkerRegisterEvent.TableCastingRegisterEvent event) {
-            if (event.getRecipe().matches(GameRegistry.makeItemStack("tconstruct:cast_custom", 3, 1, null), TinkerFluids.clay)) {
-                ItemStack out = event.getRecipe().getResult(GameRegistry.makeItemStack("tconstruct:cast_custom", 3, 1, null), TinkerFluids.clay);
-                ItemStack plate = new ItemStack(Ceramics.clayUnfired, 1, ItemClayUnfired.UnfiredType.CLAY_PLATE.getMeta());
-                if (out.getItem() == plate.getItem() && out.getMetadata() == plate.getMetadata())
-                    event.setCanceled(true);
-            }
-        }
-
-        @SubscribeEvent(priority = EventPriority.HIGH)
-        public void smeltingRemoval(TinkerRegisterEvent.MeltingRegisterEvent event) {
-            if (event.getRecipe().getResult().amount == 288 && (event.getRecipe().matches(new ItemStack(Ceramics.clayUnfired, 1, ItemClayUnfired.UnfiredType.CLAY_PLATE_RAW.getMeta()))
-                    || event.getRecipe().matches(OreDictUnifier.get(OrePrefix.plate, Materials.Clay))))
-                event.setCanceled(true);
         }
     }
 }

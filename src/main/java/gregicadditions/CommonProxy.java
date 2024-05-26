@@ -2,6 +2,7 @@ package gregicadditions;
 
 import gregicadditions.integration.CeramicsIntegration;
 import gregicadditions.integration.ForestryIntegration;
+import gregicadditions.integration.TinkerIntegration;
 import gregicadditions.item.GAMetaBlocks;
 import gregicadditions.item.GAMetaItems;
 import gregicadditions.recipes.*;
@@ -74,17 +75,18 @@ public class CommonProxy {
         if (Loader.isModLoaded("ceramics") && GAConfig.Misc.CeramicsIntegration) {
             CeramicsIntegration.oreDictInit();
             CeramicsIntegration.recipes();
+            if (Loader.isModLoaded("tconstruct") && Loader.isModLoaded("tcomplement"))
+                TinkerIntegration.init();
         }
         MatterReplication.init();
         MachineCraftingRecipes.init();
         GeneratorFuels.init();
-
     }
 
     public void preInit() {
         GARecipeGeneration.loadAlternateTranslations();
         if (GAConfig.Misc.CeramicsIntegration && Loader.isModLoaded("tconstruct") && Loader.isModLoaded("ceramics"))
-            MinecraftForge.EVENT_BUS.register(new CeramicsIntegration.CeramicsTinkerIntegrationBus());
+            MinecraftForge.EVENT_BUS.register(new TinkerIntegration.CeramicsTinkerIntegrationBus());
     }
 
     public void init() {

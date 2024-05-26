@@ -67,6 +67,7 @@ dependencies {
     deobfCompile "team.chisel.ctm:CTM:MC${minecraft_version}-${ctm_version}"
     deobfCompile "mcjty.theoneprobe:TheOneProbe-${short_version}:${short_version}-${top_version}"
     deobfCompile "curse.maven:ceramics-250617:3158763"
+    deobfCompile "curse.maven:tcomplement-272671:2843439"
     compile files("libs/GTCEBees-${minecraft_version}-${gtcebees_version}.jar")
 }
 
