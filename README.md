@@ -25,20 +25,21 @@ For GTCE Tinker's Construct integration, check out [Greg's Construct Unofficial]
 For extended Forestry integration, check out [GTCEBees](https://github.com/1ahmadbassam/GTCEBees).
 
 ### Mod Features (Not Comprehensive)
-1. Double ingots, curved plates, and rounds.
-2. Bending cylinders
-3. Rework of GregTech's tier progression, including tougher recipes for electrical components, a variety of new circuits, and superconductor materials.
-4. Cluster Mills (specialized machines to make foils), Matter replication.
-5. Higher-tier machine versions of GregTech machines (up to UV).
-6. The MAX battery (could be an Endgame goal to obtain).
-7. The Assembly Line, and Fusion Reactor multiblocks.
-8. A better version of GTCE's coke oven.
-9. Fluid Drums of various tiers.
-10. Electric [rock breakers](https://reddit.com/r/feedthebeast/comments/bi2h8s/) which replace cobblestone generators and generate various stone types based on the redstone signal they receive.  
-11. Steam Mixer (available in both low and high pressure versions).
-12. A LOT of recipe changes to Minecraft and plain GTCE.
-13. Forestry integration: Electrodes, which are used to make Forestry Electron tubes.
-14. Full Ceramics integration, and extended clay-brick-porcelain crafts.
+
+- Double ingots, curved plates, and rounds.
+- Bending cylinders
+- Rework of GregTech's tier progression, including tougher recipes for electrical components, a variety of new circuits, and superconductor materials.
+- Cluster Mills (specialized machines to make foils), Matter replication.
+- Higher-tier machine versions of GregTech machines (up to UV).
+- The MAX battery (could be an Endgame goal to obtain).
+- The Assembly Line, and Fusion Reactor multiblocks.
+- A better version of GTCE's coke oven.
+- Fluid Drums of various tiers.
+- Electric [rock breakers](https://reddit.com/r/feedthebeast/comments/bi2h8s/) which replace cobblestone generators and generate various stone types based on the redstone signal they receive.  
+- Steam Mixer (available in both low and high pressure versions).
+- A LOT of recipe changes to Minecraft and plain GTCE.
+- Forestry integration: Electrodes, which are used to make Forestry Electron tubes.
+- Full Ceramics integration, and extended clay-brick-porcelain crafts (configurable).
 
 ### License
 This project is licensed under the [GNU Lesser General Public License v3.0](https://www.gnu.org/licenses/lgpl-3.0.en.html).
