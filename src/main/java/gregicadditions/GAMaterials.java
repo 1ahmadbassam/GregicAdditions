@@ -237,57 +237,60 @@ public class GAMaterials implements IMaterialHandler {
         OrePrefix.gemFlawless.setIgnored(LigniteCoke);
         OrePrefix.gemExquisite.setIgnored(LigniteCoke);
 
-        Material[] materials = new Material[] {
-                FishOil,
-                RawGrowthMedium,
-                SterilizedGrowthMedium,
-                Meat,
-                NeutralMatter,
-                PositiveMatter,
-                Neutronium,
-                Plasma,
-                LigniteCoke,
-                MVSuperconductorBase,
-                HVSuperconductorBase,
-                EVSuperconductorBase,
-                IVSuperconductorBase,
-                LuVSuperconductorBase,
-                ZPMSuperconductorBase,
-                UVSuperconductorBase,
-                MVSuperconductor,
-                HVSuperconductor,
-                EVSuperconductor,
-                IVSuperconductor,
-                LuVSuperconductor,
-                ZPMSuperconductor,
-                UVSuperconductor,
-                Enderium,
-                AluminoSilicateWool,
-                MicaPulp,
-                Ultima,
-                IronChloride,
-                QuartzSand,
-                Massicot,
-                AntimonyTrioxide,
-                Zincite,
-                CobaltOxide,
-                ArsenicTrioxide,
-                CupricOxide,
-                Ferrosilite,
-                CompressedIron,
-                ToughAlloy,
-                SkySteel,
-                Ferroboron,
-                Porcelain
-        };
+        if (Loader.isModLoaded("gtconstruct")) {
+            Material[] materials = new Material[]{
+                    FishOil,
+                    RawGrowthMedium,
+                    SterilizedGrowthMedium,
+                    Meat,
+                    NeutralMatter,
+                    PositiveMatter,
+                    Neutronium,
+                    Plasma,
+                    LigniteCoke,
+                    MVSuperconductorBase,
+                    HVSuperconductorBase,
+                    EVSuperconductorBase,
+                    IVSuperconductorBase,
+                    LuVSuperconductorBase,
+                    ZPMSuperconductorBase,
+                    UVSuperconductorBase,
+                    MVSuperconductor,
+                    HVSuperconductor,
+                    EVSuperconductor,
+                    IVSuperconductor,
+                    LuVSuperconductor,
+                    ZPMSuperconductor,
+                    UVSuperconductor,
+                    Enderium,
+                    AluminoSilicateWool,
+                    MicaPulp,
+                    Ultima,
+                    IronChloride,
+                    QuartzSand,
+                    Massicot,
+                    AntimonyTrioxide,
+                    Zincite,
+                    CobaltOxide,
+                    ArsenicTrioxide,
+                    CupricOxide,
+                    Ferrosilite,
+                    CompressedIron,
+                    ToughAlloy,
+                    SkySteel,
+                    Ferroboron,
+                    Porcelain
+            };
 
-        for (Material mat : materials)
-            if (mat instanceof FluidMaterial) {
-                if (mat instanceof IngotMaterial && ((IngotMaterial) mat).blastFurnaceTemperature > 0)
-                    ((IngotMaterial) mat).setFluidTemperature(((IngotMaterial) mat).blastFurnaceTemperature);
-                else if (mat != Materials.Ice && mat != Materials.Water && ((FluidMaterial) mat).getFluidTemperature() <= 300)
-                    ((FluidMaterial) mat).setFluidTemperature(500);
+            for (Material mat : materials) {
+                if (mat instanceof FluidMaterial) {
+                    if (mat instanceof IngotMaterial && ((IngotMaterial) mat).blastFurnaceTemperature > 0)
+                        ((IngotMaterial) mat).setFluidTemperature(((IngotMaterial) mat).blastFurnaceTemperature);
+                    else if (mat != Materials.Ice && mat != Materials.Water && ((FluidMaterial) mat).getFluidTemperature() <= 300)
+                        ((FluidMaterial) mat).setFluidTemperature(500);
+                }
             }
+        }
     }
 
     public static class GAMatFlags {
