@@ -19,7 +19,6 @@ import knightminer.ceramics.items.ItemClayUnfired;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.Tuple;
-import net.minecraftforge.fml.common.registry.GameRegistry;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -49,15 +48,15 @@ public class CeramicsIntegration {
     public static void init() {
         ModHandler.removeFurnaceSmelting(new ItemStack(Ceramics.clayUnfired, 1, ItemClayUnfired.UnfiredType.PORCELAIN.getMeta()));
         ModHandler.removeFurnaceSmelting(new ItemStack(Ceramics.clayUnfired, 1, ItemClayUnfired.UnfiredType.CLAY_PLATE_RAW.getMeta()));
-        GameRegistry.addSmelting(GAMetaItems.UNFIRED_PORCELAIN_BRICK.getStackForm(), OreDictUnifier.get(OrePrefix.ingot, GAMaterials.Porcelain), 0.1f);
-        GameRegistry.addSmelting(new ItemStack(Ceramics.clayHelmetRaw), new ItemStack(Ceramics.clayHelmet), 0.1f);
-        GameRegistry.addSmelting(new ItemStack(Ceramics.clayChestplateRaw), new ItemStack(Ceramics.clayChestplate), 0.1f);
-        GameRegistry.addSmelting(new ItemStack(Ceramics.clayLeggingsRaw), new ItemStack(Ceramics.clayLeggings), 0.1f);
-        GameRegistry.addSmelting(new ItemStack(Ceramics.clayBootsRaw), new ItemStack(Ceramics.clayBoots), 0.1f);
-        GameRegistry.addSmelting(OreDictUnifier.get(OrePrefix.dust, GAMaterials.Porcelain), OreDictUnifier.get(OrePrefix.ingot, GAMaterials.Porcelain), 0.1f);
+        ModHandler.addSmeltingRecipe(GAMetaItems.UNFIRED_PORCELAIN_BRICK.getStackForm(), OreDictUnifier.get(OrePrefix.ingot, GAMaterials.Porcelain));
+        ModHandler.addSmeltingRecipe(new ItemStack(Ceramics.clayHelmetRaw), new ItemStack(Ceramics.clayHelmet));
+        ModHandler.addSmeltingRecipe(new ItemStack(Ceramics.clayChestplateRaw), new ItemStack(Ceramics.clayChestplate));
+        ModHandler.addSmeltingRecipe(new ItemStack(Ceramics.clayLeggingsRaw), new ItemStack(Ceramics.clayLeggings));
+        ModHandler.addSmeltingRecipe(new ItemStack(Ceramics.clayBootsRaw), new ItemStack(Ceramics.clayBoots));
+        ModHandler.addSmeltingRecipe(OreDictUnifier.get(OrePrefix.dust, GAMaterials.Porcelain), OreDictUnifier.get(OrePrefix.ingot, GAMaterials.Porcelain));
         ModHandler.removeFurnaceSmelting(new ItemStack(Ceramics.claySoft));
-        GameRegistry.addSmelting(new ItemStack(Ceramics.claySoft), OreDictUnifier.get(OrePrefix.block, GAMaterials.Porcelain), 0.1f);
-        GameRegistry.addSmelting(GAMetaItems.UNFIRED_PORCELAIN_PLATE.getStackForm(), OreDictUnifier.get(OrePrefix.plate, GAMaterials.Porcelain), 0.1f);
+        ModHandler.addSmeltingRecipe(new ItemStack(Ceramics.claySoft), OreDictUnifier.get(OrePrefix.block, GAMaterials.Porcelain));
+        ModHandler.addSmeltingRecipe(GAMetaItems.UNFIRED_PORCELAIN_PLATE.getStackForm(), OreDictUnifier.get(OrePrefix.plate, GAMaterials.Porcelain));
     }
 
     public static void recipes() {
