@@ -59,7 +59,8 @@ public class GARecipeAddition {
             CokeOvenRecipeBuilder.start().duration(1800).input(OrePrefix.log, Materials.Wood).output(new ItemStack(Items.COAL, 1, 1)).fluidOutput(Materials.Creosote.getFluid(500)).buildAndRegister();
             CokeOvenRecipeBuilder.start().duration(1800).input(OrePrefix.gem, Materials.Coal).output(OreDictUnifier.get(OrePrefix.gem, Materials.Coke)).fluidOutput(Materials.Creosote.getFluid(500)).buildAndRegister();
             CokeOvenRecipeBuilder.start().duration(1800).input(OrePrefix.gem, Materials.Lignite).output(OreDictUnifier.get(OrePrefix.gem, GAMaterials.LigniteCoke)).fluidOutput(Materials.Creosote.getFluid(500)).buildAndRegister();
-            CokeOvenRecipeBuilder.start().duration(16200).input(OrePrefix.block, Materials.Coal).output(OreDictUnifier.get(OrePrefix.block, Materials.Coke)).fluidOutput(Materials.Creosote.getFluid(4500)).buildAndRegister();
+            CokeOvenRecipeBuilder.start().duration(14400).input(OrePrefix.block, Materials.Coal).output(OreDictUnifier.get(OrePrefix.block, Materials.Coke)).fluidOutput(Materials.Creosote.getFluid(4500)).buildAndRegister();
+            CokeOvenRecipeBuilder.start().duration(14400).input(OrePrefix.block, Materials.Lignite).output(OreDictUnifier.get(OrePrefix.block, GAMaterials.LigniteCoke)).fluidOutput(Materials.Creosote.getFluid(4500)).buildAndRegister();
         }
     }
 
