@@ -106,7 +106,7 @@ public class GARecipeGeneration {
                     else
                         RecipeMaps.FORGE_HAMMER_RECIPES.recipeBuilder().duration(400).EUt(2).inputs(recipe.getIngredients().get(0).getMatchingStacks()[0]).outputs(recipe.getRecipeOutput()).buildAndRegister();
             }
-            if (recipe.getIngredients().size() == 9) {
+            if (recipe.getIngredients().size() == 9 || recipe.getIngredients().size() == 8) {
                 if (recipe.getIngredients().get(0).getMatchingStacks().length > 0 && Block.getBlockFromItem(recipe.getRecipeOutput().getItem()) == Blocks.AIR) {
                     boolean match = true;
                     for (int i = 1; i < recipe.getIngredients().size(); i++) {
@@ -125,7 +125,7 @@ public class GARecipeGeneration {
                     }
                 }
             }
-            if (recipe.getIngredients().size() == 1 && recipe.getIngredients().get(0).getMatchingStacks().length > 0 && recipe.getRecipeOutput().getCount() == 9 && Block.getBlockFromItem(recipe.getIngredients().get(0).getMatchingStacks()[0].getItem()) == Blocks.AIR) {
+            if (recipe.getIngredients().size() == 1 && recipe.getIngredients().get(0).getMatchingStacks().length > 0 && (recipe.getRecipeOutput().getCount() == 9 || recipe.getRecipeOutput().getCount() == 8) && Block.getBlockFromItem(recipe.getIngredients().get(0).getMatchingStacks()[0].getItem()) == Blocks.AIR) {
                 if (!recipesToRemove.contains(recipe.getRegistryName()) && GAMetaItems.hasPrefix(recipe.getIngredients().get(0).getMatchingStacks()[0], "dust", "dustTiny") && GAMetaItems.hasPrefix(recipe.getIngredients().get(0).getMatchingStacks()[0], "ingot") && GAConfig.Misc.Unpackager3x3Recipes) {
                     if (RecipeMaps.UNPACKER_RECIPES.findRecipe(Integer.MAX_VALUE, Arrays.asList(new ItemStack(recipe.getIngredients().get(0).getMatchingStacks()[0].getItem(), 1, recipe.getIngredients().get(0).getMatchingStacks()[0].getMetadata()), (new IntCircuitIngredient(1)).getMatchingStacks()[0]), Collections.emptyList(), Integer.MAX_VALUE) == null
                             && RecipeMaps.UNPACKER_RECIPES.findRecipe(Integer.MAX_VALUE, Arrays.asList(OreDictUnifier.getUnificated(new ItemStack(recipe.getIngredients().get(0).getMatchingStacks()[0].getItem(), 1, recipe.getIngredients().get(0).getMatchingStacks()[0].getMetadata())), (new IntCircuitIngredient(1)).getMatchingStacks()[0]), Collections.emptyList(), Integer.MAX_VALUE) == null)
