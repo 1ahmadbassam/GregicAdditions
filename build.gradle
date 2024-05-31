@@ -73,7 +73,7 @@ dependencies {
     compileOnly "curse.maven:tcomplement-272671:2843439"
     compileOnly "curse.maven:ex-nihilo-creatio-274456:2817545"
     compileOnly "curse.maven:forestry-59751:2918418"
-    compileOnly "curse.maven:gregtechce-293327:3478805"
+    compileOnly rfg.deobf("curse.maven:gregtechce-293327:3478805")
 
     api "CraftTweaker2:CraftTweaker2-MC${stripped_version}-Main:${crafttweaker_version}"
     annotationProcessor 'com.google.guava:guava:24.1.1-jre'
