@@ -110,6 +110,7 @@ public class GARecipeAddition {
         RecipeMaps.MACERATOR_RECIPES.recipeBuilder().input(OrePrefix.plank.name(), 1).output(OrePrefix.dust, Materials.Wood).EUt(8).duration(30).buildAndRegister();
 
         ModHandler.addShapelessRecipe("wood_plate_saw", OreDictUnifier.get(OrePrefix.plate, Materials.Wood), 's', new UnificationEntry(OrePrefix.plank, Materials.Wood));
+        RecipeMaps.FORGE_HAMMER_RECIPES.recipeBuilder().input("gemPrismarine", 1).outputs(new ItemStack(Items.PRISMARINE_CRYSTALS, 2)).EUt(16).duration(20).buildAndRegister();
 
         RecipeMaps.PYROLYSE_RECIPES.recipeBuilder().EUt(96).duration(440).input(OrePrefix.gem, Materials.Lignite, 16).circuitMeta(0).output(OrePrefix.gem, GAMaterials.LigniteCoke, 20).fluidOutputs(Materials.Creosote.getFluid(10000)).buildAndRegister();
 
