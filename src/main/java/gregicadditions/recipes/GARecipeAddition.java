@@ -111,6 +111,8 @@ public class GARecipeAddition {
 
         ModHandler.addShapelessRecipe("wood_plate_saw", OreDictUnifier.get(OrePrefix.plate, Materials.Wood), 's', new UnificationEntry(OrePrefix.plank, Materials.Wood));
 
+        RecipeMaps.PYROLYSE_RECIPES.recipeBuilder().EUt(96).duration(440).input(OrePrefix.gem, Materials.Lignite, 16).circuitMeta(0).output(OrePrefix.gem, GAMaterials.LigniteCoke, 20).fluidOutputs(Materials.Creosote.getFluid(10000)).buildAndRegister();
+
         //Shears
         ModHandler.removeRecipes(Items.SHEARS);
         ModHandler.addShapedRecipe("shears_iron", new ItemStack(Items.SHEARS), "hP", "Pf", 'P', new UnificationEntry(OrePrefix.plate, Materials.Iron));
